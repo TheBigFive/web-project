@@ -26,4 +26,4 @@ DB_HOST=mysql137.hosting.combell.com
 DB_PORT=3306
 DB_DATABASE=ID211210_thebigf
 DB_USERNAME=ID211210_thebigf
-DB_PASSWORD=thebigfive123
+DB_PASSWORD=
