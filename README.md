@@ -15,3 +15,7 @@ git pull origin master
 ## git master naar eigen branch
 git rebase master
 git merge origin/master
+
+## indien probleem met laravel (whoops, there seems to be ...)
+## of link naar database veranderd
+.env file lokaal aanpassen/bijwerken
