@@ -15,7 +15,7 @@ class Controller extends BaseController
 
     public function test()
     {
-    	return DB::table('wp_posts')
+    	return DB::table('campussen')
     	->get();
     	echo 'test';
     }
