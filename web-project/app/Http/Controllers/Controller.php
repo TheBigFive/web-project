@@ -15,7 +15,6 @@ class Controller extends BaseController
 
     public function test()
     {
-
     	$campussen = DB::table('campussen')->get();
         //return $campussen;
 
