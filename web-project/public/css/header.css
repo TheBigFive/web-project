@@ -7,12 +7,19 @@ img {
 	color: white;
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+.navbar-default .navbar-nav > .active > a {
 	background-color: #00a0d3;
 	color: white;
-
 }
 
-.navbar-default .navbar-nav > li > a, .navbar-default .navbar-text{
+.navbar-default .navbar-nav > li:hover, .navbar-default .navbar-nav > .active > li:hover, .navbar-default .navbar-nav > .active > a:hover{
+	background-color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li > a{
 	color: white;
+}
+
+.dropdown-menu{
+	background-color: #ffffff;
 }
