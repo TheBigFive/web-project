@@ -1,0 +1,25 @@
+img {
+	height:50px;
+}
+
+.navbar-default{
+	background-color: #004851;
+	color: white;
+}
+
+.navbar-default .navbar-nav > .active > a {
+	background-color: #00a0d3;
+	color: white;
+}
+
+.navbar-default .navbar-nav > li:hover, .navbar-default .navbar-nav > .active > li:hover, .navbar-default .navbar-nav > .active > a:hover{
+	background-color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li > a{
+	color: white;
+}
+
+.dropdown-menu{
+	background-color: #ffffff;
+}
