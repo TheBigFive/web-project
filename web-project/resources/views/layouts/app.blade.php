@@ -7,7 +7,11 @@
 
         <title>Laravel</title>
 
+
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
+        
+        <link rel="stylesheet" href="{{ asset('css/body.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}" >
         <link rel="stylesheet" href="https://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" >
 
     </head>
