@@ -2,20 +2,22 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Gebruikers extends Authenticatable
 {
-    use Notifiable;
+    protected $table = 'gebruikers';
 
-    /**
+ /*   //Deze variabele is nodig want laravel denkt dat onze primary key "id" heet.
+    protected $primaryKey = 'gebruiker_id';*/
+
+    /**b
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'voornaam', 'achternaam','email', 'password', 'geboortedatum','geslacht','woonplaats','profielfoto', 'studentenclub','op_kot'
     ];
 
     /**
@@ -27,3 +29,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 }
+
