@@ -1,4 +1,4 @@
-$('#gebruikersTab a').click(function (e) {
+$('.nav-tabs a').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
 })
