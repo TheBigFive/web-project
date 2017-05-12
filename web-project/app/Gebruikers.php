@@ -3,18 +3,16 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Auth\Passwords\CanResetPassword;
+use DB;
 
 class Gebruikers extends Authenticatable
 {
-    use CanResetPassword;
     protected $table = 'gebruikers';
 
  /*   //Deze variabele is nodig want laravel denkt dat onze primary key "id" heet.
     protected $primaryKey = 'gebruiker_id';*/
 
-    /**
+    /**b
      * The attributes that are mass assignable.
      *
      * @var array
@@ -40,5 +38,10 @@ class Gebruikers extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function alleGebruikersOpvragen()
+    {
+      return DB::table('gebruikers')->get();
+    }
 }
 

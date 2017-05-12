@@ -11,15 +11,20 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welkom');
 });
 
-
-
 Route::get('/test', 'Controller@test');
-Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+//Admin routes
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/gebruikers', 'AdminController@gebruikersPaginaOpenen');
+
+
+//Inlog routes
 Route::get('logout','Auth\LoginController@logout');

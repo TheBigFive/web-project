@@ -54,9 +54,9 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                               <!--  <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Wachtwoord vergeten
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </form>

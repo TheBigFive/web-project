@@ -29,9 +29,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -51,6 +49,9 @@
                   <li><a href="{{ route('register') }}">Registratiepagina</a></li>
                   <li><a href="{{ route('login') }}">Inloggen</a></li>
                 @else
+                  @if (Auth::user()->rol_id == 1)
+                    <li><a href="{{ url('/admin') }}">Administratie</a></li>
+                  @endif
                   <li><a href="{{ route('logout') }}">Afmelden</a></li>
                 @endif
                 
@@ -61,5 +62,6 @@
 
         @yield('content')
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/admin.js') }}"></script>
     </body>
 </html>

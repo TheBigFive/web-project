@@ -30,7 +30,7 @@ return [
         'array'   => ':attribute moet tussen :min en :max items bevatten.',
     ],
     'boolean'              => ':attribute moet ja of nee zijn.',
-    'confirmed'            => ':attribute bevestiging komt niet overeen.',
+    'confirmed'            => 'Het veld :attribute komt niet overeen.',
     'date'                 => ':attribute moet een datum bevatten.',
     'date_format'          => ':attribute moet een geldig datum formaat bevatten.',
     'different'            => ':attribute en :other moeten verschillend zijn.',
