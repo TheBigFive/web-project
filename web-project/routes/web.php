@@ -24,6 +24,9 @@ Route::get('/home', 'HomeController@index');
 //Admin routes
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/gebruikers', 'AdminController@gebruikersPaginaOpenen');
+Route::get('/admin/gebruikers/verwijder/{id}', 'AdminController@verwijderGebruiker');
+Route::get('/admin/gebruikers/wijzig/{id}', 'AdminController@openGebruiker');
+Route::post('/admin/gebruikers/wijzig/{id}', 'AdminController@wijzigGebruiker');
 
 
 //Inlog routes

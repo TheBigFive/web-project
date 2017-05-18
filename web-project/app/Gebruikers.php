@@ -43,5 +43,25 @@ class Gebruikers extends Authenticatable
     {
       return DB::table('gebruikers')->get();
     }
+
+    public function verwijderGebruiker($id)
+    {
+      return DB::table('gebruikers')
+      ->where('id', $id)
+      ->delete();
+    }
+
+    public function gebruikerViaIdOpvragen($id){
+      return DB::table('gebruikers')
+        ->where('id', $id)
+        ->get();
+    }
+
+    public function wijzigGebruiker($id, $gebruiker)
+    {
+      return DB::table('gebruikers')
+      ->where('id', $id)
+      ->update($gebruiker);
+    }
 }
 

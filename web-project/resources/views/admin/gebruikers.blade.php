@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('admincontent')
-<div class="container">
     <div class="row">
         <h2>Gebruikers</h2>
         <ul class="nav nav-pills" >
 		  <li  class="active" id="alleGebruikersTabKnop"><a data-toggle="tab" href="#alleGebruikersTab">Alle gebruikers ({{ $aantalGebruikers }})</a></li>
-		  <li role="presentation"><a data-toggle="tab" href="#administratorsTab">Administrators</a></li>
-		  <li role="presentation"><a data-toggle="tab" href="#approversTab">Approvers</a></li>
-		  <li role="presentation"><a data-toggle="tab" href="#zoekResultaatTab">Zoekresultaat</a></li>
+		  <li><a data-toggle="tab" href="#administratorsTab">Administrators ({{ $aantalAdminGebruikers }})</a></li>
+		  <li><a data-toggle="tab" href="#approversTab">Approvers ({{ $aantalApprovers }})</a></li>
+		  <li><a data-toggle="tab" href="#editorsTab">Editors ({{ $aantalEditors }})</a></li>
+		  <li><a data-toggle="tab" href="#zoekResultaatTab">Zoekresultaat</a></li>
 		  <li><input id="search_input" type="text" style="width: 200px;" placeholder="Een gebruiker zoeken" /></li>
 
 		</ul>
@@ -18,14 +18,18 @@
 					<thead>
 						<tr>
 							<th>Achternaam</th>
-							<th>Voornaam</th>	
+							<th>Voornaam</th>
+							<th>Rol</th>	
 						</tr>				
 					</thead>
 					<tbody>
-						@foreach($alleGebruikers as $gebruiker)
+						@foreach($alleGebruikers as $key => $gebruiker)
 							<tr>
 								<td>{{ $gebruiker->achternaam }}</td>
 								<td>{{ $gebruiker->voornaam }}</td>
+								<td>{{ $rollenVanAlleGebruikers{$key}->first()->naam }}</td>
+								<td><a href="/admin/gebruikers/wijzig/{{ $gebruiker->id }}">Wijzigen</a></td>
+								<td><a href="/admin/gebruikers/verwijder/{{ $gebruiker->id }}">Verwijderen</a></td>
 							</tr>
 
 						@endforeach
@@ -35,46 +39,78 @@
 			</div>
 
 			<div class="tab-pane" id="administratorsTab" > 
-				<p>administrators</p>
-				<!-- <table class="table">
+				<table class="table">
 					<thead>
 						<tr>
 							<th>Achternaam</th>
-							<th>Voornaam</th>	
+							<th>Voornaam</th>
 						</tr>				
 					</thead>
 					<tbody>
-						@foreach($alleGebruikers as $gebruiker)
+						@foreach($adminGebruikers as $key => $adminGebruiker)
 							<tr>
-								<td>{{ $gebruiker->achternaam }}</td>
-								<td>{{ $gebruiker->voornaam }}</td>
+								<td>{{ $adminGebruiker->achternaam }}</td>
+								<td>{{ $adminGebruiker->voornaam }}</td>
+								<td><a href="/admin/gebruikers/wijzig/{{ $adminGebruiker->id }}">Wijzigen</a></td>
+								<td><a href="/admin/gebruikers/verwijder/{{ $adminGebruiker->id }}">Verwijderen</a></td>
 							</tr>
 
 						@endforeach
 					</tbody>
 					
-				</table> -->
+				</table>
 			</div>
-			<div class="tab-pane" id="approversTab" > 
-				<p>approvers</p>
-				<!-- <table class="table">
+			<div class="tab-pane" id="approversTab" >
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Achternaam</th>
+								<th>Voornaam</th>
+							</tr>				
+						</thead>
+
+						<tbody>
+							@foreach($approvers as $approver)
+								<tr>
+									<td>{{ $approver->achternaam }}</td>
+									<td>{{ $approver->voornaam }}</td>
+									<td><a href="/admin/gebruikers/wijzig/{{ $approver->id }}">Wijzigen</a></td>
+									<td><a href="/admin/gebruikers/verwijder/{{ $approver->id }}">Verwijderen</a></td>
+								</tr>
+
+							@endforeach
+						</tbody>
+						
+					</table>
+				@if (!$aantalApprovers)
+					<p>Er zijn nog geen approvers aangeduid.</p>
+				@endif
+			</div>
+			<div class="tab-pane" id="editorsTab" > 
+				<table class="table">
 					<thead>
 						<tr>
 							<th>Achternaam</th>
-							<th>Voornaam</th>	
+							<th>Voornaam</th>
 						</tr>				
 					</thead>
 					<tbody>
-						@foreach($alleGebruikers as $gebruiker)
+						@foreach($editors as $editor)
 							<tr>
-								<td>{{ $gebruiker->achternaam }}</td>
-								<td>{{ $gebruiker->voornaam }}</td>
+								<td>{{ $editor->achternaam }}</td>
+								<td>{{ $editor->voornaam }}</td>
+								<td><a href="/admin/gebruikers/wijzig/{{ $editor->id }}">Wijzigen</a></td>
+								<td><a href="/admin/gebruikers/verwijder/{{ $editor->id }}">Verwijderen</a></td>
 							</tr>
 
 						@endforeach
 					</tbody>
-					
-				</table> -->
+				</table>					
+
+				@if (!$aantalEditors)
+					<p>Er zijn nog geen editors aangeduid.</p>
+				@endif
 			</div>
 			<div class="tab-pane" id="zoekResultaatTab" > 
 				<p>zoekresultaten</p>
@@ -103,5 +139,5 @@
 		
 		
     </div>
-</div>
+
 @endsection
