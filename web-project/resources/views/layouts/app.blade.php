@@ -44,11 +44,12 @@
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="./test">Databank</a></li>
+                
                 @if (Auth::guest())
                   <li><a href="{{ route('register') }}">Registratiepagina</a></li>
                   <li><a href="{{ route('login') }}">Inloggen</a></li>
                 @else
+                  <li><a href="{{ url('/profiel') }}">Profielpagina</a></li>
                   @if (Auth::user()->rol_id == 1)
                     <li><a href="{{ url('/admin') }}">Administratie</a></li>
                   @endif

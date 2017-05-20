@@ -63,5 +63,12 @@ class Gebruikers extends Authenticatable
       ->where('id', $id)
       ->update($gebruiker);
     }
+
+    public function zoekGebruikerViaNaam($naam){
+      return DB::table('gebruikers')
+        ->where('voornaam', 'like','%'.$naam.'%')
+        ->orWhere('achternaam', 'like','%'.$naam.'%')
+        ->get();
+    }
 }
 

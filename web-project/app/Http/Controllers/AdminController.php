@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Gebruikers;
 use App\Rollen;
 use Validator;
+use Redirect;
+use push;
+
 
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session;
 use App\Http\Requests;
 
 class AdminController extends Controller
@@ -110,7 +113,15 @@ class AdminController extends Controller
         $gebruiker = new Gebruikers();
         $gebruikersId = $id;
 
-        $gebruiker->wijzigGebruiker($gebruikersId,[
+        $validated = Validator::make($request->all(), [
+          'voornaam' => 'required',
+          'achternaam' => 'required',
+          'email' => 'required',
+          'geboortedatum' => 'required',
+        ]);
+
+        if(!$validated->fails()){
+            $gebruiker->wijzigGebruiker($gebruikersId,[
                 'voornaam' => $request->input('voornaam'),
                 'achternaam' => $request->input('achternaam'),
                 'email' => $request->input('email'),
@@ -121,69 +132,40 @@ class AdminController extends Controller
                 'op_kot' => $request->input('op_kot'),
                 'studentenclub' => $request->input('studentenclub')
             ]);
-        
-        return redirect('/admin/gebruikers');
+        }
+
+        return Redirect::back()->withErrors($validated)->with('succesBericht', 'De gegevens van de gebruiker werd gewijzigd');
         
     }
-    
 
-    
-   /* public function searchUser(Request $request){
+    public function zoekGebruikerViaNaam(Request $request){
         
         $validated = Validator::make($request->all(), [
-          'gebruiker' => 'required|min:2'
+          'teZoekenGebruiker' => 'required|min:2'
         ]);
 
+        $gebruiker = new Gebruikers;
         
-        $zoekResultaten = array();
-        $zoekResultatenObjecten = new \stdClass();
-       
-            
-        $gebruiker = new Gebruiker;
-        
-        $gebruikersNaam = $request->input('gebruiker');
+        $gebruikersNaam = $request->input('teZoekenGebruiker');
         if(!$validated->fails()){
-            $zoekResultatenObjecten = $gebruiker->getByName($gebruikersNaam);
+            $zoekResultaten = $gebruiker->zoekGebruikerViaNaam($gebruikersNaam);
+            $aantalZoekResultaten = sizeof($zoekResultaten);
+            session()->put(['zoekResultaten' => $zoekResultaten,
+            'aantalZoekResultaten' => $aantalZoekResultaten
+            ]);
 
-            foreach($zoekResultatenObjecten as $object)
-            {
-                $zoekResultaten[] = (array) $object;
-            }
-            
-            
-            var_dump($zoekResultaten);
-            var_dump($zoekResultatenObjecten);
+            return redirect('/admin/gebruikers')->withErrors($validated); 
+        }
+        else{
+            return Redirect::back()->withErrors($validated); 
         }
         
+
         
-        return view('admin/index', [
-            'title' => 'home',
-            'zoekResultaten' => $zoekResultaten
-          ])->withErrors($validated);
+
         
-       
+
     }
-    
-    
-    
-    public function toggleAdminRights($id){
-        $gebruiker = new Gebruiker();
-        $userId = $id;
-        
-        if( $gebruiker->isAdmin($id)){
-            $gebruiker->updateGebruiker($userId,[
-                'isAdmin' => 0
-            ]);
-        }
-        else
-        {
-            $gebruiker->updateGebruiker($userId,[
-                'isAdmin' => 1
-            ]);
-        }
-        
-        return redirect('/admin');
-    }*/
-        
+            
 
 }

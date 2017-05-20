@@ -16,10 +16,17 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->rol_id != 1) {
-            return redirect('home');
+        if(Auth::check()){
+            if (Auth::user()->rol_id = 1) {
+                return $next($request);
+            }else{
+                 return redirect('home');
+            }
+        }else{
+             return redirect('home');
         }
 
-        return $next($request);
+        
     }
 }
+

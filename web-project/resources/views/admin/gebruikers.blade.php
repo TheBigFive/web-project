@@ -3,13 +3,32 @@
 @section('admincontent')
     <div class="row">
         <h2>Gebruikers</h2>
+
+        <form action="{{ url('admin/gebruikers/zoeken') }}" method="post">
+	        {!! csrf_field() !!}
+
+	        <div class="form-group{{ $errors->has('teZoekenGebruiker') ? ' has-error' : '' }}">
+	            <input type="text" class="form-control" name="teZoekenGebruiker" placeholder="Typ hier de naam van de gebruiker">
+	            @if ($errors->has('teZoekenGebruiker'))
+	                <span class="help-block">
+	    	            <strong>{{ $errors->first('teZoekenGebruiker') }}</strong>
+	                </span>
+	            @endif
+	        </div>
+
+	        <input type="submit" name="zoeken" class="btn btn-primary" value="Gebruiker zoeken">
+	    </form>
+	    
+	    <div class="spacer"></div>
+
         <ul class="nav nav-pills" >
-		  <li  class="active" id="alleGebruikersTabKnop"><a data-toggle="tab" href="#alleGebruikersTab">Alle gebruikers ({{ $aantalGebruikers }})</a></li>
-		  <li><a data-toggle="tab" href="#administratorsTab">Administrators ({{ $aantalAdminGebruikers }})</a></li>
-		  <li><a data-toggle="tab" href="#approversTab">Approvers ({{ $aantalApprovers }})</a></li>
-		  <li><a data-toggle="tab" href="#editorsTab">Editors ({{ $aantalEditors }})</a></li>
-		  <li><a data-toggle="tab" href="#zoekResultaatTab">Zoekresultaat</a></li>
-		  <li><input id="search_input" type="text" style="width: 200px;" placeholder="Een gebruiker zoeken" /></li>
+			  <li  @if(!Session::has('zoekResultaten')) class="active" @endif id="alleGebruikersTabKnop"><a data-toggle="tab" href="#alleGebruikersTab">Alle gebruikers ({{ $aantalGebruikers }})</a></li>
+			  <li><a data-toggle="tab" href="#administratorsTab">Administrators ({{ $aantalAdminGebruikers }})</a></li>
+			  <li><a data-toggle="tab" href="#approversTab">Approvers ({{ $aantalApprovers }})</a></li>
+			  <li><a data-toggle="tab" href="#editorsTab">Editors ({{ $aantalEditors }})</a></li>
+			  @if (Session::has('zoekResultaten'))
+			  	<li class="active"><a data-toggle="tab" href="#zoekResultaatTab">Zoekresultaten ({{ Session::get('aantalZoekResultaten') }}) </a></li>
+			  @endif
 
 		</ul>
 		<div class="tab-content">
@@ -112,27 +131,40 @@
 					<p>Er zijn nog geen editors aangeduid.</p>
 				@endif
 			</div>
-			<div class="tab-pane" id="zoekResultaatTab" > 
-				<p>zoekresultaten</p>
-				<!-- <table class="table">
-					<thead>
-						<tr>
-							<th>Achternaam</th>
-							<th>Voornaam</th>	
-						</tr>				
-					</thead>
-					<tbody>
-						@foreach($alleGebruikers as $gebruiker)
-							<tr>
-								<td>{{ $gebruiker->achternaam }}</td>
-								<td>{{ $gebruiker->voornaam }}</td>
-							</tr>
 
-						@endforeach
-					</tbody>
-					
-				</table> -->
-			</div>
+			
+				<div class="tab-pane" id="zoekResultaatTab" > 
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Achternaam</th>
+								<th>Voornaam</th>	
+							</tr>				
+						</thead>
+						
+						<tbody>
+							@if (Session::has('zoekResultaten'))
+								@if (Session::get('aantalZoekResultaten') > 0 )
+									@foreach ( Session::pull('zoekResultaten') as $zoekResultaat )
+										<td>{{ $zoekResultaat->achternaam }}</td>
+										<td>{{ $zoekResultaat->voornaam }}</td>
+										<td><a href="/admin/gebruikers/wijzig/{{ $zoekResultaat->id }}">Wijzigen</a></td>
+										<td><a href="/admin/gebruikers/verwijder/{{ $zoekResultaat->id }}">Verwijderen</a></td>
+									@endforeach
+								
+						</tbody>
+					</table>
+								@else
+						</tbody>
+					</table>
+					{{ Session::forget('zoekResultaten') }}
+					<p>Er werden geen gebruikers gevonden.</p>
+								@endif
+							@endif
+				
+				</div>
+			
 
 
 		</div>
