@@ -139,12 +139,13 @@
 	            	</div>
 	                <div class="row">
 	                	<span>
-		                	<input type="submit" name="wijzigen" class="btn btn-primary" value="Gebruiker wijzigen">
-		              	</span>
-		                <span>
-		                	<a href="/admin/gebruikers/verwijder/{{ $geopendeGebruiker->id }}" class="btn btn-red">Gebruiker verwijderen</a>
+		                	<a href="/admin/gebruikers/verwijder/{{ $geopendeGebruiker->id }}" class="btn btn-danger">Gebruiker verwijderen</a>
 		             	</span>	
 
+	                	<span>
+		                	<input type="submit" name="wijzigen" class="btn btn-primary" value="Gebruiker wijzigen">
+		              	</span>
+		                
 	                </div>               
 	                
 	              	

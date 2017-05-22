@@ -12,7 +12,7 @@
           <div class="list-group">
             <a href="{{ url('/admin') }}" class="list-group-item">Dashboard</a>
             <a href="{{ url('/admin/gebruikers') }}" class="list-group-item">Gebruikers</a>
-            <a href="#" class="list-group-item">Nieuwsitems</a>
+            <a href="{{ url('/admin/nieuwsitems') }}" class="list-group-item">Nieuwsitems</a>
             <a href="#" class="list-group-item">Testimonials</a>
             <a href="#" class="list-group-item">Bezienswaardigheden</a>
             <a href="#" class="list-group-item">Scholen</a>
