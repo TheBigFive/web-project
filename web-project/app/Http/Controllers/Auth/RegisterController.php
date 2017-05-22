@@ -65,12 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        
         return Gebruikers::create([
             'voornaam' => $data['voornaam'],
             'achternaam' => $data['achternaam'],
             'geboortedatum' => $data['geboortedatum'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'rol_id' => 5,
         ]);
     }
 }

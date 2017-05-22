@@ -27,7 +27,8 @@ class Gebruikers extends Authenticatable
         'woonplaats',
         'profielfoto',
         'studentenclub',
-        'op_kot'
+        'op_kot',
+        'rol_id'
     ];
 
     /**
@@ -41,7 +42,10 @@ class Gebruikers extends Authenticatable
 
     public function alleGebruikersOpvragen()
     {
-      return DB::table('gebruikers')->get();
+      return DB::table('gebruikers')
+      ->join('rollen', 'gebruikers.rol_id', '=', 'rollen.rol_id')
+      ->select('gebruikers.*', 'rollen.naam as rol_naam')
+      ->get();
     }
 
     public function verwijderGebruiker($id)

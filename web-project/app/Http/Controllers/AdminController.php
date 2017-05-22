@@ -26,23 +26,17 @@ class AdminController extends Controller
 
     public function gebruikersPaginaOpenen(){
         $gebruikers = new Gebruikers();
-        $rollen = new Rollen();
 
         //Voor de tab alle gebruikers
         $alleGebruikers = $gebruikers->alleGebruikersOpvragen();
-        $rollenVanAlleGebruikers = array();
-
-        foreach ($alleGebruikers as $gebruiker) {
-            $rolVanGebruiker = $rollen->RolOpvragenViaId($gebruiker->rol_id);
-            array_push($rollenVanAlleGebruikers,$rolVanGebruiker);
-        }
         $aantalGebruikers = sizeof($alleGebruikers);
 
         //Voor de tab administrators
         $adminGebruikers = array();
+        $rolNaamAdministrator = 'Administrator';
 
         foreach ($alleGebruikers as $gebruiker) {
-            if ($gebruiker->rol_id==1){
+            if ($gebruiker->rol_naam==$rolNaamAdministrator){
                 array_push($adminGebruikers,$gebruiker);
             }
         }
@@ -50,10 +44,10 @@ class AdminController extends Controller
 
         //Voor de tab approvers
         $approvers = array();
-        $rollenVanAdminGebruikers = array();
+        $rolNaamApprover = 'Approver';
 
         foreach ($alleGebruikers as $gebruiker) {
-            if ($gebruiker->rol_id==3){
+            if ($gebruiker->rol_naam == $rolNaamApprover){
                 array_push($approvers,$gebruiker);
             }
         }
@@ -61,8 +55,10 @@ class AdminController extends Controller
 
         //Voor de tab editors
         $editors = array();
+        $rolNaamEditor = 'Editor';
+
         foreach ($alleGebruikers as $gebruiker) {
-            if ($gebruiker->rol_id==4){
+            if ($gebruiker->rol_naam==$rolNaamEditor){
                 array_push($editors,$gebruiker);
             }
         }
@@ -70,7 +66,6 @@ class AdminController extends Controller
 
         return view('admin/gebruikers',
             ['alleGebruikers' => $alleGebruikers,
-            'rollenVanAlleGebruikers' => $rollenVanAlleGebruikers,
             'aantalGebruikers' => $aantalGebruikers,
             'adminGebruikers' => $adminGebruikers,
             'aantalAdminGebruikers' => $aantalAdminGebruikers,

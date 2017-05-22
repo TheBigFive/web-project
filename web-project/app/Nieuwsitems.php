@@ -9,7 +9,10 @@ class Nieuwsitems extends Model
 {
     public function alleNieuwsitemsOpvragen()
     {
-      return DB::table('nieuwsitems')->get();
+      return DB::table('nieuwsitems')
+      ->join('gebruikers', 'nieuwsitems.toegevoegddoor_id', '=', 'gebruikers.id')
+      ->select('nieuwsitems.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
+      ->get();
     }
 
     public function nieuwsitemOpvragenViaId($id)
