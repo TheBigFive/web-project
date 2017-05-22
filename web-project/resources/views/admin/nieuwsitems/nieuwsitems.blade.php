@@ -18,7 +18,7 @@
 				@if($nieuwsitem->goedkeuringsstatus == 'Nieuw artikel')
 					<tr>
 						<td><a href="/admin/nieuwsitems/open/{{ $nieuwsitem->nieuwsitem_id }}">{{ $nieuwsitem->titel }}</a></td>
-						<td>{{ $nieuwsitem->toegevoegddoor_id }}</td>
+						<td>{{ $nieuwsitem->toegevoegddoor_voornaam }} {{ $nieuwsitem->toegevoegddoor_achternaam }}</td>
 						<td>{{ $nieuwsitem->toegevoegdop }}</td>
 						<td>{{ $nieuwsitem->goedkeuringsstatus }}</td>
 						<td><a href="/admin/nieuwsitems/wijzig/{{ $nieuwsitem->nieuwsitem_id }}">Wijzigen</a></td>
@@ -44,7 +44,7 @@
 			@foreach($alleNieuwsitems as $key => $nieuwsitem)
 				<tr>
 					<td><a href="/admin/nieuwsitems/open/{{ $nieuwsitem->nieuwsitem_id }}">{{ $nieuwsitem->titel }}</a></td>
-					<td>{{ $nieuwsitem->toegevoegddoor_id }}</td>
+					<td>{{ $nieuwsitem->toegevoegddoor_voornaam }} {{ $nieuwsitem->toegevoegddoor_achternaam }}</td>
 					<td>{{ $nieuwsitem->toegevoegdop }}</td>
 					<td>{{ $nieuwsitem->goedkeuringsstatus }}</td>
 					<td><a href="/admin/nieuwsitems/wijzig/{{ $nieuwsitem->nieuwsitem_id }}">Wijzigen</a></td>

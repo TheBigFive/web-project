@@ -121,7 +121,7 @@
 			                    @endif
 			                </div>
 			    	<span>
-	                	<a href="/profiel/delete" class="btn btn-danger">Account verwijderen</a>
+	                	<a href="/profiel/verwijderen" class="btn btn-danger">Account verwijderen</a>
 	              	</span>	                
 	              	<span>
 	                	<input type="submit" name="wijzigen" class="btn btn-primary" value="Profiel wijzigen">

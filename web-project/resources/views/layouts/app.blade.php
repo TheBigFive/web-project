@@ -9,9 +9,6 @@
 
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
-
-        <link rel="stylesheet" href="{{ asset('css/body.css') }}" >
-        <link rel="stylesheet" href="{{ asset('css/header.css') }}" >
         <link rel="stylesheet" href="https://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" >
 
     </head>
@@ -25,44 +22,71 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <img src="{{ asset('img/A_logo_RGB_123x123.jpg') }}">
+              <img class="logo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}">
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
                 <li><a href="{{ url('/') }}">Home</a></li>
+                <li class="active"><a href="#">Atypisch</a></li>
+                <li><a href="#about">Studeren</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li><a href="#">Vervoer</a></li>
+                    <li><a href="#">Fuiven</a></li>
+                    <li><a href="#">Parken</a></li>
+                    <li><a href="#">Sport</a></li>
+                    <li><a href="#">Op kot</a></li>
                   </ul>
                 </li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                
+                <li><a href="#contact">Verhalen</a></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle icon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                 @if (Auth::guest())
-                  <li><a href="{{ route('register') }}">Registratiepagina</a></li>
-                  <li><a href="{{ route('login') }}">Inloggen</a></li>
+                
+                <ul class="dropdown-menu">
+                  <ul><a href="{{ route('login') }}">Inloggen</a></ul>
+                  <ul><a href="{{ route('register') }}">Registratiepagina</a></ul>
                 @else
+                <ul class="dropdown-menu">
                   <li><a href="{{ url('/profiel') }}">Profielpagina</a></li>
                   @if (Auth::user()->rol_id == 1)
                     <li><a href="{{ url('/admin') }}">Administratie</a></li>
                   @endif
                   <li><a href="{{ route('logout') }}">Afmelden</a></li>
+                  </ul>
                 @endif
                 
+              </ul>
+              </li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
         </nav>
 
         @yield('content')
+        <div class="footer ">
+          <table class="inhoud container">
+            <tr>
+              <td class="footerRechts footerTop">
+                GROTE MARKT 15
+              </td>
+              <td class="footerLinks footerTop">
+                TEL +32 3 234 98 76
+              </td>
+            </tr>
+            <tr>  
+              <td class="footerRechts footerOnder">
+                2000 ANTWERPEN
+              </td>
+              <td class="footerLinks footerOnder">
+                <a>INFO@HANDLEIDING.BE</a>
+              </td>
+            </tr>
+          </table>
+        </div>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/admin.js') }}"></script>
+        <script src="{{ asset('js/slideshow.js') }}"></script>
     </body>
 </html>

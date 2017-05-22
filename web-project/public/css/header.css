@@ -1,15 +1,17 @@
-img {
+.logo {
 	height:50px;
 }
 
 .navbar-default{
-	background-color: #004851;
-	color: white;
+	background-color: #ffffff;
+	color: black;
+	width:1260px;
+	left:20%;
 }
 
 .navbar-default .navbar-nav > .active > a {
-	background-color: #00a0d3;
-	color: white;
+	background-color: #ffffff;
+	color: black;
 }
 
 .navbar-default .navbar-nav > li:hover, .navbar-default .navbar-nav > .active > li:hover, .navbar-default .navbar-nav > .active > a:hover{
@@ -17,9 +19,10 @@ img {
 }
 
 .navbar-default .navbar-nav > li > a{
-	color: white;
+	color: black;
 }
 
 .dropdown-menu{
 	background-color: #ffffff;
 }
+

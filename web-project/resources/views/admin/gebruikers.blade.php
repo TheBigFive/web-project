@@ -46,7 +46,7 @@
 							<tr>
 								<td>{{ $gebruiker->achternaam }}</td>
 								<td>{{ $gebruiker->voornaam }}</td>
-								<td>{{ $rollenVanAlleGebruikers{$key}->first()->naam }}</td>
+								<td>{{ $gebruiker->rol_naam }}</td>
 								<td><a href="/admin/gebruikers/wijzig/{{ $gebruiker->id }}">Wijzigen</a></td>
 								<td><a href="/admin/gebruikers/verwijder/{{ $gebruiker->id }}">Verwijderen</a></td>
 							</tr>
