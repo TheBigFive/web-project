@@ -74,5 +74,17 @@ class Gebruikers extends Authenticatable
         ->orWhere('achternaam', 'like','%'.$naam.'%')
         ->get();
     }
+
+    public function geefRol($id){
+      $rolGebruiker = DB::table('gebruikers')
+      ->join('rollen', 'gebruikers.rol_id', '=', 'rollen.rol_id')
+      ->select('rollen.naam')
+      ->where('id', $id)
+      ->get();
+
+      return $rolGebruiker->first()->naam;
+    }
+      
+
 }
 

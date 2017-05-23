@@ -13,13 +13,16 @@
 	
 	<p>Introtekst: {{ $geopendeNieuwsitem->introtekst }}</p>
 	<p>Artikel: {{ $geopendeNieuwsitem->artikel }}</p>
+	<p>Goedkeuringsstatus: {{ $geopendeNieuwsitem->goedkeuringsstatus }}</p>
 
-	<span>
-		<a href="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-danger">Artikel afwijzen</a>
-	</span>	
-	<span>
-		<a href="/admin/nieuwsitems/goedkeuren/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-success">Artikel goedkeuren</a>
-	</span>	
+	@if (Auth::user()->rol_id!=4)
+		<span>
+			<a href="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-danger">Artikel afwijzen</a>
+		</span>	
+		<span>
+			<a href="/admin/nieuwsitems/goedkeuren/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-success">Artikel goedkeuren</a>
+		</span>	
+	@endif
 	
 
 @endsection

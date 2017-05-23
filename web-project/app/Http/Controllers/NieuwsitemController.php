@@ -18,10 +18,6 @@ use Illuminate\Http\Response;
 
 class NieuwsitemController extends Controller
 {
-    public function __construct(){
-      $this->middleware('admin');
-    }
-
     public function index()
     {
         $nieuwsitem = new Nieuwsitems();

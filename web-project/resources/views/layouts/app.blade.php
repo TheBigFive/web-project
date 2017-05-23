@@ -50,7 +50,7 @@
                 @else
                 <ul class="dropdown-menu">
                   <li><a href="{{ url('/profiel') }}">Profielpagina</a></li>
-                  @if (Auth::user()->rol_id == 1)
+                  @if (Auth::user()->rol_id == 1 ||Auth::user()->rol_id == 3 || Auth::user()->rol_id == 4)
                     <li><a href="{{ url('/admin') }}">Administratie</a></li>
                   @endif
                   <li><a href="{{ route('logout') }}">Afmelden</a></li>
