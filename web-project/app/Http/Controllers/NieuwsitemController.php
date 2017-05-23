@@ -39,6 +39,7 @@ class NieuwsitemController extends Controller
     {
         $nieuwsitem = new Nieuwsitems();
         $gebruikersId = Auth::id();
+        $publicatieStatus = 'Nog niet gepubliceerd';
         $goedkeuringsstatus = 'Nieuw artikel';
         $datumEnTijd = new DateTime();
 
@@ -53,6 +54,7 @@ class NieuwsitemController extends Controller
                 'titel' => $request->input('titel'),
                 'introtekst' => $request->input('introtekst'),
                 'artikel' => $request->input('artikel'),
+                'publicatieStatus' => $publicatieStatus,
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'toegevoegdop' => $datumEnTijd,
                 'toegevoegddoor_id' => $gebruikersId,
@@ -80,6 +82,7 @@ class NieuwsitemController extends Controller
 
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemsId = $id;
+        $goedkeuringsstatus = "Werd gewijzigd";
 
         $validated = Validator::make($request->all(), [
           'titel' => 'required',
@@ -92,6 +95,7 @@ class NieuwsitemController extends Controller
                 'titel' => $request->input('titel'),
                 'introtekst' => $request->input('introtekst'),
                 'artikel' => $request->input('artikel'),
+                'goedkeuringsstatus' => $goedkeuringsstatus,
             ]);
         }
 
@@ -126,10 +130,14 @@ class NieuwsitemController extends Controller
 
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemsId = $id;
+        $datumEnTijd = new DateTime();
         $goedkeuringsstatus = 'Goedgekeurd';
+        $redenVanAfwijzing = null;
      
         $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
-                'goedkeuringsstatus' => $goedkeuringsstatus
+                'goedkeuringsstatus' => $goedkeuringsstatus,
+                'goedgekeurdop' => $datumEnTijd,
+                'redenVanAfwijzing' => $redenVanAfwijzing
             ]);
         
 
@@ -137,18 +145,60 @@ class NieuwsitemController extends Controller
         
     }
     
-    public function afwijzenNieuwsitem($id){
+    public function afwijzenNieuwsitem($id, Request $request){
 
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemsId = $id;
         $goedkeuringsstatus = 'Afgewezen';
+        $goedgekeurdop = null;
+
+        $validated = Validator::make($request->all(), [
+          'redenVanAfwijzing' => 'required',
+        ]);
+
+        if(!$validated->fails()){
+            $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
+                'goedkeuringsstatus' => $goedkeuringsstatus,
+                'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
+                'goedgekeurdop' => $goedgekeurdop
+            ]); 
+        };        
+
+        return Redirect::back()->withErrors($validated)->with('succesBericht', 'Het artikel werd succesvol afgewezen.');
+        
+    }
+
+    public function publicerenNieuwsitem($id){
+
+        $nieuwsitem = new Nieuwsitems();
+        $nieuwsitemsId = $id;
+        $datumEnTijd = new DateTime();
+        $publicatieStatus = 'Gepubliceerd';
      
         $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
-                'goedkeuringsstatus' => $goedkeuringsstatus
+                'gepubliceerdop' => $datumEnTijd,
+                'publicatieStatus' => $publicatieStatus
             ]);
-        
 
-        return Redirect::back()->with('succesBericht', 'Het artikel werd succesvol afgewezen.');
+        $this->goedkeurenNieuwsitem($nieuwsitemsId);
+
+        return Redirect::back()->with('succesBericht', 'Het artikel werd succsvol gepubliceerd.');
+        
+    }
+
+    public function offlineHalenNieuwsitem($id){
+
+        $nieuwsitem = new Nieuwsitems();
+        $nieuwsitemsId = $id;
+        $datumEnTijd = null;
+        $publicatieStatus = 'Nog niet gepubliceerd';
+     
+        $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
+                'gepubliceerdop' => $datumEnTijd,
+                'publicatieStatus' => $publicatieStatus
+            ]);
+
+        return Redirect::back()->with('succesBericht', 'Het artikel werd succsvol offline gehaald.');
         
     }
     

@@ -3,7 +3,7 @@
 @section('admincontent')
 	<h2>Nieuwsartikel wijzigen</h2>
 	
-	<form class="project-form" action="/admin/nieuwsitems/wijzig/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">
+	<form action="/admin/nieuwsitems/wijzig/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">
 		@if( session()->has('succesBericht'))
         				@if(!$errors->all())
         					<div class="alert alert-success">
@@ -39,9 +39,16 @@
 			    </span>
 			@endif
 		  </div>
-		  <div class="form-group">
-		    <input type="submit" class="btn btn-primary" value="Wijzig artikel">
-		 </div>
+		  <div class="row">
+		  		@if (Auth::user()->rol_id!=4)
+				  	<span>
+				        <a href="/admin/nieuwsitems/verwijder/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-danger">Nieuwsitem verwijderen</a>
+				   	</span>
+			   	@endif
+
+				<span><input type="submit" class="btn btn-primary" value="Wijzig artikel"></span>
+			
+		 	</div>
 	</form>
 
 @endsection
