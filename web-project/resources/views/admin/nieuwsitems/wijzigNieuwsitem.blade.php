@@ -39,7 +39,24 @@
 			    </span>
 			@endif
 		  </div>
-		  <div class="row">
+		<div class="form-group{{ $errors->has('tag') ? ' has-error' : '' }}">
+		    <label for="tag">Tag</label>
+		    <select class="form-control" name="tag">
+		    @foreach ($alleTags as $tag)
+		    	@if ($geopendeNieuwsitem->tag_naam == $tag->naam)
+		    		<option selected value="{{ $tag->tag_id }}">{{ $tag->naam }}</option>
+			   	@else
+			   		<option value="{{ $tag->tag_id }}">{{ $tag->naam }}</option>
+				@endif
+			@endforeach
+			</select>
+			@if ($errors->has('tag'))
+			    <span class="help-block">
+				    <strong>{{ $errors->first('tag') }}</strong>
+			    </span>
+			@endif
+		</div>
+		<div class="row">
 		  		@if (Auth::user()->rol_id!=4)
 				  	<span>
 				        <a href="/admin/nieuwsitems/verwijder/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-danger">Nieuwsitem verwijderen</a>

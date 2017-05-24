@@ -23,7 +23,7 @@
 			    </span>
 			@endif
 		</div>
-		  <div class="form-group">
+		<div class="form-group">
 		    <label for="beschrijving">Artikel</label>
 		    <textarea rows="5" name="artikel" class="form-control" placeholder="Typ hier je artikel"></textarea>
 		    @if ($errors->has('artikel'))
@@ -31,10 +31,24 @@
 			        <strong>{{ $errors->first('artikel') }}</strong>
 			    </span>
 			@endif
-		  </div>
-		  <div class="form-group">
+		</div>
+		<div class="form-group{{ $errors->has('tag') ? ' has-error' : '' }}">
+		    <label for="tag">Tag</label>
+		    <select class="form-control" name="tag">
+		    @foreach ($alleTags as $tag)
+			   		<option value="{{ $tag->tag_id }}">{{ $tag->naam }}</option>
+			@endforeach
+			</select>
+			@if ($errors->has('tag'))
+			    <span class="help-block">
+				    <strong>{{ $errors->first('tag') }}</strong>
+			    </span>
+			@endif
+		</div>
+
+		<div class="form-group">
 		    <input type="submit" class="btn btn-primary" value="Maak artikel">
-		  </div>
+		</div>
 	</form>
 
 @endsection

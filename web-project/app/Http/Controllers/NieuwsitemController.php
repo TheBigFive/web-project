@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Gebruikers;
 use App\Nieuwsitems;
+use App\Tags;
 use Auth;
 use Validator;
 use Redirect;
@@ -31,7 +32,12 @@ class NieuwsitemController extends Controller
     
     public function openToevoegenNieuwsitem()
     {
-        return view('admin/nieuwsitems/toevoegenNieuwsitem');
+        $tag = new Tags();
+        $alleTags = $tag->alleTagsOpvragen();
+
+        return view('admin/nieuwsitems/toevoegenNieuwsitem',
+            ['alleTags' => $alleTags,
+            ]);
         
     }
 
@@ -58,6 +64,7 @@ class NieuwsitemController extends Controller
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'toegevoegdop' => $datumEnTijd,
                 'toegevoegddoor_id' => $gebruikersId,
+                'tag_id' => $request->input('tag'),
             ]);
         }
 
@@ -69,11 +76,14 @@ class NieuwsitemController extends Controller
 
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemsId = $id;
+        $tag = new Tags();
 
         $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemsId)->first();
+        $alleTags = $tag->alleTagsOpvragen();
         
         return view('/admin/nieuwsitems/wijzigNieuwsitem', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
+            'alleTags' => $alleTags,
             ]);
         
     }
@@ -96,6 +106,7 @@ class NieuwsitemController extends Controller
                 'introtekst' => $request->input('introtekst'),
                 'artikel' => $request->input('artikel'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
+                'tag_id' => $request->input('tag'),
             ]);
         }
 

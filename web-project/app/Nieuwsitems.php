@@ -11,13 +11,17 @@ class Nieuwsitems extends Model
     {
       return DB::table('nieuwsitems')
       ->join('gebruikers', 'nieuwsitems.toegevoegddoor_id', '=', 'gebruikers.id')
-      ->select('nieuwsitems.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
+      ->join('tags', 'nieuwsitems.tag_id', '=', 'tags.tag_id')
+      ->select('nieuwsitems.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam')
       ->get();
     }
 
     public function nieuwsitemOpvragenViaId($id)
     {
       return DB::table('nieuwsitems')
+      ->join('gebruikers', 'nieuwsitems.toegevoegddoor_id', '=', 'gebruikers.id')
+      ->join('tags', 'nieuwsitems.tag_id', '=', 'tags.tag_id')
+      ->select('nieuwsitems.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam')
       ->where('nieuwsitem_id', $id)
       ->get();
     }
