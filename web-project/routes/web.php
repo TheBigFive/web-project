@@ -17,8 +17,10 @@ Route::get('/', function () {
     return view('welkom');
 });
 
+
 Route::get('/home', 'HomeController@index');
 Route::get('test', 'AdminController@test');
+Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {

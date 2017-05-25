@@ -4789,3 +4789,31 @@ height:50px;
 .dropdown-menu a{
 	margin-right: 1em;
 }
+
+	.kolom {
+		width: 33%;
+		display: inline-grid;
+		clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+		font-family: SunAntwerpen;
+	}
+
+	kolom image{
+	}
+
+	.clip-svg {
+        width: 0;
+        height: 0;
+    }
+
+    .auteur{
+    	font-family: georgia;
+    }
+
+    .nieuws{
+    	text-align: center;
+    }
+
+    .nieuwsberichten td{
+    	width: 30%;
+    }
+

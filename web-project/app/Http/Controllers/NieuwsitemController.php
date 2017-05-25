@@ -26,7 +26,16 @@ class NieuwsitemController extends Controller
         return view('admin/nieuwsitems/nieuwsitems',
             ['alleNieuwsitems' => $alleNieuwsitems
             ]);
-        
+    }
+
+    public function ophalenNieuwsitem()
+    {
+        $nieuwsitem = new Nieuwsitems();
+        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+
+        return view('user/nieuwsberichten',
+            ['alleNieuwsitems' => $alleNieuwsitems
+            ]);
     }
     
     public function openToevoegenNieuwsitem()
