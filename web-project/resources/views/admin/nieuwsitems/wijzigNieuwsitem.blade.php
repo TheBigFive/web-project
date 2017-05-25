@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('admincontent')
+
+<div class="gebruikerswrapper">
+
 	<h2>Nieuwsartikel wijzigen</h2>
 	
 	<form action="/admin/nieuwsitems/wijzig/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">
@@ -50,5 +53,7 @@
 			
 		 	</div>
 	</form>
+
+</div>
 
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('admincontent')
+<div class="gebruikerswrapper">
     <div class="row">
         <h2>Wijziging gebruiker</h2>      
         	
@@ -157,5 +158,5 @@
 		
 		
     </div>
-
+</div>
 @endsection

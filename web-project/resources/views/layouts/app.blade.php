@@ -65,7 +65,7 @@
         </nav>
 
         @yield('content')
-        <div class="footer ">
+        <div class="footer">
           <table class="inhoud container">
             <tr>
               <td class="footerRechts footerTop">

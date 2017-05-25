@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('admincontent')
+<div class="gebruikerswrapper">
+
 	<h2>Nieuwsartikel: {{ $geopendeNieuwsitem->titel }}</h2>
 
 	@if( session()->has('succesBericht'))
@@ -34,7 +36,7 @@
 					@endif
 				</div>
 				<span>
-					<input type="submit" class="btn btn-danger" value="Artikel afwijzen">
+					<input type="submit" class="btn btn-danger afwijsbutton" value="Artikel afwijzen">
 				</span>	
 			</form>
 		@endif
@@ -47,7 +49,7 @@
 
 		@if($geopendeNieuwsitem->goedkeuringsstatus != "Goedgekeurd")
 		<span>
-			<a href="/admin/nieuwsitems/goedkeuren/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-success">Artikel goedkeuren</a>
+			<a href="/admin/nieuwsitems/goedkeuren/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-success goedkeurbutton">Artikel goedkeuren</a>
 		</span>
 		<span>
 			<a href="/admin/nieuwsitems/publiceren/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-primary">Goedkeuren en publiceren</a>
@@ -64,5 +66,6 @@
 		<a href="/admin/nieuwsitems/wijzig/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-primary">Wijzig Nieuwsitem</a>
 	</span>
 	
+</div>
 
 @endsection
