@@ -104,8 +104,17 @@ table{
 td,th{
 	padding:0}
 
-
+.nieuwsitems{
+    	column-count: 1;
+    }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+@media (min-width:400px){
+	.nieuwsitems{
+    	column-count: 2;
+    }
+}
+
 @media print{
 	*,:after,:before{
 	background:transparent!important;
@@ -806,6 +815,8 @@ p{
 font-size:16px;
  font-weight:300;
  line-height:1.4}
+
+ }
  @media (min-width:768px){
  	.lead{
  	font-size:21px}
@@ -2766,6 +2777,9 @@ padding-right:0}
 .container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 
 @media (min-width:768px){
+	.nieuwsitems{
+    	column-count: 3;
+    }
 	.container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 }
 .navbar-static-top{
@@ -2987,7 +3001,7 @@ margin-right:-15px}
 
 background-color:transparent}
 .navbar-default .navbar-nav>li>a,.navbar-default .navbar-text{
-	font-size: 1.8em;
+	font-size: 1.4em;
 	color:#777}
 .navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover{
 	color:#0099cc;
@@ -4818,15 +4832,22 @@ height:50px;
     }
 
     .nieuws .titel{
-    	color: #000000;
+    	color: #0099cc;
     	font-size: 1.8em;
+    	text-decoration: none;
+    	line-height: 1em;
+    	margin-bottom: .1em;
     }
 
-    .nieuwsitems{
-    	column-count: 3;
+    .nieuws .titel:hover{
+    	text-decoration: underline;
     }
+
+
 
     .kolom{
+    	min-height: 650px;
+    	height: auto;
     }
 
     table{
@@ -4834,5 +4855,4 @@ height:50px;
     }
 
     .nieuwsitems tr{
-    	min-height: 1000px;
     }
