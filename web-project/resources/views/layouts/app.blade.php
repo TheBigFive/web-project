@@ -28,7 +28,7 @@
             <div id="navbar" class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="#">Bezienswaardigheden</a></li>
+                <li><a href="{{ url('nieuwsberichten') }}">Bezienswaardigheden</a></li>
                 <li><a href="#about">Studeren</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>

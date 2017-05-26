@@ -4674,6 +4674,11 @@ color:transparent;
 	position: relative;
 	mask: url(http://i.imgur.com/mH5ZRZ1.png) no-repeat;
 	}
+
+	.kolom{
+		width: 400px;
+		margin: 8px;
+	}
 }
 
 .tekstHero{
@@ -4790,9 +4795,8 @@ height:50px;
 	margin-right: 1em;
 }
 
-	.kolom {
-		width: 33%;
-		display: inline-grid;
+	.kolom .foto {
+		margin: 1%;
 		clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 		font-family: SunAntwerpen;
 	}
@@ -4813,7 +4817,22 @@ height:50px;
     	text-align: center;
     }
 
-    .nieuwsberichten td{
-    	width: 30%;
+    .nieuws .titel{
+    	color: #000000;
+    	font-size: 1.8em;
     }
 
+    .nieuwsitems{
+    	column-count: 3;
+    }
+
+    .kolom{
+    }
+
+    table{
+    	column-gap: 10px;
+    }
+
+    .nieuwsitems tr{
+    	min-height: 1000px;
+    }

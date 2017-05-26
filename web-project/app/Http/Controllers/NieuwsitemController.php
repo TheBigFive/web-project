@@ -32,7 +32,6 @@ class NieuwsitemController extends Controller
     {
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
-
         return view('user/nieuwsberichten',
             ['alleNieuwsitems' => $alleNieuwsitems
             ]);
