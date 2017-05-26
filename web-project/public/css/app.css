@@ -107,6 +107,10 @@ td,th{
 .nieuwsitems{
     	column-count: 1;
     }
+
+    .nieuwsitems svg:hover{
+    	opacity: 0.5;
+}
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 
 @media (min-width:400px){
@@ -4689,10 +4693,6 @@ color:transparent;
 	mask: url(http://i.imgur.com/mH5ZRZ1.png) no-repeat;
 	}
 
-	.kolom{
-		width: 400px;
-		margin: 8px;
-	}
 }
 
 .tekstHero{
@@ -4846,8 +4846,7 @@ height:50px;
 
 
     .kolom{
-    	min-height: 650px;
-    	height: auto;
+    	min-height: 560px;
     }
 
     table{
@@ -4855,4 +4854,11 @@ height:50px;
     }
 
     .nieuwsitems tr{
+    }
+
+    #aangemeldAccount{
+    	padding-left: 1em;
+    	display: ruby;
+    	padding-left: .1em;
+    	color: #0099cc;
     }

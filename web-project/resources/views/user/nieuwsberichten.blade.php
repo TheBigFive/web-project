@@ -4,7 +4,7 @@
 	<div class="nieuwsitems">
 	<?php $i=0; $j=0; ?>
 	<table>
-	<tr><td>
+	<tr>
 	@foreach($alleNieuwsitems as $key => $nieuwsitem)
 		
 		<div class="kolom">
@@ -35,7 +35,7 @@
 		</div>
 		
 		<?php $i++; if($i>2) {
-			echo "</td></tr><tr>"; 
+			echo "</tr><tr>"; 
 			$i=0;
 			}  ?>
 	@endforeach

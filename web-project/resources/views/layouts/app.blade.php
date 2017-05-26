@@ -50,7 +50,7 @@
                   <ul><a href="{{ route('register') }}">Registratiepagina</a></ul>
                 @else
                 <ul class="dropdown-menu">
-                  <li><a href="{{ url('/profiel') }}">Profielpagina</a></li>
+                  <li><a href="{{ url('/profiel') }}">Aangemeld als <div id="aangemeldAccount">{{ Auth::user()->voornaam }}</div></a></li>
                   @if (Auth::user()->rol_id == 1 ||Auth::user()->rol_id == 3 || Auth::user()->rol_id == 4)
                     <li><a href="{{ url('/admin') }}">Administratie</a></li>
                   @endif
