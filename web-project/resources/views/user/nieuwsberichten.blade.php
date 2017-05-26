@@ -2,12 +2,9 @@
 @section('content')
 	<div class="nieuwsberichten container">
 	<div class="nieuwsitems">
-	<?php $i=0; $j=0; ?>
-	<table>
-	<tr>
 	@foreach($alleNieuwsitems as $key => $nieuwsitem)
-		
 		<div class="kolom">
+		<li>
 			<div class="foto">
 			<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
 				<defs>
@@ -26,21 +23,17 @@
 					{{ $nieuwsitem->toegevoegddoor_voornaam }} {{ $nieuwsitem->toegevoegddoor_achternaam }}
 				</div>
 				<div class="titel">
-				{{ $nieuwsitem->titel }}
+					<a href="nieuwsbericht/{{ $nieuwsitem->nieuwsitem_id }}">
+						{{ $nieuwsitem->titel }}
+					</a>
 				</div>
 				<div class="introtekst">
 					{{ substr($nieuwsitem->introtekst,0,180).'...' }}
 				</div>
 			</div>
+		</li>
 		</div>
-		
-		<?php $i++; if($i>2) {
-			echo "</tr><tr>"; 
-			$i=0;
-			}  ?>
 	@endforeach
-	</tr>
-	</table>
 	</div>
 	</div>
 @endsection

@@ -21,6 +21,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 Route::get('test', 'AdminController@test');
 Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
+Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');
+
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
@@ -38,7 +40,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::post('admin/nieuwsitems/toevoegen','NieuwsitemController@voegNieuwsitemToe');
 	Route::get('admin/nieuwsitems/wijzig/{id}', 'NieuwsitemController@openWijzigingNieuwsitem');
 	Route::post('admin/nieuwsitems/wijzig/{id}', 'NieuwsitemController@wijzigNieuwsitem');
-	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitem');
+	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitemAdmin');
 });
 
 //Administratieroutes die Approver en Admin mag uitvoeren

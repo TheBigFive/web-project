@@ -28,6 +28,19 @@ class NieuwsitemController extends Controller
             ]);
     }
 
+    public function openNieuwsitem($id){
+
+        $nieuwsitem = new Nieuwsitems();
+        $nieuwsitemsId = $id;
+
+        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemsId)->first();
+        
+        return view('user/nieuwsbericht', 
+            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
+            ]);
+        
+    }
+
     public function ophalenNieuwsitem()
     {
         $nieuwsitem = new Nieuwsitems();
@@ -121,7 +134,7 @@ class NieuwsitemController extends Controller
         
     }
 
-    public function openNieuwsitem($id, Request $request){
+    public function openNieuwsitemAdmin($id, Request $request){
 
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemsId = $id;

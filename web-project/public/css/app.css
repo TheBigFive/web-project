@@ -108,12 +108,16 @@ td,th{
     	column-count: 1;
     }
 
-    .nieuwsitems svg:hover{
+.kolom li{
+	display: initial;
+}
+
+.nieuwsitems svg:hover{
     	opacity: 0.5;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 
-@media (min-width:400px){
+@media (min-width:500px){
 	.nieuwsitems{
     	column-count: 2;
     }
@@ -4845,8 +4849,8 @@ height:50px;
 
 
 
-    .kolom{
-    	min-height: 560px;
+    .kolom li{
+    	display: table;
     }
 
     table{
@@ -4861,4 +4865,11 @@ height:50px;
     	display: ruby;
     	padding-left: .1em;
     	color: #0099cc;
+    }
+
+    .nieuwsbericht img{
+    	width: 100%;
+    }
+
+    .nieuwsbericht table{
     }
