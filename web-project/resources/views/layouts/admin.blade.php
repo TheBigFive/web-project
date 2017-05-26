@@ -50,6 +50,8 @@
         <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
         <a href="{{ url('/') }}"><img class="brand-img pull-left logo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}" alt="brand"/></a>
         <ul class="nav navbar-right top-nav pull-right">
+
+<!--
           <li>
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#site_navbar_search">
             <i class="fa fa-search top-nav-icon"></i>
@@ -128,6 +130,8 @@
               </li>
             </ul>
           </li>
+-->
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="{{ asset('img/user1.png') }}" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
             <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
