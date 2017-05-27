@@ -27,7 +27,7 @@ class Nieuwsitems extends Model
     }
 
     public function voegNieuwsitemToe($nieuwsitem){
-      return DB::table('nieuwsitems')->insert($nieuwsitem);
+      return DB::table('nieuwsitems')->insertGetId($nieuwsitem);
     }
 
     public function wijzigNieuwsitem($id,$nieuwsitem){

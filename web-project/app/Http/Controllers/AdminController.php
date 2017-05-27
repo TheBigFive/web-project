@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gebruikers;
 use App\Rollen;
+use App\Media;
 use Validator;
 use Redirect;
 use push;
@@ -12,6 +13,9 @@ use push;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session;
 use App\Http\Requests;
+use Input;
+
+
 
 class AdminController extends Controller
 {

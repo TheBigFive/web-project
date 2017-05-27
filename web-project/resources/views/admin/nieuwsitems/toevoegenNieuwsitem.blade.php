@@ -3,7 +3,7 @@
 @section('admincontent')
 	<h2>Nieuwsartikel toevoegen</h2>
 	
-	<form action="/admin/nieuwsitems/toevoegen" method="post">
+	<form action="/admin/nieuwsitems/toevoegen" method="post" enctype="multipart/form-data">
 		{!! csrf_field() !!}
 		<div class="form-group">
 		    <label for="titel">Titel nieuwsartikel</label>
@@ -42,6 +42,18 @@
 			@if ($errors->has('tag'))
 			    <span class="help-block">
 				    <strong>{{ $errors->first('tag') }}</strong>
+			    </span>
+			@endif
+		</div>
+
+		<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
+			<label for="afbeeldingen">Kies een of meerdere afbeelding</label>
+			<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
+			<input hidden name="mediaCategorie" value="Nieuwsitem"/><br/>
+			<input hidden name="mediaType" value="Afbeelding"/><br/>
+			@if ($errors->has('afbeeldingen'))
+			    <span class="help-block">
+				    <strong>{{ $errors->first('afbeeldingen') }}</strong>
 			    </span>
 			@endif
 		</div>

@@ -10,17 +10,37 @@
 		    </div>
 	    @endif
     @endif
-	
-	<p>Introtekst: {{ $geopendeNieuwsitem->introtekst }}</p>
-	<p>Artikel: {{ $geopendeNieuwsitem->artikel }}</p>
-	<p>Auteur: {{ $geopendeNieuwsitem->toegevoegddoor_voornaam }} {{ $geopendeNieuwsitem->toegevoegddoor_achternaam }}</p>
-	<p>Tag: {{ $geopendeNieuwsitem->tag_naam }}</p>
-	<p>Goedkeuringsstatus: {{ $geopendeNieuwsitem->goedkeuringsstatus }}</p>
-	<p>Publicatiestatus: {{ $geopendeNieuwsitem->publicatieStatus }}</p>
 
-	@if ($geopendeNieuwsitem->redenVanAfwijzing)
-		<p>Reden van afwijzing: {{ $geopendeNieuwsitem->redenVanAfwijzing }}</p>
-	@endif
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-4">
+		    	<p>Introtekst: {{ $geopendeNieuwsitem->introtekst }}</p>
+				<p>Artikel: {{ $geopendeNieuwsitem->artikel }}</p>
+				<p>Auteur: {{ $geopendeNieuwsitem->toegevoegddoor_voornaam }} {{ $geopendeNieuwsitem->toegevoegddoor_achternaam }}</p>
+				<p>Tag: {{ $geopendeNieuwsitem->tag_naam }}</p>
+				<p>Goedkeuringsstatus: {{ $geopendeNieuwsitem->goedkeuringsstatus }}</p>
+				<p>Publicatiestatus: {{ $geopendeNieuwsitem->publicatieStatus }}</p>
+				@if ($geopendeNieuwsitem->redenVanAfwijzing)
+					<p>Reden van afwijzing: {{ $geopendeNieuwsitem->redenVanAfwijzing }}</p>
+				@endif
+				
+		    </div>
+		    <div class="col-md-6">
+		     	<p>Afbeeldingen</p>
+		     	@foreach($alleNieuwsitemMedia as $media)
+					<img height="60px" src="{{ asset($media->link)  }}">
+				@endforeach
+		    </div>
+    		
+    	</div>
+
+    </div>
+	
+	
+
+	
+
+	
 
 	@if (Auth::user()->rol_id!=4)
 		@if($geopendeNieuwsitem->goedkeuringsstatus == "Goedgekeurd")

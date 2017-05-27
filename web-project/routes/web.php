@@ -18,7 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index');
-Route::get('test', 'AdminController@test');
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
@@ -51,6 +50,9 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::post('admin/nieuwsitems/afwijzen/{id}', 'NieuwsitemController@afwijzenNieuwsitem');
 	Route::get('admin/nieuwsitems/publiceren/{id}', 'NieuwsitemController@publicerenNieuwsitem');
 	Route::get('admin/nieuwsitems/offlineHalen/{id}', 'NieuwsitemController@offlineHalenNieuwsitem');
+	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
+	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
+
 	
 });
 
