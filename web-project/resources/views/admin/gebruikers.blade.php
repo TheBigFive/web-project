@@ -72,26 +72,16 @@
 								<td>{{ $gebruiker->achternaam }}</td>
 								<td>{{ $gebruiker->voornaam }}</td>
 								<td>
-									<span class="label
-									<?php 
-										if($gebruiker->rol_naam == "Administrator")
-										{
-											echo " label-danger";
-										}
-										else if($gebruiker->rol_naam == "Approver")
-										{
-											echo " label-success";
-										}
-										else if($gebruiker->rol_naam == "Editor")
-										{
-											echo " label-warning";
-										}
-										else if($gebruiker->rol_naam == "Gebruiker")
-										{
-											echo " label-info";
-										}
-									?>
-								">{{ $gebruiker->rol_naam }}</span>
+									@if($gebruiker->rol_naam == "Administrator")							
+										<span class="label label-danger">{{ $gebruiker->rol_naam }}</span>
+										
+									@elseif($gebruiker->rol_naam == "Approver")
+											<span class="label label-success">{{ $gebruiker->rol_naam }}</span>
+									@elseif($gebruiker->rol_naam == "Editor")
+										<span class="label label-warning">{{ $gebruiker->rol_naam }}</span>
+									@elseif($gebruiker->rol_naam == "Gebruiker")
+										<span class="label label-info">{{ $gebruiker->rol_naam }}</span>
+									@endif								
 								</td>
 								<td><a href="/admin/gebruikers/wijzig/{{ $gebruiker->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
 								<td><a href="/admin/gebruikers/verwijder/{{ $gebruiker->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
@@ -120,27 +110,8 @@
 								<td><?php echo $i; $i++; ?></td>
 								<td>{{ $adminGebruiker->achternaam }}</td>
 								<td>{{ $adminGebruiker->voornaam }}</td>
-								<td>
-									<span class="label
-									<?php 
-										if($adminGebruiker->rol_naam == "Administrator")
-										{
-											echo " label-danger";
-										}
-										else if($adminGebruiker->rol_naam == "Approver")
-										{
-											echo " label-success";
-										}
-										else if($adminGebruiker->rol_naam == "Editor")
-										{
-											echo " label-warning";
-										}
-										else if($adminGebruiker->rol_naam == "Gebruiker")
-										{
-											echo " label-info";
-										}
-									?>
-								">{{ $adminGebruiker->rol_naam }}</span>
+								<td>			
+									<span class="label label-danger">{{ $adminGebruiker->rol_naam }}</span>	
 								</td>
 								<td><a href="/admin/gebruikers/wijzig/{{ $adminGebruiker->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
 								<td><a href="/admin/gebruikers/verwijder/{{ $adminGebruiker->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
@@ -170,28 +141,7 @@
 									<td><?php echo $i; $i++; ?></td>
 									<td>{{ $approver->achternaam }}</td>
 									<td>{{ $approver->voornaam }}</td>
-									<td>
-									<span class="label
-									<?php 
-										if($approver->rol_naam == "Administrator")
-										{
-											echo " label-danger";
-										}
-										else if($approver->rol_naam == "Approver")
-										{
-											echo " label-success";
-										}
-										else if($approver->rol_naam == "Editor")
-										{
-											echo " label-warning";
-										}
-										else if($approver->rol_naam == "Gebruiker")
-										{
-											echo " label-info";
-										}
-									?>
-								">{{ $approver->rol_naam }}</span>
-								</td>
+									<td><span class="label label-success">{{ $approver->rol_naam }}</span></td>
 									<td><a href="/admin/gebruikers/wijzig/{{ $approver->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
 									<td><a href="/admin/gebruikers/verwijder/{{ $approver->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
 								</tr>
@@ -221,28 +171,7 @@
 								<td><?php echo $i; $i++; ?></td>
 								<td>{{ $editor->achternaam }}</td>
 								<td>{{ $editor->voornaam }}</td>
-								<td>
-									<span class="label
-									<?php 
-										if($editor->rol_naam == "Administrator")
-										{
-											echo " label-danger";
-										}
-										else if($editor->rol_naam == "Approver")
-										{
-											echo " label-success";
-										}
-										else if($editor->rol_naam == "Editor")
-										{
-											echo " label-warning";
-										}
-										else if($editor->rol_naam == "Gebruiker")
-										{
-											echo " label-info";
-										}
-									?>
-								">{{ $editor->rol_naam }}</span>
-								</td>
+								<td><span class="label label-warning">{{ $editor->rol_naam }}</span></td>
 								<td><a href="/admin/gebruikers/wijzig/{{ $editor->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
 								<td><a href="/admin/gebruikers/verwijder/{{ $editor->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
 							</tr>
@@ -278,26 +207,15 @@
 										<td>{{ $zoekResultaat->achternaam }}</td>
 										<td>{{ $zoekResultaat->voornaam }}</td>
 										<td>
-											<span class="label
-											<?php 
-												if($zoekResultaat->rol_naam == "Administrator")
-												{
-													echo " label-danger";
-												}
-												else if($zoekResultaat->rol_naam == "Approver")
-												{
-													echo " label-success";
-												}
-												else if($zoekResultaat->rol_naam == "Editor")
-												{
-													echo " label-warning";
-												}
-												else if($zoekResultaat->rol_naam == "Gebruiker")
-												{
-													echo " label-info";
-												}
-											?>
-										">{{ $zoekResultaat->rol_naam }}</span>
+											@if($zoekResultaat->rol_naam == "Administrator")
+												<span class="label label-danger">{{ $zoekResultaat->rol_naam }}</span>
+											@elseif($zoekResultaat->rol_naam == "Approver")
+												<span class="label label-success">{{ $zoekResultaat->rol_naam }}</span>
+											@elseif($zoekResultaat->rol_naam == "Editor")
+												<span class="label label-warning">{{ $zoekResultaat->rol_naam }}</span>
+											@elseif($zoekResultaat->rol_naam == "Gebruiker")
+												<span class="label label-info">{{ $zoekResultaat->rol_naam }}</span>
+											@endif
 										</td>
 										<td><a href="/admin/gebruikers/wijzig/{{ $zoekResultaat->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
 										<td><a href="/admin/gebruikers/verwijder/{{ $zoekResultaat->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>

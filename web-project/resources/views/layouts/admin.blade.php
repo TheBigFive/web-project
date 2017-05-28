@@ -12,9 +12,6 @@
         
       <!--VANAF HIER VOOR KENNY-->
 
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="{{ asset ('css/kenny/favicon.ico') }}">
-        <link rel="icon" href="{{ asset ('css/kenny/favicon.ico') }}" type="image/x-icon">
   
         <!-- Morris Charts CSS -->
          <link rel="stylesheet" href="{{ asset('css/kenny/vendors/bower_components/morris.js/morris.css') }}" type="text/css"/>
@@ -339,8 +336,9 @@
        </nav>
 -->
 
-
-        @yield('admincontent')
+        <div class="page-wrapper">
+          @yield('admincontent')
+        </div>
         <!--
         <div class="footer ">
           <table class="inhoud container">
