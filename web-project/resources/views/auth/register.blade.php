@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
   <div class="container">
     <h1>Registratiepagina</h1>
@@ -35,7 +34,7 @@
       <div class="form-group{{ $errors->has('geboortedatum') ? ' has-error' : '' }}">
         <label>Geboortedatum</label>
 
-        <input type="date" class="form-control" name="geboortedatum" value="{{ old('geboortedatum') }}" placeholder="Typ hier je achternaam">
+        <input type="date" class="form-control" name="geboortedatum" value="{{ old('geboortedatum') }}" placeholder="Typ hier je geboortedatum">
 
         @if ($errors->has('geboortedatum'))
           <span class="help-block">

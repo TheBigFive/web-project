@@ -9,7 +9,6 @@
 
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
-        <link rel="stylesheet" href="https://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" >
 
     </head>
     <body>
@@ -22,12 +21,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <img class="logo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}">
+              <a href="{{ url('/') }}">
+                <img class="logo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}">
+              </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('nieuwsberichten') }}">Atypisch</a></li>
+                <li><a href="{{ url('nieuwsberichten') }}">Bezienswaardigheden</a></li>
                 <li><a href="#about">Studeren</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
@@ -49,7 +50,7 @@
                   <ul><a href="{{ route('register') }}">Registratiepagina</a></ul>
                 @else
                 <ul class="dropdown-menu">
-                  <li><a href="{{ url('/profiel') }}">Profielpagina</a></li>
+                  <li><a href="{{ url('/profiel') }}">Aangemeld als <div id="aangemeldAccount">{{ Auth::user()->voornaam }}</div></a></li>
                   @if (Auth::user()->rol_id == 1 ||Auth::user()->rol_id == 3 || Auth::user()->rol_id == 4)
                     <li><a href="{{ url('/admin') }}">Administratie</a></li>
                   @endif
@@ -88,5 +89,7 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/admin.js') }}"></script>
         <script src="{{ asset('js/slideshow.js') }}"></script>
+        <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
+        <script src="{{ asset('js/datumFirefox.js') }}"></script>
     </body>
 </html>
