@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('admincontent')
+
+<div class="gebruikerswrapper">
+
 	<h2>Nieuwsartikel wijzigen</h2>
 
 	<div class="container">
@@ -140,5 +143,7 @@
 	
 
 	
+
+</div>
 
 @endsection

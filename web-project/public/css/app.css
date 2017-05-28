@@ -25,7 +25,8 @@
 
 
 body{
-	margin:0;}
+	margin:0;
+	margin-top: 50px;}
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{
 	display:block}
 audio,canvas,progress,video{
@@ -103,8 +104,25 @@ table{
 td,th{
 	padding:0}
 
+.nieuwsitems{
+    	column-count: 1;
+    }
 
+.kolom li{
+	display: initial;
+}
+
+.nieuwsitems svg:hover{
+    	opacity: 0.5;
+}
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+@media (min-width:500px){
+	.nieuwsitems{
+    	column-count: 2;
+    }
+}
+
 @media print{
 	*,:after,:before{
 	background:transparent!important;
@@ -805,6 +823,8 @@ p{
 font-size:16px;
  font-weight:300;
  line-height:1.4}
+
+ }
  @media (min-width:768px){
  	.lead{
  	font-size:21px}
@@ -2765,6 +2785,9 @@ padding-right:0}
 .container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 
 @media (min-width:768px){
+	.nieuwsitems{
+    	column-count: 3;
+    }
 	.container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 }
 .navbar-static-top{
@@ -2986,7 +3009,7 @@ margin-right:-15px}
 
 background-color:transparent}
 .navbar-default .navbar-nav>li>a,.navbar-default .navbar-text{
-	font-size: 1.8em;
+	font-size: 1.4em;
 	color:#777}
 .navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover{
 	color:#0099cc;
@@ -4673,6 +4696,7 @@ color:transparent;
 	position: relative;
 	mask: url(http://i.imgur.com/mH5ZRZ1.png) no-repeat;
 	}
+
 }
 
 .tekstHero{
@@ -4788,3 +4812,64 @@ height:50px;
 .dropdown-menu a{
 	margin-right: 1em;
 }
+
+	.kolom .foto {
+		margin: 1%;
+		clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+		font-family: SunAntwerpen;
+	}
+
+	kolom image{
+	}
+
+	.clip-svg {
+        width: 0;
+        height: 0;
+    }
+
+    .auteur{
+    	font-family: georgia;
+    }
+
+    .nieuws{
+    	text-align: center;
+    }
+
+    .nieuws .titel{
+    	color: #0099cc;
+    	font-size: 1.8em;
+    	text-decoration: none;
+    	line-height: 1em;
+    	margin-bottom: .1em;
+    }
+
+    .nieuws .titel:hover{
+    	text-decoration: underline;
+    }
+
+
+
+    .kolom li{
+    	display: table;
+    }
+
+    table{
+    	column-gap: 10px;
+    }
+
+    .nieuwsitems tr{
+    }
+
+    #aangemeldAccount{
+    	padding-left: 1em;
+    	display: ruby;
+    	padding-left: .1em;
+    	color: #0099cc;
+    }
+
+    .nieuwsbericht img{
+    	width: 100%;
+    }
+
+    .nieuwsbericht table{
+    }

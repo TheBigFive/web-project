@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('admincontent')
+
+<div class="gebruikerswrapper">
+
 	<h2>Nieuwsartikel toevoegen</h2>
 	
 	<form action="/admin/nieuwsitems/toevoegen" method="post" enctype="multipart/form-data">
@@ -88,5 +91,7 @@
 		    <input type="submit" class="btn btn-primary" value="Maak artikel">
 		</div>
 	</form>
+
+</div>
 
 @endsection

@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('welkom');
 });
 
+
 Route::get('/home', 'HomeController@index');
+Route::get('test', 'AdminController@test');
+Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
+Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');
+
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
@@ -35,7 +40,15 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::post('admin/nieuwsitems/toevoegen','NieuwsitemController@voegNieuwsitemToe');
 	Route::get('admin/nieuwsitems/wijzig/{id}', 'NieuwsitemController@openWijzigingNieuwsitem');
 	Route::post('admin/nieuwsitems/wijzig/{id}', 'NieuwsitemController@wijzigNieuwsitem');
-	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitem');
+	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitemAdmin');
+
+	//Testimonials routes
+	Route::get('admin/testimonials','TestimonialController@index');
+	Route::get('admin/testimonials/toevoegen','TestimonialController@openToevoegenTestimonial');
+	Route::post('admin/testimonials/toevoegen','TestimonialController@voegTestimonialToe');
+	Route::get('admin/testimonials/wijzig/{id}', 'TestimonialController@openWijzigingTestimonial');
+	Route::post('admin/testimonials/wijzig/{id}', 'TestimonialController@wijzigTestimonial');
+	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonial');
 });
 
 //Administratieroutes die Approver en Admin mag uitvoeren
@@ -50,10 +63,13 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::post('admin/nieuwsitems/afwijzen/{id}', 'NieuwsitemController@afwijzenNieuwsitem');
 	Route::get('admin/nieuwsitems/publiceren/{id}', 'NieuwsitemController@publicerenNieuwsitem');
 	Route::get('admin/nieuwsitems/offlineHalen/{id}', 'NieuwsitemController@offlineHalenNieuwsitem');
-	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
-	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
 
-	
+	//Testimonials routes
+	Route::get('admin/testimonials/verwijder/{id}', 'TestimonialController@verwijderTestimonial');
+	Route::get('admin/testimonials/goedkeuren/{id}', 'TestimonialController@goedkeurenTestimonial');
+	Route::post('admin/testimonials/afwijzen/{id}', 'TestimonialController@afwijzenTestimonial');
+	Route::get('admin/testimonials/publiceren/{id}', 'TestimonialController@publicerenTestimonial');
+	Route::get('admin/testimonials/offlineHalen/{id}', 'TestimonialController@offlineHalenTestimonial');
 });
 
 

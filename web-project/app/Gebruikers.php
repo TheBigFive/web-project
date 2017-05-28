@@ -70,9 +70,11 @@ class Gebruikers extends Authenticatable
 
     public function zoekGebruikerViaNaam($naam){
       return DB::table('gebruikers')
-        ->where('voornaam', 'like','%'.$naam.'%')
-        ->orWhere('achternaam', 'like','%'.$naam.'%')
-        ->get();
+      ->join('rollen', 'gebruikers.rol_id', '=', 'rollen.rol_id')
+      ->select('gebruikers.*', 'rollen.naam as rol_naam')
+      ->where('voornaam', 'like','%'.$naam.'%')
+      ->orWhere('achternaam', 'like','%'.$naam.'%')
+      ->get();
     }
 
     public function geefRol($id){
