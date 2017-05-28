@@ -17,9 +17,11 @@
     	<div class="row">
     		<div class="col-md-6">
 				<h4>Introtekst:</h4>
-				<p>{{ $geopendeNieuwsitem->introtekst }}</p>
+				<!-- Dit zorgt ervoor dat \n en \r niet genegeerd worden -->
+				<p>{!! nl2br(e($geopendeNieuwsitem->introtekst)) !!}</p>
 				<h4>Artikel:</h4>
-				<p>{{ $geopendeNieuwsitem->artikel }}</p>
+				<!-- Dit zorgt ervoor dat \n en \r niet genegeerd worden -->
+				<p>{!! nl2br(e($geopendeNieuwsitem->artikel)) !!}</p>
 				<h4>Auteur:</h4>
 				<p>{{ $geopendeNieuwsitem->toegevoegddoor_voornaam }} {{ $geopendeNieuwsitem->toegevoegddoor_achternaam }}</p>
 				<h4>Tag:</h4>
