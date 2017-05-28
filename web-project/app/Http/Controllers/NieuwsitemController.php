@@ -193,7 +193,7 @@ class NieuwsitemController extends Controller
                     //Afbeelding toevoegen in de database
                     $media->voegMediaToe([
                     'link' => $filePath,
-                    'mediaType' => $request->input('mediaType'),
+                    'mediaType' => $mediaType,
                     'nieuwsitem_id' => $nieuwsitemId
                     ]);
                 }
