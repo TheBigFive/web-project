@@ -13,7 +13,7 @@
 
     <div class="container">
     	<div class="row">
-    		<div class="col-md-4">
+    		<div class="col-md-5">
 		    	<p>Introtekst: {{ $geopendeNieuwsitem->introtekst }}</p>
 				<p>Artikel: {{ $geopendeNieuwsitem->artikel }}</p>
 				<p>Auteur: {{ $geopendeNieuwsitem->toegevoegddoor_voornaam }} {{ $geopendeNieuwsitem->toegevoegddoor_achternaam }}</p>
@@ -25,11 +25,28 @@
 				@endif
 				
 		    </div>
-		    <div class="col-md-6">
-		     	<p>Afbeeldingen</p>
-		     	@foreach($alleNieuwsitemMedia as $media)
-					<img height="60px" src="{{ asset($media->link)  }}">
-				@endforeach
+		    <div class="col-md-5">
+		     	<h4>Afbeeldingen</h4>
+		     	@if($aantalAfbeeldingen > 0 )
+			     	@foreach($alleNieuwsitemMedia as $key => $media)
+			     		@if($media->mediaType == "Afbeelding")
+							<img height="60px" src="{{ asset($media->link)  }}">
+						@endif
+					@endforeach
+				@else
+					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
+				@endif
+
+				<h4>Video</h4>
+				@if($aantalVideos > 0 )
+			     	@foreach($alleNieuwsitemMedia as $key => $media)
+			     		@if($media->mediaType == "Video")
+							<iframe width="160" height="130" src="https://www.youtube.com/embed/{{ $media->link }}" frameborder="0" allowfullscreen></iframe>
+						@endif
+					@endforeach
+				@else
+					<p>Dit nieuwsitem heeft geen video's.</p>
+				@endif
 		    </div>
     		
     	</div>

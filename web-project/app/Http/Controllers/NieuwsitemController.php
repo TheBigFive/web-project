@@ -51,7 +51,6 @@ class NieuwsitemController extends Controller
         $goedkeuringsstatus = 'Nieuw artikel';
         $datumEnTijd = new DateTime();
 
-        $mediaCategorie = $request->input('mediaCategorie');
         $media = new Media();
 
         $validator = Validator::make($request->all(), [
@@ -85,15 +84,47 @@ class NieuwsitemController extends Controller
                         $afbeeldingNaam = 'nieuwsitem-'.$nieuwsitem_id.'-'.str_random(5).$afbeelding->getClientOriginalName();
                         $afbeelding->move('img/nieuwsitems/', $afbeeldingNaam);
                         $filePath = 'img/nieuwsitems/'.$afbeeldingNaam;
-                        
+                        $mediaType = "Afbeelding";
+
                         //Afbeelding toevoegen in de database
                         $media->voegMediaToe([
                         'link' => $filePath,
-                        'mediaType' => $request->input('mediaType'),
+                        'mediaType' => $mediaType,
                         'nieuwsitem_id' => $nieuwsitem_id
                         ]);
                     }
                 }
+            }
+
+            $youtubelink = $request->input('video');
+            $mediaType = "Video";
+
+            if($youtubelink != ''){
+                $validator = Validator::make(array('video' => $youtubelink), [
+                    'video' => 'sometimes|required',
+                ]);
+                if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                } else if (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                } else if (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                } else if (preg_match('/youtu\.be\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                }
+                else if (preg_match('/youtube\.com\/verify_age\?next_url=\/watch%3Fv%3D([^\&\?\/]+)/', $youtubelink, $id)) {
+                    $videoId = $id[1];
+                } else {   
+                    // not an youtube video
+                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youutbelink');
+                }
+
+                //youtubelink toevoegen in de database
+                $media->voegMediaToe([
+                'link' => $videoId,
+                'mediaType' => $mediaType,
+                'nieuwsitem_id' => $nieuwsitem_id
+                ]);
             }
 
             return redirect('/admin/nieuwsitems/open/'.$nieuwsitem_id);
@@ -106,18 +137,25 @@ class NieuwsitemController extends Controller
 
         $mediaId = $id;
         $media = new Media();
-        $filePath = $media->nieuwsitemMediaOphalenViaId($mediaId)->first()->link;
-        $media->verwijderMedia($mediaId);
-        unlink($filePath);
+        $opgehaaldeMedia = $media->nieuwsitemMediaOphalenViaId($mediaId)->first();
+        if($opgehaaldeMedia->mediaType == "Afbeelding"){
+            $filePath = $media->nieuwsitemMediaOphalenViaId($mediaId)->first()->link;
+            $media->verwijderMedia($mediaId);
+            unlink($filePath);
+        }
+        elseif ($opgehaaldeMedia->mediaType == "Video")
+        {
+            $media->verwijderMedia($mediaId);
+        }
 
         return Redirect::back();
     }
 
     public function toevoegenMediaNieuwsitem($id, Request $request){
 
-        $mediaCategorie = $request->input('mediaCategorie');
         $media = new Media();
         $nieuwsitemId = $id;
+
 
         if(Input::file('afbeeldingen')){
             $afbeeldingen = Input::file('afbeeldingen');
@@ -126,7 +164,7 @@ class NieuwsitemController extends Controller
                 $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
                     
                 if($validator->passes()){  
-
+                    $mediaType = "Afbeelding";
                     $afbeeldingNaam = 'nieuwsitem-'.$nieuwsitemId.'-'.str_random(5).$afbeelding->getClientOriginalName();
                     $afbeelding->move('img/nieuwsitems/', $afbeeldingNaam);
                     $filePath = 'img/nieuwsitems/'.$afbeeldingNaam;
@@ -141,6 +179,38 @@ class NieuwsitemController extends Controller
             }
         }
 
+        $youtubelink = $request->input('video');
+        $mediaType = "Video";
+
+        if($youtubelink != ''){
+            $validator = Validator::make(array('video' => $youtubelink), [
+                'video' => 'sometimes|required',
+            ]);
+
+            if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else if (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else if (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else if (preg_match('/youtu\.be\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            }
+            else if (preg_match('/youtube\.com\/verify_age\?next_url=\/watch%3Fv%3D([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else {   
+                // not an youtube video
+                return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
+            }
+
+            //youtubelink toevoegen in de database
+            $media->voegMediaToe([
+            'link' => $videoId,
+            'mediaType' => $mediaType,
+            'nieuwsitem_id' => $nieuwsitemId
+            ]);
+        }
+
         return Redirect::back()->withErrors($validator);
     }
 
@@ -152,15 +222,29 @@ class NieuwsitemController extends Controller
         $nieuwsitemsId = $id;
         $tag = new Tags();
         $media = new Media();
+        $aantalAfbeeldingen = 0;
+        $aantalVideos = 0;
 
         $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemsId)->first();
         $alleTags = $tag->alleTagsOpvragen();
         $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemsId);
+
+        foreach ($alleNieuwsitemMedia as $key => $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "Video"){
+                $aantalVideos++;
+            }
+        }
         
         return view('/admin/nieuwsitems/wijzigNieuwsitem', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
             'alleTags' => $alleTags,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia
+            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'aantalVideos' => $aantalVideos
             ]);
         
     }
@@ -194,7 +278,20 @@ class NieuwsitemController extends Controller
     public function verwijderNieuwsitem($id, Request $request){
         
         $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemId = $id;    
+        $nieuwsitemId = $id;
+
+        //media dat in de folder wordt geplaatst moet ook verwijderd worden
+        $media = new Media();
+        $nieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+
+        if(sizeof($nieuwsitemMedia) >0){
+            foreach ($nieuwsitemMedia as $media) {
+                if($media->mediaType == "Afbeelding"){
+                    $filePath = $media->link;
+                    unlink($filePath);
+                }
+            } 
+        }
         $nieuwsitem->verwijderNieuwsitem($nieuwsitemId);
 
         return redirect('/admin/nieuwsitems');
@@ -205,15 +302,29 @@ class NieuwsitemController extends Controller
 
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemId = $id;
+        $aantalAfbeeldingen = 0;
+        $aantalVideos = 0;
 
         $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
 
         $media = new Media;
         $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+
+        foreach ($alleNieuwsitemMedia as $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "Video"){
+                $aantalVideos++;
+            }
+        }
         
         return view('/admin/nieuwsitems/openNieuwsitem', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia
+            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'aantalVideos' => $aantalVideos
             ]);
         
     }

@@ -46,17 +46,43 @@
 			@endif
 		</div>
 
-		<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
-			<label for="afbeeldingen">Kies een of meerdere afbeelding</label>
-			<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
-			<input hidden name="mediaCategorie" value="Nieuwsitem"/><br/>
-			<input hidden name="mediaType" value="Afbeelding"/><br/>
-			@if ($errors->has('afbeeldingen'))
-			    <span class="help-block">
-				    <strong>{{ $errors->first('afbeeldingen') }}</strong>
-			    </span>
-			@endif
+		<h3>Media</h3>
+		
+		<div class="row">
+			<div class="col-md-5">
+				<h4>Afbeeldingen</h4>
+				<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
+					<label for="afbeeldingen">Voeg één of meerdere afbeeldingen toe</label>
+					<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
+					@if ($errors->has('afbeeldingen'))
+					    <span class="help-block">
+						    <strong>{{ $errors->first('afbeeldingen') }}</strong>
+					    </span>
+					@endif
+				</div>
+			</div>
+			<div class="col-md-5">
+				<h4>Video</h4>
+				<div class="form-group{{ $errors->has('video') ? ' has-error' : '' }}">
+					<label for="afbeeldingen">Voeg een youtube videolink toe</label>
+					<input type="text" name="video" class="form-control" placeholder="Kopieer en plak hier de youtubelink"/>
+					@if ($errors->has('video'))
+					    <span class="help-block">
+						    <strong>{{ $errors->first('video') }}</strong>
+					    </span>
+					@endif
+					@if( session()->has('foutmelding'))
+						<div class="alert alert-danger">
+						    {{ session()->get('foutmelding') }}
+						</div>
+							    
+					@endif
+				</div>				
+			</div>
+			
 		</div>
+		
+		
 
 		<div class="form-group">
 		    <input type="submit" class="btn btn-primary" value="Maak artikel">

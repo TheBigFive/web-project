@@ -59,7 +59,8 @@
 						    </span>
 						@endif
 					</div>
-					<div class="row">
+					
+					<div class="form-group">
 					  		@if (Auth::user()->rol_id!=4)
 							  	<span>
 							        <a href="/admin/nieuwsitems/verwijder/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-danger">Nieuwsitem verwijderen</a>
@@ -67,36 +68,73 @@
 						   	@endif
 
 							<span><input type="submit" class="btn btn-primary" value="Wijzig artikel"></span>
-						
-					 	</div>
+					</div>						
+					
 				</form>
 			</div>
 			<div class="col-md-4">
 				<h4>Afbeeldingen</h4>
-				@foreach($alleNieuwsitemMedia as $media)
-					<img height="60px" src="{{ asset($media->link)  }}">
-					<a href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
-				@endforeach
-				<h4>Afbeelding toevoegen</h4>
-				<form action="/admin/nieuwsitems/toevoegenMedia/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post" enctype="multipart/form-data">
-					{!! csrf_field() !!}
-					<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
-						<label for="afbeeldingen">Kies een of meerdere afbeelding</label>
-						<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
-						<input hidden name="mediaCategorie" value="Nieuwsitem"/><br/>
-						<input hidden name="mediaType" value="Afbeelding"/><br/>
-						@if ($errors->has('afbeeldingen'))
-						    <span class="help-block">
-							    <strong>{{ $errors->first('afbeeldingen') }}</strong>
-						    </span>
+				@if($aantalAfbeeldingen > 0 )
+					@foreach($alleNieuwsitemMedia as $media)
+						@if($media->mediaType == "Afbeelding")
+							<img height="60px" src="{{ asset($media->link)  }}">
+							<a href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
 						@endif
-						<input type="submit" class="btn btn-primary" value="Uploaden">
-					</div>
-				</form>
-
+					@endforeach
+				@else
+					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
+				@endif
+				<h4>Video</h4>
+				@if($aantalVideos > 0 )
+			     	@foreach($alleNieuwsitemMedia as $key => $media)
+			     		@if($media->mediaType == "Video")
+							<iframe width="160" height="160" src="https://www.youtube.com/embed/{{ $media->link }}" frameborder="0" allowfullscreen></iframe>
+							<a href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
+						@endif
+					@endforeach
+				@else
+					<p>Dit nieuwsitem heeft geen video's.</p>
+				@endif
 			</div>
 		</div>
 		
+			<h3>Extra media toevoegen</h3>
+			<form action="/admin/nieuwsitems/toevoegenMedia/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post" enctype="multipart/form-data">
+				{!! csrf_field() !!}
+    			<div class="row">
+    				<div class="col-md-3">
+    					<h4>Afbeelding toevoegen</h4>				
+						<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
+							<label for="afbeeldingen">Voeg één of meerdere afbeeldingen toe</label>
+							<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
+							@if ($errors->has('afbeeldingen'))
+							    <span class="help-block">
+								    <strong>{{ $errors->first('afbeeldingen') }}</strong>
+							    </span>
+							@endif
+						</div>
+    				</div>
+    				<div class="col-md-3">
+    					<h4>Video toevoegen</h4>
+						<div class="form-group{{ $errors->has('video') ? ' has-error' : '' }}">
+							<label for="afbeeldingen">Voeg een youtube videolink toe</label>
+							<input type="text" name="video" class="form-control" placeholder="Kopieer en plak hier de youtubelink"/>
+							@if ($errors->has('video'))
+							    <span class="help-block">
+								    <strong>{{ $errors->first('video') }}</strong>
+							    </span>
+							@endif
+							@if( session()->has('foutmelding'))
+						        <div class="alert alert-danger">
+								    {{ session()->get('foutmelding') }}
+								</div>
+							    
+						    @endif			
+						</div>    				
+    				</div>
+    			</div>
+    			<input type="submit" class="btn btn-primary" value="Media Toevoegen">
+			</form>	
 	</div>
 	
 	
