@@ -6,7 +6,7 @@
 
 	<h2>Testimonial toevoegen</h2>
 	
-	<form action="/admin/testimonials/toevoegen" method="post">
+	<form action="/admin/testimonials/toevoegen" enctype="multipart/form-data" method="post">
 		{!! csrf_field() !!}
 		<div class="form-group">
 		    <label for="titel">Titel testimonial</label>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="leeftijd_persoon">Leeftijd persoon</label>
-		    <input type="text" name="leeftijd_persoon" class="form-control" placeholder="Typ hier de leeftijd van de persoon die het verhaal vertelt">
+		    <input type="number" name="leeftijd_persoon" class="form-control" placeholder="Typ hier de leeftijd van de persoon die het verhaal vertelt">
 		    @if ($errors->has('leeftijd_persoon'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('leeftijd_persoon') }}</strong>

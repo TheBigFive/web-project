@@ -65,7 +65,7 @@ class AdminController extends Controller
         }
         $aantalEditors = sizeof($editors);
 
-        return view('admin/gebruikers',
+        return view('admin/gebruikers/gebruikers',
             ['alleGebruikers' => $alleGebruikers,
             'aantalGebruikers' => $aantalGebruikers,
             'adminGebruikers' => $adminGebruikers,

@@ -33,7 +33,7 @@
 		</thead>
 		<tbody>
 			@foreach($alleTestimonials as $key => $testimonial)
-				@if($testimonial->goedkeuringsstatus == 'Nieuw artikel' || $testimonial->goedkeuringsstatus == 'Werd gewijzigd')
+				@if($testimonial->goedkeuringsstatus == 'Nieuwe testimonial' || $testimonial->goedkeuringsstatus == 'Werd gewijzigd')
 					<tr>
 						<td>{{ $key+1 }}</td>
 						<td><a href="/admin/testimonials/open/{{ $testimonial->testimonial_id }}">{{ $testimonial->titel }}</a></td>

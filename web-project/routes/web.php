@@ -28,8 +28,6 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 
 	//Gebruiker routes
 	Route::get('admin/gebruikers', 'AdminController@gebruikersPaginaOpenen');
-	Route::get('admin/gebruikers/wijzig/{id}', 'AdminController@openGebruiker');
-	Route::post('admin/gebruikers/wijzig/{id}', 'AdminController@wijzigGebruiker');
 	Route::post('admin/gebruikers/zoeken','AdminController@zoekGebruikerViaNaam');
 
 	//Nieuwsitems routes
@@ -39,6 +37,8 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/nieuwsitems/wijzig/{id}', 'NieuwsitemController@openWijzigingNieuwsitem');
 	Route::post('admin/nieuwsitems/wijzig/{id}', 'NieuwsitemController@wijzigNieuwsitem');
 	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitemAdmin');
+	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
+	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
 
 	//Testimonials routes
 	Route::get('admin/testimonials','TestimonialController@index');
@@ -47,22 +47,22 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/testimonials/wijzig/{id}', 'TestimonialController@openWijzigingTestimonial');
 	Route::post('admin/testimonials/wijzig/{id}', 'TestimonialController@wijzigTestimonial');
 	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonial');
+	Route::post('admin/testimonials/toevoegenMedia/{id}', 'TestimonialController@toevoegenMediaTestimonial');
+	Route::get('admin/testimonials/verwijderMedia/{id}', 'TestimonialController@verwijderMediaTestimonial');
+	
+
 });
 
 //Administratieroutes die Approver en Admin mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver'], function () {	
 	
-	//Gebruikers routes
-	Route::get('admin/gebruikers/verwijder/{id}', 'AdminController@verwijderGebruiker');
-
 	//Nieuwsitems routes
 	Route::get('admin/nieuwsitems/verwijder/{id}', 'NieuwsitemController@verwijderNieuwsitem');
 	Route::get('admin/nieuwsitems/goedkeuren/{id}', 'NieuwsitemController@goedkeurenNieuwsitem');
 	Route::post('admin/nieuwsitems/afwijzen/{id}', 'NieuwsitemController@afwijzenNieuwsitem');
 	Route::get('admin/nieuwsitems/publiceren/{id}', 'NieuwsitemController@publicerenNieuwsitem');
 	Route::get('admin/nieuwsitems/offlineHalen/{id}', 'NieuwsitemController@offlineHalenNieuwsitem');
-	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
-	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
+	
 
 	//Testimonials routes
 	Route::get('admin/testimonials/verwijder/{id}', 'TestimonialController@verwijderTestimonial');
@@ -72,6 +72,14 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::get('admin/testimonials/offlineHalen/{id}', 'TestimonialController@offlineHalenTestimonial');
 });
 
+//Administratieroutes die Approver en Admin mag uitvoeren
+Route::group(['middleware' => 'rol:Administrator'], function () {
+
+	//Gebruikers routes
+	Route::get('admin/gebruikers/wijzig/{id}', 'AdminController@openGebruiker');
+	Route::post('admin/gebruikers/wijzig/{id}', 'AdminController@wijzigGebruiker');
+	Route::get('admin/gebruikers/verwijder/{id}', 'AdminController@verwijderGebruiker');
+});
 
 
 //Inlog routes

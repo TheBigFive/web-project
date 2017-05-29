@@ -120,7 +120,7 @@
     				<div class="col-md-3">
     					<h4>Video toevoegen</h4>
 						<div class="form-group{{ $errors->has('video') ? ' has-error' : '' }}">
-							<label for="afbeeldingen">Voeg een youtube videolink toe</label>
+							<label for="video">Voeg een youtube videolink toe</label>
 							<input type="text" name="video" class="form-control" placeholder="Kopieer en plak hier de youtubelink"/>
 							@if ($errors->has('video'))
 							    <span class="help-block">

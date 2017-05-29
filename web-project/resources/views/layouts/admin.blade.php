@@ -182,7 +182,7 @@
 
        <!--@yield('content')-->
       <script src="{{ asset('js/app.js') }}"></script>
-      <script src="{{ asset('js/admin.js') }}"></script>
+      
 
 
       <!--table-->
@@ -251,8 +251,11 @@
 -->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+      
       <!-- Summernote zorgt voor toolbar in textarea's-->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-      <script type="text/javascript" src="{{ asset('js/summernoteConfig.js') }}"></script>
+      <script src="{{ asset('js/summernote-nl-NL.js') }}"></script>
+      <!-- Bevat summernote, tabs gebruikers -->
+      <script src="{{ asset('js/admin.js') }}"></script>
     </body>
 </html>

@@ -66,7 +66,14 @@
     
 		@if (Auth::user()->rol_id!=4)
 			@if($geopendeNieuwsitem->goedkeuringsstatus == "Goedgekeurd")
-				<form action="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">     	
+				<span>
+					<button type="button" id="afwijzingKnop" class="btn btn-danger">
+    					Artikel Afwijzen en reden meegeven
+  					</button>
+				</span>
+				
+
+				<form class="afwijzingForm" action="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">     	
 				 	{!! csrf_field() !!}
 					<div class="form-group">
 					    <label for="titel">Reden van afwijzing</label>
@@ -77,6 +84,9 @@
 						    </span>
 						@endif
 					</div>
+					<button type="button" id="afwijzingAnnulerenKnop" class="btn btn-primary">
+    					Afwijzing annuleren
+  					</button>
 					<span>
 						<input type="submit" class="btn btn-danger" value="Artikel afwijzen">
 					</span>	
@@ -92,6 +102,32 @@
 				@endif
 				
 			@else
+				@if($geopendeNieuwsitem->goedkeuringsstatus == "Nieuw artikel")
+					<span>
+						<button type="button" id="afwijzingKnop" class="btn btn-danger">
+	    					Artikel Afwijzen en reden meegeven
+	  					</button>
+					</span>					
+
+					<form class="afwijzingForm" action="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">     	
+					 	{!! csrf_field() !!}
+						<div class="form-group">
+						    <label for="titel">Reden van afwijzing</label>
+						    <textarea rows="5" name="redenVanAfwijzing" class="form-control" placeholder="Typ hier de reden van Afwijzing"></textarea>
+						    @if ($errors->has('redenVanAfwijzing'))
+							    <span class="help-block">
+							        <strong>{{ $errors->first('redenVanAfwijzing') }}</strong>
+							    </span>
+							@endif
+						</div>
+						<button type="button" id="afwijzingAnnulerenKnop" class="btn btn-primary">
+	    					Afwijzing annuleren
+	  					</button>
+						<span>
+							<input type="submit" class="btn btn-danger" value="Artikel afwijzen">
+						</span>	
+					</form>
+				@endif
 				<span>
 					<a href="/admin/nieuwsitems/goedkeuren/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-success">Artikel goedkeuren</a>
 				</span>
