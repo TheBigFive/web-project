@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Gebruikers;
 use App\Testimonials;
+use App\Tags;
 use Auth;
 use Validator;
 use Redirect;
@@ -31,7 +32,13 @@ class TestimonialController extends Controller
     
     public function openToevoegenTestimonial()
     {
-        return view('admin/testimonials/toevoegenTestimonial');
+        $tag = new Tags();
+        $alleTags = $tag->alleTagsOpvragen();
+
+
+        return view('admin/testimonials/toevoegenTestimonial',
+            ['alleTags' => $alleTags,
+            ]);
         
     }
 

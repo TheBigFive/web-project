@@ -17,13 +17,6 @@ Route::get('/', function () {
     return view('welkom');
 });
 
-Route::get('/test', function () {
-   $text = "Hello \r\n Hello again \r\n Hello again again \r\n Goodbye \r\n";
-   
-   echo nl2br(e($text));
-});
-
-
 Route::get('/home', 'HomeController@index');
 Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
 Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');
