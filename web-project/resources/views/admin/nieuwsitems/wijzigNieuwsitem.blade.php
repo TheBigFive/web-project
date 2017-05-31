@@ -8,7 +8,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-5">
+			<div class="col-md-8">
 				<form action="/admin/nieuwsitems/wijzig/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">
 					@if( session()->has('succesBericht'))
 			        				@if(!$errors->all())
@@ -29,7 +29,7 @@
 					</div>
 					<div class="form-group">
 					    <label for="introtekst">Introtekst</label>
-					    <textarea rows="5" name="introtekst" class="form-control" placeholder="Typ hier je introtekst">{{ $geopendeNieuwsitem->introtekst }}</textarea>
+					    <textarea rows="5" name="introtekst" class="form-control summernote" placeholder="Typ hier je introtekst">{{ $geopendeNieuwsitem->introtekst }}</textarea>
 					    @if ($errors->has('introtekst'))
 						    <span class="help-block">
 						        <strong>{{ $errors->first('introtekst') }}</strong>
@@ -38,7 +38,7 @@
 					</div>
 					  <div class="form-group">
 					    <label for="beschrijving">Artikel</label>
-					    <textarea rows="5" name="artikel" class="form-control" placeholder="Typ hier je artikel">{{ $geopendeNieuwsitem->artikel }}</textarea>
+					    <textarea rows="5" name="artikel" class="form-control summernote" placeholder="Typ hier je artikel">{{ $geopendeNieuwsitem->artikel }}</textarea>
 					    @if ($errors->has('artikel'))
 						    <span class="help-block">
 						        <strong>{{ $errors->first('artikel') }}</strong>
@@ -120,7 +120,7 @@
     				<div class="col-md-3">
     					<h4>Video toevoegen</h4>
 						<div class="form-group{{ $errors->has('video') ? ' has-error' : '' }}">
-							<label for="afbeeldingen">Voeg een youtube videolink toe</label>
+							<label for="video">Voeg een youtube videolink toe</label>
 							<input type="text" name="video" class="form-control" placeholder="Kopieer en plak hier de youtubelink"/>
 							@if ($errors->has('video'))
 							    <span class="help-block">

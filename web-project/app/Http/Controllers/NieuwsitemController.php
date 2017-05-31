@@ -31,6 +31,7 @@ class NieuwsitemController extends Controller
             ]);
     }
 
+    //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
     public function openNieuwsitem($id){
 
         $nieuwsitem = new Nieuwsitems();
@@ -313,7 +314,7 @@ class NieuwsitemController extends Controller
         
     }
 
-    public function verwijderNieuwsitem($id, Request $request){
+    public function verwijderNieuwsitem($id){
         
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemId = $id;

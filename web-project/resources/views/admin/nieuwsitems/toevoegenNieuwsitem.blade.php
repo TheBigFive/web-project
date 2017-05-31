@@ -19,7 +19,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="beschrijving">Introtekst</label>
-		    <textarea rows="5" name="introtekst" class="form-control" placeholder="Typ hier je introtekst"></textarea>
+		    <textarea rows="5" name="introtekst" class="form-control summernote" placeholder="Typ hier je introtekst"></textarea>
 		    @if ($errors->has('introtekst'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('introtekst') }}</strong>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="beschrijving">Artikel</label>
-		    <textarea rows="5" name="artikel" class="form-control" placeholder="Typ hier je artikel"></textarea>
+		    <textarea rows="5" name="artikel" class="form-control summernote" placeholder="Typ hier je artikel"></textarea>
 		    @if ($errors->has('artikel'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('artikel') }}</strong>

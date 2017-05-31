@@ -15,7 +15,7 @@ use DateTime;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Http\Response;
 
-class NieuwsitemController extends Controller
+class InhoudWebsiteController extends Controller
 {
     public function index()
     {

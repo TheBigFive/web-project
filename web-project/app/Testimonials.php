@@ -19,11 +19,15 @@ class Testimonials extends Model
     {
       return DB::table('testimonials')
       ->where('testimonial_id', $id)
+      ->join('gebruikers', 'testimonials.toegevoegddoor_id', '=', 'gebruikers.id')
+      ->join('tags', 'testimonials.tag_id', '=', 'tags.tag_id')
+      ->select('testimonials.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam')
       ->get();
     }
 
     public function voegTestimonialToe($testimonial){
-      return DB::table('testimonials')->insert($testimonial);
+      return DB::table('testimonials')
+      ->insertGetId($testimonial);
     }
 
     public function wijzigTestimonial($id,$testimonial){

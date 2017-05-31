@@ -65,10 +65,9 @@
 						</tr>				
 					</thead>
 					<tbody>
-						<?php $i=1; ?>
 						@foreach($alleGebruikers as $key => $gebruiker)
 							<tr>
-								<td><?php echo $i; $i++; ?></td>
+								<td>{{ $key+1 }}</td>
 								<td>{{ $gebruiker->achternaam }}</td>
 								<td>{{ $gebruiker->voornaam }}</td>
 								<td>
@@ -83,8 +82,10 @@
 										<span class="label label-info">{{ $gebruiker->rol_naam }}</span>
 									@endif								
 								</td>
-								<td><a href="/admin/gebruikers/wijzig/{{ $gebruiker->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
-								<td><a href="/admin/gebruikers/verwijder/{{ $gebruiker->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+								@if (Auth::user()->rol_id=1)
+									<td><a href="/admin/gebruikers/wijzig/{{ $gebruiker->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
+									<td><a href="/admin/gebruikers/verwijder/{{ $gebruiker->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+								@endif
 							</tr>
 
 						@endforeach
@@ -104,17 +105,18 @@
 						</tr>				
 					</thead>
 					<tbody>
-						<?php $i=1; ?>
 						@foreach($adminGebruikers as $key => $adminGebruiker)
 							<tr>
-								<td><?php echo $i; $i++; ?></td>
+								<td>{{ $key+1 }}</td>
 								<td>{{ $adminGebruiker->achternaam }}</td>
 								<td>{{ $adminGebruiker->voornaam }}</td>
 								<td>			
 									<span class="label label-danger">{{ $adminGebruiker->rol_naam }}</span>	
 								</td>
-								<td><a href="/admin/gebruikers/wijzig/{{ $adminGebruiker->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
-								<td><a href="/admin/gebruikers/verwijder/{{ $adminGebruiker->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+								@if (Auth::user()->rol_id=1)
+									<td><a href="/admin/gebruikers/wijzig/{{ $adminGebruiker->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
+									<td><a href="/admin/gebruikers/verwijder/{{ $adminGebruiker->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+								@endif
 							</tr>
 
 						@endforeach
@@ -135,15 +137,16 @@
 						</thead>
 
 						<tbody>
-							<?php $i=1; ?>
-							@foreach($approvers as $approver)
+							@foreach($approvers as $key => $approver)
 								<tr>
-									<td><?php echo $i; $i++; ?></td>
+									<td>{{ $key+1 }}</td>
 									<td>{{ $approver->achternaam }}</td>
 									<td>{{ $approver->voornaam }}</td>
 									<td><span class="label label-success">{{ $approver->rol_naam }}</span></td>
-									<td><a href="/admin/gebruikers/wijzig/{{ $approver->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
-									<td><a href="/admin/gebruikers/verwijder/{{ $approver->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+									@if (Auth::user()->rol_id=1)
+										<td><a href="/admin/gebruikers/wijzig/{{ $approver->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
+										<td><a href="/admin/gebruikers/verwijder/{{ $approver->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+									@endif
 								</tr>
 
 							@endforeach
@@ -165,15 +168,16 @@
 						</tr>				
 					</thead>
 					<tbody>
-						<?php $i=1; ?>
-						@foreach($editors as $editor)
+						@foreach($editors as $key => $editor)
 							<tr>
-								<td><?php echo $i; $i++; ?></td>
+								<td>{{ $key+1 }}</td>
 								<td>{{ $editor->achternaam }}</td>
 								<td>{{ $editor->voornaam }}</td>
 								<td><span class="label label-warning">{{ $editor->rol_naam }}</span></td>
-								<td><a href="/admin/gebruikers/wijzig/{{ $editor->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
-								<td><a href="/admin/gebruikers/verwijder/{{ $editor->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+								@if (Auth::user()->rol_id=1)
+									<td><a href="/admin/gebruikers/wijzig/{{ $editor->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
+									<td><a href="/admin/gebruikers/verwijder/{{ $editor->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+								@endif
 							</tr>
 
 						@endforeach
@@ -201,9 +205,8 @@
 						<tbody>
 							@if (Session::has('zoekResultaten'))
 								@if (Session::get('aantalZoekResultaten') > 0 )
-									<?php $i=1; ?>
-									@foreach ( Session::pull('zoekResultaten') as $zoekResultaat )
-										<td><?php echo $i; $i++; ?></td>
+									@foreach ( Session::pull('zoekResultaten') as $key => $zoekResultaat )
+										<td>{{ $key+1 }}</td>
 										<td>{{ $zoekResultaat->achternaam }}</td>
 										<td>{{ $zoekResultaat->voornaam }}</td>
 										<td>
@@ -217,8 +220,10 @@
 												<span class="label label-info">{{ $zoekResultaat->rol_naam }}</span>
 											@endif
 										</td>
-										<td><a href="/admin/gebruikers/wijzig/{{ $zoekResultaat->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
-										<td><a href="/admin/gebruikers/verwijder/{{ $zoekResultaat->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+										@if (Auth::user()->rol_id=1)
+											<td><a href="/admin/gebruikers/wijzig/{{ $zoekResultaat->id }}" class="text-inverse" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a></td>
+											<td><a href="/admin/gebruikers/verwijder/{{ $zoekResultaat->id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+										@endif
 									@endforeach
 								
 						</tbody>

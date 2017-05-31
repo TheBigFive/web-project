@@ -32,11 +32,10 @@
 			</tr>				
 		</thead>
 		<tbody>
-			<?php $i=1; ?>
 			@foreach($alleTestimonials as $key => $testimonial)
-				@if($testimonial->goedkeuringsstatus == 'Nieuw artikel' || $testimonial->goedkeuringsstatus == 'Werd gewijzigd')
+				@if($testimonial->goedkeuringsstatus == 'Nieuwe testimonial' || $testimonial->goedkeuringsstatus == 'Werd gewijzigd')
 					<tr>
-						<td><?php echo $i; $i++; ?></td>
+						<td>{{ $key+1 }}</td>
 						<td><a href="/admin/testimonials/open/{{ $testimonial->testimonial_id }}">{{ $testimonial->titel }}</a></td>
 						<td>{{ $testimonial->toegevoegddoor_voornaam }} {{ $testimonial->toegevoegddoor_achternaam }}</td>
 						<td>{{ $testimonial->publicatieStatus }}</td>
@@ -85,10 +84,9 @@
 			</tr>				
 		</thead>
 		<tbody>
-			<?php $i=1; ?>
 			@foreach($alleTestimonials as $key => $testimonial)
 				<tr>
-					<td><?php echo $i; $i++; ?></td>
+					<td>{{ $key+1 }}</td>
 					<td><a href="/admin/testimonials/open/{{ $testimonial->testimonial_id }}">{{ $testimonial->titel }}</a></td>
 					<td>{{ $testimonial->toegevoegddoor_voornaam }} {{ $testimonial->toegevoegddoor_achternaam }}</td>
 					<td>{{ $testimonial->publicatieStatus }}</td>

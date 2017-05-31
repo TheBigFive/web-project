@@ -8,10 +8,13 @@ use App\Http\Requests;
 
 use App\Gebruikers;
 use App\Testimonials;
+use App\Tags;
+use App\Media;
 use Auth;
 use Validator;
 use Redirect;
 use DateTime;
+use Input;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Http\Response;
@@ -31,50 +34,145 @@ class TestimonialController extends Controller
     
     public function openToevoegenTestimonial()
     {
-        return view('admin/testimonials/toevoegenTestimonial');
+        $tag = new Tags();
+        $alleTags = $tag->alleTagsOpvragen();
+
+
+        return view('admin/testimonials/toevoegenTestimonial',
+            ['alleTags' => $alleTags,
+            ]);
         
     }
 
     public function voegTestimonialToe(Request $request)
     {
         $testimonial = new Testimonials();
-        $testimonialId = Auth::id();
-        /*$publicatieStatus = 'Nog niet gepubliceerd';*/
-        $goedkeuringsstatus = 'Nieuw artikel';
+        $gebruikersId = Auth::id();
+        $publicatieStatus = 'Nog niet gepubliceerd';
+        $goedkeuringsstatus = 'Nieuwe testimonial';
         $datumEnTijd = new DateTime();
 
-        $validated = Validator::make($request->all(), [
+        $media = new Media();
+
+        $validator = Validator::make($request->all(), [
+            'titel' => 'required',
             'naam_persoon' => 'required',
+            'leeftijd_persoon' => 'required',
+            'functie_persoon' => 'required',
             'beschrijving_persoon' => 'required',
-          'titel' => 'required',
-          'beschrijving_testimonial' => 'required'
+            'tekstvorm_testimonial' => 'required',
         ]);
 
-        if(!$validated->fails()){
-            $testimonial->voegTestimonialToe([
-                'naam_persoon' => $request->input('naam_persoon'),
-                'beschrijving_persoon' => $request->input('beschrijving_persoon'),
+        if($validator->passes()){
+            $testimonialId = $testimonial->voegTestimonialToe([
                 'titel' => $request->input('titel'),
-                'beschrijving_testimonial' => $request->input('beschrijving_testimonial'),
+                'naam_persoon' => $request->input('naam_persoon'),
+                'leeftijd_persoon' => $request->input('leeftijd_persoon'),
+                'functie_persoon' => $request->input('functie_persoon'),
+                'beschrijving_persoon' => $request->input('beschrijving_persoon'),                
+                'tekstvorm_testimonial' => $request->input('tekstvorm_testimonial'),
+                'publicatieStatus' => $publicatieStatus,
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'toegevoegdop' => $datumEnTijd,
                 'toegevoegddoor_id' => $gebruikersId,
+                'tag_id' => $request->input('tag'),
             ]);
-        }
 
-        return redirect('/admin/testimonials/')->withErrors($validated); 
+            //Toevoegen van afbeeldingen 
+            if(Input::file('afbeeldingen')){
+                $afbeeldingen = Input::file('afbeeldingen');
+                foreach ($afbeeldingen as $afbeelding) {
+                    $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
+                    $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
+                    
+                    if($validator->passes()){  
+
+                        $afbeeldingNaam = 'testimonial-'.$testimonialId.'-'.str_random(5).$afbeelding->getClientOriginalName();
+                        $afbeelding->move('img/testimonials/', $afbeeldingNaam);
+                        $filePath = 'img/testimonials/'.$afbeeldingNaam;
+                        $mediaType = "Afbeelding";
+
+                        //Afbeelding toevoegen in de database
+                        $media->voegMediaToe([
+                        'link' => $filePath,
+                        'mediaType' => $mediaType,
+                        'testimonial_id' => $testimonialId
+                        ]);
+                    }else{
+                        return "tis ni valid";
+                    }
+                }
+            }else{
+                return "Niks in afbeeldingen";
+            }
+
+            $youtubelink = $request->input('video');
+            $mediaType = "Video";
+
+            if($youtubelink != ''){
+                $validator = Validator::make(array('video' => $youtubelink), [
+                    'video' => 'sometimes|required',
+                ]);
+                if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                } else if (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                } else if (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                } else if (preg_match('/youtu\.be\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                  $videoId = $id[1];
+                }
+                else if (preg_match('/youtube\.com\/verify_age\?next_url=\/watch%3Fv%3D([^\&\?\/]+)/', $youtubelink, $id)) {
+                    $videoId = $id[1];
+                } else {   
+                    // not an youtube video
+                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
+                }
+
+                //youtubelink toevoegen in de database
+                $media->voegMediaToe([
+                'link' => $videoId,
+                'mediaType' => $mediaType,
+                'testimonial_id' => $testimonialId
+                ]);
+            }
+
+            return redirect('/admin/testimonials/');
+        }else{
+            return Redirect::back()->withErrors($validator); 
+        }        
         
     }
 
     public function openWijzigingTestimonial($id, Request $request){
 
         $testimonial = new Testimonials();
-        $testimonialsId = $id;
+        $testimonialId = $id;
+        $tag = new Tags();
+        $media = new Media();
+        $aantalAfbeeldingen = 0;
+        $aantalVideos = 0;
 
-        $geopendeTestimonial = $testimonial->testimonialOpvragenViaId($testimonialsId)->first();
-        
+        $geopendeTestimonial = $testimonial->testimonialOpvragenViaId($testimonialId)->first();
+        $alleTags = $tag->alleTagsOpvragen();
+        $alleTestimonialMedia = $media->TestimonialMediaOphalenViaTestimonialId($testimonialId);
+
+        foreach ($alleTestimonialMedia as $key => $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "Video"){
+                $aantalVideos++;
+            }
+        }
+
         return view('/admin/testimonials/wijzigTestimonial', 
             ['geopendeTestimonial' => $geopendeTestimonial,
+            'alleTags' => $alleTags,
+            'alleTestimonialMedia' => $alleTestimonialMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'aantalVideos' => $aantalVideos
             ]);
         
     }
@@ -82,23 +180,28 @@ class TestimonialController extends Controller
     public function wijzigTestimonial($id, Request $request){
 
         $testimonial = new Testimonials();
-        $testimonialsId = $id;
+        $testimonialId = $id;
         $goedkeuringsstatus = "Werd gewijzigd";
 
         $validated = Validator::make($request->all(), [
+            'titel' => 'required',
             'naam_persoon' => 'required',
+            'leeftijd_persoon' => 'required',
+            'functie_persoon' => 'required',
             'beschrijving_persoon' => 'required',
-          'titel' => 'required',
-          'beschrijving_testimonial' => 'required'
+            'tekstvorm_testimonial' => 'required',
         ]);
 
         if(!$validated->fails()){
-            $testimonial->wijzigTestimonial($testimonialsId,[
-                'naam_persoon' => $request->input('naam_persoon'),
-                'beschrijving_persoon' => $request->input('beschrijving_persoon'),
+            $testimonial->wijzigTestimonial($testimonialId,[
                 'titel' => $request->input('titel'),
-                'beschrijving_testimonial' => $request->input('beschrijving_testimonial'),
+                'naam_persoon' => $request->input('naam_persoon'),
+                'leeftijd_persoon' => $request->input('leeftijd_persoon'),
+                'functie_persoon' => $request->input('functie_persoon'),
+                'beschrijving_persoon' => $request->input('beschrijving_persoon'),                
+                'tekstvorm_testimonial' => $request->input('tekstvorm_testimonial'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
+                'tag_id' => $request->input('tag'),
             ]);
         }
 
@@ -110,7 +213,23 @@ class TestimonialController extends Controller
         
         $testimonial = new Testimonials();
         $testimonialId = $id;    
+
+        //media dat in de folder wordt geplaatst moet ook verwijderd worden
+        $media = new Media();
+        $testimonialMedia = $media->testimonialMediaOphalenViaTestimonialId($testimonialId);
+
+        if(sizeof($testimonialMedia) >0){
+            foreach ($testimonialMedia as $media) {
+                if($media->mediaType == "Afbeelding"){
+                    $filePath = $media->link;
+                    unlink($filePath);
+                }
+            } 
+        }
+
         $testimonial->verwijderTestimonial($testimonialId);
+
+
 
         return redirect('/admin/testimonials');
         
@@ -119,12 +238,30 @@ class TestimonialController extends Controller
     public function openTestimonial($id, Request $request){
 
         $testimonial = new Testimonials();
-        $testimonialsId = $id;
+        $testimonialId = $id;
+        $aantalAfbeeldingen = 0;
+        $aantalVideos = 0;
 
-        $geopendeTestimonial = $testimonial->testimonialOpvragenViaId($testimonialsId)->first();
+        $geopendeTestimonial = $testimonial->testimonialOpvragenViaId($testimonialId)->first();
+
+        $media = new Media;
+        $alleTestimonialMedia = $media->testimonialMediaOphalenViaTestimonialId($testimonialId);
+
+        foreach ($alleTestimonialMedia as $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "Video"){
+                $aantalVideos++;
+            }
+        }
         
         return view('/admin/testimonials/openTestimonial', 
             ['geopendeTestimonial' => $geopendeTestimonial,
+            'alleTestimonialMedia' => $alleTestimonialMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'aantalVideos' => $aantalVideos
             ]);
         
     }
@@ -149,23 +286,23 @@ class TestimonialController extends Controller
     public function afwijzenTestimonial($id, Request $request){
 
         $testimonial = new Testimonials();
-        $testimonialsId = $id;
+        $testimonialId = $id;
         $goedkeuringsstatus = 'Afgewezen';
         $goedgekeurdop = null;
-/*
-        $validated = Validator::make($request->all(), [
+
+        $validator = Validator::make($request->all(), [
           'redenVanAfwijzing' => 'required',
         ]);
 
-        if(!$validated->fails()){*/
-            $testimonial->wijzigTestimonial($testimonialsId,[
+        if($validator->passes()){
+            $testimonial->wijzigTestimonial($testimonialId,[
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
                 'goedgekeurdop' => $goedgekeurdop
             ]); 
-        /*};*/        
+        };        
 
-        return Redirect::back()->withErrors($validated)->with('succesBericht', 'De testimonial werd succesvol afgewezen.');
+        return Redirect::back()->withErrors($validator)->with('succesBericht', 'De testimonial werd succesvol afgewezen.');
         
     }
 
@@ -201,6 +338,89 @@ class TestimonialController extends Controller
 
         return Redirect::back()->with('succesBericht', 'De testimonial werd succsvol offline gehaald.');
         
+    }
+
+    public function toevoegenMediaTestimonial($id, Request $request){
+
+        $media = new Media();
+        $testimonialId = $id;
+
+
+        if(Input::file('afbeeldingen')){
+            $afbeeldingen = Input::file('afbeeldingen');
+            foreach ($afbeeldingen as $afbeelding) {
+                $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
+                $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
+                    
+                if($validator->passes()){  
+                    $mediaType = "Afbeelding";
+                    $afbeeldingNaam = 'testimonial-'.$testimonialId.'-'.str_random(5).$afbeelding->getClientOriginalName();
+                    $afbeelding->move('img/testimonials/', $afbeeldingNaam);
+                    $filePath = 'img/testimonials/'.$afbeeldingNaam;
+                        
+                    //Afbeelding toevoegen in de database
+                    $media->voegMediaToe([
+                    'link' => $filePath,
+                    'mediaType' => $mediaType,
+                    'testimonial_id' => $testimonialId
+                    ]);
+                }
+            }
+        }
+
+        $youtubelink = $request->input('video');
+        $mediaType = "Video";
+
+        if($youtubelink != ''){
+            $validator = Validator::make(array('video' => $youtubelink), [
+                'video' => 'sometimes|required',
+            ]);
+
+            if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else if (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else if (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else if (preg_match('/youtu\.be\/([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            }
+            else if (preg_match('/youtube\.com\/verify_age\?next_url=\/watch%3Fv%3D([^\&\?\/]+)/', $youtubelink, $id)) {
+                $videoId = $id[1];
+            } else {   
+                // not an youtube video
+                return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
+            }
+
+            //youtubelink toevoegen in de database
+            $media->voegMediaToe([
+            'link' => $videoId,
+            'mediaType' => $mediaType,
+            'testimonial_id' => $testimonialId
+            ]);
+        }
+
+        return Redirect::back()->withErrors($validator);
+    }
+
+    public function verwijderMediaTestimonial($id){
+
+        $mediaId = $id;
+        $media = new Media();
+        $opgehaaldeMedia = $media->testimonialMediaOphalenViaId($mediaId)->first();
+
+        //Afbeelding moet locaal ook verwijderd worden
+        if($opgehaaldeMedia->mediaType == "Afbeelding"){
+            $filePath = $media->testimonialMediaOphalenViaId($mediaId)->first()->link;
+            $media->verwijderMedia($mediaId);
+            unlink($filePath);
+        }
+        elseif ($opgehaaldeMedia->mediaType == "Video")
+        {
+            $media->verwijderMedia($mediaId);
+        }
+
+        return Redirect::back();
     }
     
 }
