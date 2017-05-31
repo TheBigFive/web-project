@@ -120,13 +120,10 @@
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#form_dr"><i class="fa fa-fw fa-camera"></i> Bezienswaardigheden<span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
             <ul id="form_dr" class="collapse collapse-level-1">
               <li>
-                <a href="#">Optie 1</a>
+                <a href="{{ url('admin/bezienswaardigheden') }}">Alle Bezienswaardigheden</a>
               </li>
               <li>
-                <a href="#">Optie 2</a>
-              </li>
-              <li>
-                <a href="#">Optie 3</a>
+                <a href="{{ url('admin/bezienswaardigheden/toevoegen') }}">Bezienswaardigheid toevoegen</a>
               </li>
             </ul>
           </li>

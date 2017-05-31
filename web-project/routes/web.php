@@ -49,6 +49,17 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonial');
 	Route::post('admin/testimonials/toevoegenMedia/{id}', 'TestimonialController@toevoegenMediaTestimonial');
 	Route::get('admin/testimonials/verwijderMedia/{id}', 'TestimonialController@verwijderMediaTestimonial');
+
+	//Bezienswaardigheden
+	Route::get('admin/bezienswaardigheden','BezienswaardigheidController@index');
+	Route::get('admin/bezienswaardigheden/toevoegen','BezienswaardigheidController@openToevoegenBezienswaardigheid');
+	Route::post('admin/bezienswaardigheden/toevoegen','BezienswaardigheidController@voegBezienswaardigheidToe');
+	Route::get('admin/bezienswaardigheden/wijzig/{id}', 'BezienswaardigheidController@openWijzigingBezienswaardigheid');
+	Route::post('admin/bezienswaardigheden/wijzig/{id}', 'BezienswaardigheidController@wijzigBezienswaardigheid');
+	Route::post('admin/bezienswaardigheden/toevoegenMedia/{id}', 'BezienswaardigheidController@toevoegenMediaBezienswaardigheid');
+	Route::get('admin/bezienswaardigheden/verwijderMedia/{id}', 'BezienswaardigheidController@afbeeldingVerwijderen');
+	
+	
 	
 
 });
@@ -70,9 +81,13 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::post('admin/testimonials/afwijzen/{id}', 'TestimonialController@afwijzenTestimonial');
 	Route::get('admin/testimonials/publiceren/{id}', 'TestimonialController@publicerenTestimonial');
 	Route::get('admin/testimonials/offlineHalen/{id}', 'TestimonialController@offlineHalenTestimonial');
+
+	//Bezienswaardigheden routes
+	Route::get('admin/bezienswaardigheden/verwijder/{id}', 'BezienswaardigheidController@verwijderBezienswaardigheid');
+	
 });
 
-//Administratieroutes die Approver en Admin mag uitvoeren
+//Administratieroutes die de Admin mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator'], function () {
 
 	//Gebruikers routes

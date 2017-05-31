@@ -84,10 +84,9 @@
 			</tr>				
 		</thead>
 		<tbody>
-			<?php $i=1; ?>
 			@foreach($alleNieuwsitems as $key => $nieuwsitem)
 				<tr>
-					<td><?php echo $i; $i++; ?></td>
+					<td>{{ $key+1 }}</td>
 					<td><a href="/admin/nieuwsitems/open/{{ $nieuwsitem->nieuwsitem_id }}">{{ $nieuwsitem->titel }}</a></td>
 					<td>{{ $nieuwsitem->toegevoegddoor_voornaam }} {{ $nieuwsitem->toegevoegddoor_achternaam }}</td>
 					<td>{{ $nieuwsitem->publicatieStatus }}</td>

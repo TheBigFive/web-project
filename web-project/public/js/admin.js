@@ -5,13 +5,13 @@ $(document).ready(function() {
 	    height: 200,
 	    toolbar: [
 	      // [groupName, [list of button]]
-	      ['style', ['bold', 'italic', 'underline', 'clear']],
-	      ['font', ['strikethrough', 'superscript', 'subscript']],
-	      ['fontsize', ['fontsize']],
-	      ['color', ['color']],
-	      ['para', ['ul', 'ol', 'paragraph']],
-	      ['height', ['height']],
-	      ['insert',['link']]
+	   		['style', ['bold', 'italic', 'underline', 'clear']],
+	    	['font', ['strikethrough', 'superscript', 'subscript']],
+	    	['fontsize', ['fontsize']],
+	    	['color', ['color']],
+	    	['para', ['ul', 'ol', 'paragraph', 'style']],
+	    	['height', ['height']],
+	    	['insert',['link','codeview','fullscreen']]
 	     ],
 	    placeholder: 'Schrijf je tekst hier...',
 	    focus: true,

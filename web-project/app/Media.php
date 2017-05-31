@@ -40,6 +40,20 @@ class Media extends Model
       ->get();
     }
 
+    public function bezienswaardigheidMediaOphalenViabezienswaardigheidId($id)
+    {
+      return DB::table('media')
+      ->where('bezienswaardigheid_id', $id)
+      ->get();
+    }
+
+    public function bezienswaardigheidMediaOphalenViaId($id)
+    {
+      return DB::table('media')
+      ->where('media_id', $id)
+      ->get();
+    }
+    
 
     public function voegMediaToe($media)
     {

@@ -297,7 +297,7 @@ class NieuwsitemController extends Controller
         
     }
 
-    public function verwijderNieuwsitem($id, Request $request){
+    public function verwijderNieuwsitem($id){
         
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemId = $id;
