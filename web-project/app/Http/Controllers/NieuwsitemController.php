@@ -34,14 +34,31 @@ class NieuwsitemController extends Controller
     public function openNieuwsitem($id){
 
         $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+        $nieuwsitemId = $id;
+        $aantalAfbeeldingen = 0;
+        $aantalVideos = 0;
 
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemsId)->first();
+        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
+
+        $media = new Media;
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+
+        foreach ($alleNieuwsitemMedia as $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "Video"){
+                $aantalVideos++;
+            }
+        }
         
         return view('user/nieuwsbericht', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            ]);
-        
+            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'aantalVideos' => $aantalVideos
+            ]);        
     }
 
     public function ophalenNieuwsitem()
