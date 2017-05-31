@@ -105,7 +105,6 @@ td,th{
 	padding:0}
 
 .nieuwsitems{
-    	column-count: 1;
     }
 
 .kolom li{
@@ -119,7 +118,6 @@ td,th{
 
 @media (min-width:500px){
 	.nieuwsitems{
-    	column-count: 2;
     }
 }
 
@@ -2786,7 +2784,6 @@ padding-right:0}
 
 @media (min-width:768px){
 	.nieuwsitems{
-    	column-count: 3;
     }
 	.container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 }
@@ -4813,63 +4810,50 @@ height:50px;
 	margin-right: 1em;
 }
 
-	.kolom .foto {
-		margin: 1%;
-		clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-		font-family: SunAntwerpen;
-	}
+.clip-svg {
+    width: 0;
+    height: 0;
+}
 
-	kolom image{
-	}
+.auteur{
+   	font-family: georgia;
+}
 
-	.clip-svg {
-        width: 0;
-        height: 0;
-    }
+.nieuws{
+   	text-align: center;
+}
 
-    .auteur{
-    	font-family: georgia;
-    }
+.nieuws .titel{
+   	color: #0099cc;
+   	font-size: 1.8em;
+   	text-decoration: none;
+   	line-height: 1em;
+   	margin-bottom: .1em;
+}
 
-    .nieuws{
-    	text-align: center;
-    }
+.nieuws .titel:hover{
+   	text-decoration: underline;
+}
 
-    .nieuws .titel{
-    	color: #0099cc;
-    	font-size: 1.8em;
-    	text-decoration: none;
-    	line-height: 1em;
-    	margin-bottom: .1em;
-    }
+.kolom{
 
-    .nieuws .titel:hover{
-    	text-decoration: underline;
-    }
+}
 
+.kolom .nieuws{
+	min-height: 15em;
+}
 
+#aangemeldAccount{
+   	padding-left: 1em;
+   	display: ruby;
+   	padding-left: .1em;
+   	color: #0099cc;
+}
 
-    .kolom li{
-    	display: table;
-    }
+.nieuwsbericht img{
+   	width: 100%;
+}
 
-    table{
-    	column-gap: 10px;
-    }
-
-    .nieuwsitems tr{
-    }
-
-    #aangemeldAccount{
-    	padding-left: 1em;
-    	display: ruby;
-    	padding-left: .1em;
-    	color: #0099cc;
-    }
-
-    .nieuwsbericht img{
-    	width: 100%;
-    }
-
-    .nieuwsbericht table{
-    }
+.nieuwsitem img{
+	width: 100%;
+}
