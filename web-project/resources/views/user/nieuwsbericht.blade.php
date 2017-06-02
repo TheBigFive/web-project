@@ -13,11 +13,20 @@
 				<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img)"/>
 			</svg>
 			<p>{{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
+
+			@foreach($alleNieuwsitemMedia as $media)
+				@if($media->mediaType == "Afbeelding")
+			<div class="col-lg-6">
+					<img src="{{ asset($media->link)  }}">
+			</div>
+				@endif
+			@endforeach
 		</div>
 		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
 			<h1>{!! $geopendeNieuwsitem->titel !!}</h1>
 			<b>{!! $geopendeNieuwsitem->introtekst !!}</b>
 			<p>{!! $geopendeNieuwsitem->artikel !!}</p>
+			
 		</div>
 		<div class="col-lg-1">
 		</div>

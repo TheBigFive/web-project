@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welkom');
 });
 
+
+Route::get('/', 'NieuwsitemController@ophalenNieuwsitemWelkom');
 Route::get('/home', 'HomeController@index');
 Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
 Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');

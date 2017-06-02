@@ -953,7 +953,8 @@ blockquote{
 	padding:11px 22px;
 
 margin:0 0 22px;
- font-size:7.5px;
+ font-size:18px;
+ color: #0099cc;
  border-left:5px solid #eee}
  blockquote ol:last-child,blockquote p:last-child,blockquote ul:last-child{
  	margin-bottom:0}
@@ -4856,4 +4857,26 @@ height:50px;
 
 .nieuwsitem img{
 	width: 100%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
 }

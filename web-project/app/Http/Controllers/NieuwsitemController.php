@@ -34,13 +34,31 @@ class NieuwsitemController extends Controller
     //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
     public function openNieuwsitem($id){
 
+       
         $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+        $nieuwsitemId = $id;
+        $aantalAfbeeldingen = 0;
+        $aantalVideos = 0;
 
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemsId)->first();
-        
+        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
+
+        $media = new Media;
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+
+        foreach ($alleNieuwsitemMedia as $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "Video"){
+                $aantalVideos++;
+            }
+        }
         return view('user/nieuwsbericht', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
+            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'aantalVideos' => $aantalVideos
             ]);
         
     }
@@ -49,9 +67,18 @@ class NieuwsitemController extends Controller
     {
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
-        return view('user/nieuwsberichten',
-            ['alleNieuwsitems' => $alleNieuwsitems
-            ]);
+
+        return view(['home','user/nieuwsberichten'],
+            ['alleNieuwsitems' => $alleNieuwsitems]);
+    }
+
+    public function ophalenNieuwsitemWelkom()
+    {
+        $nieuwsitem = new Nieuwsitems();
+        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+
+        return view('welkom',
+            ['alleNieuwsitems' => $alleNieuwsitems]);
     }
     
     public function openToevoegenNieuwsitem()
