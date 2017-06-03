@@ -155,6 +155,9 @@
               </li>
             </ul>
           </li>
+          <li>
+            <a href="{{ url('admin/tags') }}" ><i class="fa fa-fw fa-hashtag"></i> Tag<span class="pull-right"></span></a>
+          </li>
 
         </ul>
       </div>

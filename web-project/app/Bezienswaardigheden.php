@@ -19,6 +19,8 @@ class Bezienswaardigheden extends Model
     {
       return DB::table('bezienswaardigheden')
       ->where('bezienswaardigheid_id', $id)
+      ->join('gebruikers', 'bezienswaardigheden.toegevoegddoor_id', '=', 'gebruikers.id')
+      ->select('bezienswaardigheden.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
       ->get();
     }
 
