@@ -65,20 +65,26 @@ class NieuwsitemController extends Controller
 
     public function ophalenNieuwsitem()
     {
+        $media = new Media();
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
 
-        return view(['home','user/nieuwsberichten'],
-            ['alleNieuwsitems' => $alleNieuwsitems]);
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
+
+        return view('user/nieuwsberichten',
+            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
     }
 
     public function ophalenNieuwsitemWelkom()
     {
+        $media = new Media();
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
 
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
+
         return view('welkom',
-            ['alleNieuwsitems' => $alleNieuwsitems]);
+            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
     }
     
     public function openToevoegenNieuwsitem()

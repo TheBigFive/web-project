@@ -26,6 +26,13 @@ class Media extends Model
       ->get();
     }
 
+    public function nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding()
+    {
+      return DB::table('media')
+      ->where('isHoofdafbeelding', '1')
+      ->get();
+    }
+
     public function testimonialMediaOphalenViaId($id)
     {
       return DB::table('media')

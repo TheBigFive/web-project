@@ -16,9 +16,7 @@
 
 			@foreach($alleNieuwsitemMedia as $media)
 				@if($media->mediaType == "Afbeelding")
-			<div class="col-lg-6">
-					<img src="{{ asset($media->link)  }}">
-			</div>
+					<img src="{{ asset($media->link)  }}" >
 				@endif
 			@endforeach
 		</div>

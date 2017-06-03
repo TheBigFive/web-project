@@ -29,7 +29,7 @@
 					</a>
 				</div>
 				<div class="introtekst">
-					{{ substr($nieuwsitem->introtekst,0,180).'...' }}
+					{{ substr($nieuwsitem->introtekst,0,140).'...' }}
 				</div>
 			</div>
 		</div>
