@@ -29,11 +29,11 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('nieuwsberichten') }}">Bezienswaardigheden</a></li>
-                <li><a href="#about">Studeren</a></li>
+                <li><a href="{{ url('scholen') }}">Studeren</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Vervoer</a></li>
+                    <li><a href="#about">Vervoer</a></li>
                     <li><a href="#">Fuiven</a></li>
                     <li><a href="#">Parken</a></li>
                     <li><a href="#">Sport</a></li>
