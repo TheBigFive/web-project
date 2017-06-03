@@ -22,7 +22,7 @@ Route::get('/', 'NieuwsitemController@ophalenNieuwsitemWelkom');
 Route::get('/home', 'HomeController@index');
 Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
 Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');
-
+Route::get('praktisch','PraktischController@index');
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {

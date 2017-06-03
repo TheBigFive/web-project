@@ -1,0 +1,36 @@
+.parallax {
+    /* The image used */
+    background-image: url("{{ asset('img/hero1.jpg') }}");
+
+    /* Set a specific height */
+    height: 800px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.tekst{
+	height: 600px;
+	background-color: #8dc8e8;
+	margin: -23px;
+	text-align: center;
+	color: white;
+}
+
+.tekst p{
+	font-size: 1.5em;
+}
+
+.tekst h1{
+	font-size: 3em;
+}
+
+.tekst .icon{
+	font-size: 10em;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+}

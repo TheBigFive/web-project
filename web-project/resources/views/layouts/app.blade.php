@@ -9,6 +9,10 @@
 
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/onepager.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+        
+
 
     </head>
     <body>
@@ -31,7 +35,7 @@
                 <li><a href="{{ url('nieuwsberichten') }}">Bezienswaardigheden</a></li>
                 <li><a href="#about">Studeren</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
+                  <a href="{{ url('praktisch') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Vervoer</a></li>
                     <li><a href="#">Fuiven</a></li>
