@@ -34,6 +34,7 @@ class NieuwsitemController extends Controller
     //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
     public function openNieuwsitem($id){
 
+       
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemId = $id;
         $aantalAfbeeldingen = 0;
@@ -53,22 +54,30 @@ class NieuwsitemController extends Controller
                 $aantalVideos++;
             }
         }
-        
+
         return view('user/nieuwsbericht', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
             'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
             'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos
-            ]);        
+            'aantalVideos' => $aantalVideos]);
     }
 
     public function ophalenNieuwsitem()
     {
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+
         return view('user/nieuwsberichten',
-            ['alleNieuwsitems' => $alleNieuwsitems
-            ]);
+            ['alleNieuwsitems' => $alleNieuwsitems]);
+    }
+
+    public function ophalenNieuwsitemWelkom()
+    {
+        $nieuwsitem = new Nieuwsitems();
+        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+
+        return view('welkom',
+            ['alleNieuwsitems' => $alleNieuwsitems]);
     }
     
     public function openToevoegenNieuwsitem()

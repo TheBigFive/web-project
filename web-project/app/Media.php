@@ -26,6 +26,7 @@ class Media extends Model
       ->get();
     }
 
+
     public function testimonialMediaOphalenViaId($id)
     {
       return DB::table('media')

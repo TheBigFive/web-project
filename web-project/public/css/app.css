@@ -107,14 +107,12 @@ td,th{
 	padding:0}
 
 .nieuwsitems{
-    	column-count: 1;
     }
 
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 
 @media (min-width:500px){
 	.nieuwsitems{
-    	column-count: 2;
     }
 }
 
@@ -950,7 +948,8 @@ blockquote{
 	padding:11px 22px;
 
 margin:0 0 22px;
- font-size:17.5px;
+ font-size:18px;
+ color: #0099cc;
  border-left:5px solid #eee}
  blockquote ol:last-child,blockquote p:last-child,blockquote ul:last-child{
  	margin-bottom:0}
@@ -2781,7 +2780,6 @@ padding-right:0}
 
 @media (min-width:768px){
 	.nieuwsitems{
-    	column-count: 3;
     }
 	.container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 }
@@ -4811,15 +4809,27 @@ height:50px;
 	margin-right: 1em;
 }
 
+<<<<<<< HEAD
 	.clip-svg {
         width: 0;
         height: 0;
     }
+=======
+.clip-svg {
+    width: 0;
+    height: 0;
+}
 
-    .auteur{
-    	font-family: georgia;
-    }
+.auteur{
+   	font-family: georgia;
+}
+>>>>>>> 908836debaaa5972d1ca10ebcbb841cb91e61a68
 
+.nieuws{
+   	text-align: center;
+}
+
+<<<<<<< HEAD
     table{
     	column-gap: 10px;
     }
@@ -4841,19 +4851,23 @@ height:50px;
     .nieuws{
     	text-align: center;
     }
+=======
+.nieuws .titel{
+   	color: #0099cc;
+   	font-size: 1.8em;
+   	text-decoration: none;
+   	line-height: 1em;
+   	margin-bottom: .1em;
+}
+>>>>>>> 908836debaaa5972d1ca10ebcbb841cb91e61a68
 
-    .nieuws .titel{
-    	color: #0099cc;
-    	font-size: 1.8em;
-    	text-decoration: none;
-    	line-height: 1em;
-    	margin-bottom: .1em;
-    }
+.nieuws .titel:hover{
+   	text-decoration: underline;
+}
 
-    .nieuws .titel:hover{
-    	text-decoration: underline;
-    }
+.kolom{
 
+<<<<<<< HEAD
     .nieuwsbericht
     	padding-left: 0em;
     }
@@ -4874,4 +4888,47 @@ height:50px;
 	mask: url(http://puu.sh/w3Xax/4787e376eb.png) no-repeat;
 	height: calc();
 	width: auto;
+=======
+}
+
+.kolom .nieuws{
+	min-height: 15em;
+}
+
+#aangemeldAccount{
+   	padding-left: 1em;
+   	display: ruby;
+   	padding-left: .1em;
+   	color: #0099cc;
+}
+
+.nieuwsbericht img{
+   	width: 100%;
+}
+
+.nieuwsitem img{
+	width: 100%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+>>>>>>> 908836debaaa5972d1ca10ebcbb841cb91e61a68
 }
