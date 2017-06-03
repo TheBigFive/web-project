@@ -35,7 +35,55 @@
 			    </span>
 			@endif
 		</div>
+
+		<div class="form-group">
+		    <label for="openingsuren">Openingsuren</label>
+		    <textarea rows="5" name="openingsuren" class="form-control summernote" placeholder="Typ hier de openingsuren van de bezienswaardigheid"></textarea>
+		    @if ($errors->has('openingsuren'))
+			    <span class="help-block">
+			        <strong>{{ $errors->first('openingsuren') }}</strong>
+			    </span>
+			@endif
+		</div>
+
+		<div class="form-group">
+		    <label for="vervoer">Vervoer</label>
+		    <textarea rows="5" name="vervoer" class="form-control summernote" placeholder="Typ hier de vervoersmogelijkheden van de bezienswaardigheid"></textarea>
+		    @if ($errors->has('vervoer'))
+			    <span class="help-block">
+			        <strong>{{ $errors->first('vervoer') }}</strong>
+			    </span>
+			@endif
+		</div>
+		<div class="form-group">
+		    <label for="kostprijs">Kostprijs</label>
+		    <textarea rows="5" name="kostprijs" class="form-control summernote" placeholder="Typ hier de kostprijzen van de bezienswaardigheid"></textarea>
+		    @if ($errors->has('kostprijs'))
+			    <span class="help-block">
+			        <strong>{{ $errors->first('kostprijs') }}</strong>
+			    </span>
+			@endif
+		</div>
+		<div class="form-group">
+		    <label for="adres">Adres</label>
+		    <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
+		    @if ($errors->has('adres'))
+			    <span class="help-block">
+			        <strong>{{ $errors->first('adres') }}</strong>
+			    </span>
+			@endif
+		</div>
 		
+		<div class="form-group">
+		    <label for="contact">Contact</label>
+		    <textarea rows="5" name="contact" class="form-control summernote" placeholder="Typ hier de contactmogelijkheden van de bezienswaardigheid"></textarea>
+		    @if ($errors->has('contact'))
+			    <span class="help-block">
+			        <strong>{{ $errors->first('contact') }}</strong>
+			    </span>
+			@endif
+		</div>
+
 		<div class="form-group">
 		    <input type="submit" class="btn btn-primary" value="Maak Bezienswaardigheid">
 		</div>

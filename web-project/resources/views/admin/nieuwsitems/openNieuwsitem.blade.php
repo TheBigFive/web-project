@@ -109,7 +109,7 @@
 	  					</button>
 					</span>					
 
-					<form class="afwijzingForm" action="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">     	
+					<form class="tagForm" action="/admin/tags/toevoegen/" method="post">     	
 					 	{!! csrf_field() !!}
 						<div class="form-group">
 						    <label for="titel">Reden van afwijzing</label>

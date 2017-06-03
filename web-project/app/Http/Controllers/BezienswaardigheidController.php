@@ -38,7 +38,31 @@ class BezienswaardigheidController extends Controller
             'aantalNieuweEnGewijzigdeBezienswaardigheden' => $aantalNieuweEnGewijzigdeBezienswaardigheden
             ]);        
     }
-    
+
+    public function openBezienswaardigheidAdmin($id, Request $request){
+
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $bezienswaardigheidId = $id;
+        $aantalAfbeeldingen = 0;
+
+        $geopendeBezienswaardigheid = $bezienswaardigheid->bezienswaardigheidOpvragenViaId($bezienswaardigheidId)->first();
+
+        $media = new Media;
+        $alleBezienswaardigheidMedia = $media->bezienswaardigheidMediaOphalenViaBezienswaardigheidId($bezienswaardigheidId);
+
+        foreach ($alleBezienswaardigheidMedia as $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+        }
+        
+        return view('/admin/bezienswaardigheden/openBezienswaardigheid', 
+            ['geopendeBezienswaardigheid' => $geopendeBezienswaardigheid,
+            'alleBezienswaardigheidMedia' => $alleBezienswaardigheidMedia,
+            'aantalAfbeeldingen' => $aantalAfbeeldingen
+            ]);
+    }
+
     public function openToevoegenBezienswaardigheid()
     {
         return view('admin/bezienswaardigheden/toevoegenBezienswaardigheid');
@@ -62,6 +86,11 @@ class BezienswaardigheidController extends Controller
             $bezienswaardigheid_id = $bezienswaardigheid->voegBezienswaardigheidToe([
                 'naam' => $request->input('naam'),
                 'beschrijving' => $request->input('beschrijving'),
+                'openingsuren' => $request->input('openingsuren'),
+                'vervoer' => $request->input('vervoer'),
+                'kostprijs' => $request->input('kostprijs'),
+                'adres' => $request->input('adres'),
+                'contact' => $request->input('contact'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'publicatieStatus' => $publicatieStatus,
                 'toegevoegddoor_id' => $gebruikersId,
@@ -96,7 +125,7 @@ class BezienswaardigheidController extends Controller
             }
         }
         
-        return view('/admin/bezienswaardigheden/wijzigbezienswaardigheid', 
+        return view('/admin/bezienswaardigheden/wijzigBezienswaardigheid', 
             ['geopendeBezienswaardigheid' => $geopendeBezienswaardigheid,
             'alleBezienswaardigheidMedia' => $alleBezienswaardigheidMedia,
             'aantalAfbeeldingen' => $aantalAfbeeldingen,
@@ -120,6 +149,11 @@ class BezienswaardigheidController extends Controller
             $bezienswaardigheid->wijzigBezienswaardigheid($bezienswaardigheidId,[
                 'naam' => $request->input('naam'),
                 'beschrijving' => $request->input('beschrijving'),
+                'openingsuren' => $request->input('openingsuren'),
+                'vervoer' => $request->input('vervoer'),
+                'kostprijs' => $request->input('kostprijs'),
+                'adres' => $request->input('adres'),
+                'contact' => $request->input('contact'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
             ]);
         }
@@ -151,6 +185,82 @@ class BezienswaardigheidController extends Controller
         
     }
 
+    public function goedkeurenBezienswaardigheid($id){
+
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $bezienswaardigheidId = $id;
+        $datumEnTijd = new DateTime();
+        $goedkeuringsstatus = 'Goedgekeurd';
+        $redenVanAfwijzing = null;
+     
+        $bezienswaardigheid->wijzigBezienswaardigheid($bezienswaardigheidId,[
+                'goedkeuringsstatus' => $goedkeuringsstatus,
+                'goedgekeurdop' => $datumEnTijd,
+                'redenVanAfwijzing' => $redenVanAfwijzing
+            ]);
+        
+
+        return Redirect::back()->with('succesBericht', 'De bezienswaardigheid werd succsvol goedgekeurd.');
+        
+    }
+
+    public function afwijzenBezienswaardigheid($id, Request $request){
+
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $bezienswaardigheidId = $id;
+        $goedkeuringsstatus = 'Afgewezen';
+        $goedgekeurdop = null;
+
+        $validator = Validator::make($request->all(), [
+          'redenVanAfwijzing' => 'required',
+        ]);
+
+        if($validator->passes()){
+            $bezienswaardigheid->wijzigBezienswaardigheid($bezienswaardigheidId,[
+                'goedkeuringsstatus' => $goedkeuringsstatus,
+                'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
+                'goedgekeurdop' => $goedgekeurdop
+            ]); 
+        };        
+
+        return Redirect::back()->withErrors($validator)->with('succesBericht', 'De bezienswaardigheid werd succesvol afgewezen.');
+        
+    }
+
+    public function publicerenBezienswaardigheid($id){
+
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $bezienswaardigheidId = $id;
+        $datumEnTijd = new DateTime();
+        $publicatieStatus = 'Gepubliceerd';
+     
+        $bezienswaardigheid->wijzigBezienswaardigheid($bezienswaardigheidId,[
+                'gepubliceerdop' => $datumEnTijd,
+                'publicatieStatus' => $publicatieStatus
+            ]);
+
+        $this->goedkeurenBezienswaardigheid($bezienswaardigheidId);
+
+        return Redirect::back()->with('succesBericht', 'De bezienswaardigheid werd succsvol gepubliceerd.');
+        
+    }
+
+    public function offlineHalenBezienswaardigheid($id){
+
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $bezienswaardigheidId = $id;
+        $datumEnTijd = null;
+        $publicatieStatus = 'Nog niet gepubliceerd';
+     
+        $bezienswaardigheid->wijzigBezienswaardigheid($bezienswaardigheidId,[
+                'gepubliceerdop' => $datumEnTijd,
+                'publicatieStatus' => $publicatieStatus
+            ]);
+
+        return Redirect::back()->with('succesBericht', 'De bezienswaardigheid werd succesvol offline gehaald.');
+        
+    }
+
     public function toevoegenMediaBezienswaardigheid($id,Request $request){
         $media = new Media();
         $bezienswaardigheid_id = $id;
@@ -162,7 +272,7 @@ class BezienswaardigheidController extends Controller
                 $validator = $this->afbeeldingToevoegen($bezienswaardigheid_id, $afbeeldingen);
             }
 
-        return redirect('/admin/bezienswaardigheden/wijzig/'.$bezienswaardigheid_id)->withErrors($validator);
+        return redirect('/admin/bezienswaardigheden/wijzig/'.$bezienswaardigheid_id)->withErrors($validator)->with('succesBericht', 'De afbeelding werd succesvol toegevoegd.');
     }
 
     public function afbeeldingToevoegen($bezienswaardigheid_id, $afbeeldingen){
@@ -204,7 +314,7 @@ class BezienswaardigheidController extends Controller
             unlink($filePath);
         }
 
-        return Redirect::back();
+        return Redirect::back()->with('succesBericht', 'De afbeelding werd verwijderd.');
     }
     
 

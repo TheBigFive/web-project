@@ -56,8 +56,15 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::post('admin/bezienswaardigheden/toevoegen','BezienswaardigheidController@voegBezienswaardigheidToe');
 	Route::get('admin/bezienswaardigheden/wijzig/{id}', 'BezienswaardigheidController@openWijzigingBezienswaardigheid');
 	Route::post('admin/bezienswaardigheden/wijzig/{id}', 'BezienswaardigheidController@wijzigBezienswaardigheid');
+	Route::get('admin/bezienswaardigheden/open/{id}', 'BezienswaardigheidController@openBezienswaardigheidAdmin');
 	Route::post('admin/bezienswaardigheden/toevoegenMedia/{id}', 'BezienswaardigheidController@toevoegenMediaBezienswaardigheid');
 	Route::get('admin/bezienswaardigheden/verwijderMedia/{id}', 'BezienswaardigheidController@afbeeldingVerwijderen');
+
+	//Tags
+	Route::get('admin/tags','TagsController@index');
+	Route::post('admin/tags/toevoegen/','TagsController@voegTagToe');
+	Route::get('admin/tags/verwijder/{id}','TagsController@verwijderTag');
+
 	
 	
 	
@@ -84,6 +91,10 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 
 	//Bezienswaardigheden routes
 	Route::get('admin/bezienswaardigheden/verwijder/{id}', 'BezienswaardigheidController@verwijderBezienswaardigheid');
+	Route::get('admin/bezienswaardigheden/goedkeuren/{id}', 'BezienswaardigheidController@goedkeurenBezienswaardigheid');
+	Route::post('admin/bezienswaardigheden/afwijzen/{id}', 'BezienswaardigheidController@afwijzenBezienswaardigheid');
+	Route::get('admin/bezienswaardigheden/publiceren/{id}', 'BezienswaardigheidController@publicerenBezienswaardigheid');
+	Route::get('admin/bezienswaardigheden/offlineHalen/{id}', 'BezienswaardigheidController@offlineHalenBezienswaardigheid');
 	
 });
 
