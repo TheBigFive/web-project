@@ -4693,6 +4693,11 @@ color:transparent;
 	.hero .afbeeldingHero{
 	position: relative;
 	mask: url(http://i.imgur.com/mH5ZRZ1.png) no-repeat;
+	mask-size: auto 100%;
+	display: block;
+	max-height: 12000px;
+	width: auto;
+	height: auto;
 	}
 
 }

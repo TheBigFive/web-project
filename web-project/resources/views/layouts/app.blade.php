@@ -9,7 +9,6 @@
 
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
-        <link rel="stylesheet" href="{{ asset('css/onepager.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         
 
@@ -32,21 +31,23 @@
             <div id="navbar" class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('nieuwsberichten') }}">Bezienswaardigheden</a></li>
+                <li><a href="#">Bezienswaardigheden</a></li>
                 <li><a href="#about">Studeren</a></li>
                 <li class="dropdown">
                   <a href="{{ url('praktisch') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Vervoer</a></li>
-                    <li><a href="#">Fuiven</a></li>
-                    <li><a href="#">Parken</a></li>
-                    <li><a href="#">Sport</a></li>
-                    <li><a href="#">Op kot</a></li>
+                    <li><a href="{{ url('praktisch') }}#vervoer">Vervoer</a></li>
+                    <li><a href="{{ url('praktisch') }}#fuiven">Fuiven</a></li>
+                    <li><a href="{{ url('praktisch') }}#parken">Parken</a></li>
+                    <li><a href="{{ url('praktisch') }}#sport">Sport</a></li>
+                    <li><a href="{{ url('praktisch') }}#kot">Op kot</a></li>
                   </ul>
                 </li>
                 <li><a href="#contact">Verhalen</a></li>
+                <li><a href="{{ url('nieuwsberichten') }}">Nieuws</a></li>
+                <li><a href="{{ url('nieuwsberichten') }}"><i class="fa fa-gamepad" aria-hidden="true"></i></a></li>
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle icon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle icon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="caret"></span></a>
                 @if (Auth::guest())
                 
                 <ul class="dropdown-menu">

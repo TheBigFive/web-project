@@ -3,7 +3,7 @@
     background-image: url("{{ asset('img/hero1.jpg') }}");
 
     /* Set a specific height */
-    height: 800px;
+    height: 100vh;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -12,19 +12,19 @@
     background-size: cover;
 }
 
-.tekst{
-	height: 600px;
+.praktisch .tekst{
 	background-color: #8dc8e8;
-	margin: -23px;
 	text-align: center;
 	color: white;
+    display: block;
+    overflow: auto;
 }
 
-.tekst p{
+.praktisch .tekst p{
 	font-size: 1.5em;
 }
 
-.tekst h1{
+.praktisch .tekst h1{
 	font-size: 3em;
 }
 
@@ -33,4 +33,44 @@
 	color: white;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.tekst .col-lg-4{
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.fototekst{
+	text-align: center;
+	font-family: Antwerpen;
+	font-size: 6em;
+	color: white;
+	position: relative;
+	overflow: hidden;
+	top: 70%;
+}
+
+.footer{
+	margin-top: -.7em;
+}
+
+/* achtergrondkleuren per hoofdstuk */
+.praktisch #vervoer .tekst{
+	background-color: #0091D2;
+}
+
+.praktisch #fuiven .tekst{
+	background-color: #8431A5;
+}
+
+.praktisch #parken .tekst{
+	background-color: #6DC24B;
+}
+
+.praktisch #sport .tekst{
+	background-color: #0091D2;
+}
+
+.praktisch #kot .tekst{
+	background-color: #4F758A;
 }

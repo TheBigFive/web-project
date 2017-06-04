@@ -3,17 +3,17 @@
   		<div class="hero container">
   			<div class="mySlides fade">
 	  			<div class="afbeeldingHero container">
-					<img src="{{ asset('img/hero3.png') }}" alt="hero afbeelding">
+					<img src="{{ asset('img/heroimages/hero3.png') }}" alt="hero afbeelding">
 				</div>
 			</div>
   			<div class="mySlides fade">
 	  			<div class="afbeeldingHero container">
-					<img src="{{ asset('img/hero4.png') }}" alt="hero afbeelding">
+					<img src="{{ asset('img/heroimages/hero4.png') }}" alt="hero afbeelding">
 				</div>
 			</div>
   			<div class="mySlides fade">
 	  			<div class="afbeeldingHero container">
-					<img src="{{ asset('img/hero5.png') }}" alt="hero afbeelding">
+					<img src="{{ asset('img/heroimages/hero5.png') }}" alt="hero afbeelding">
 				</div>
 			</div>
 		</div>

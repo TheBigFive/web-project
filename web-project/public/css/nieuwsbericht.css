@@ -1,0 +1,9 @@
+.miniatuurAfbeelding{
+	border: pink 5px solid;
+}
+
+.nieuwsitem .datum{
+	text-align: center;
+	font-family: georgia;
+	font-size: 1.5em;
+}
