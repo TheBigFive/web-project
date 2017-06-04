@@ -28,14 +28,6 @@
 				</a>
 			</div>
 			<div class="nieuws tekst">
-			<!--
-				<div class="datum">
-					23-05-2017
-				</div>
-				<div class="auteur">
-					Tom Aat
-				</div>
-				-->
 				<h2 class="titel">
 					<a href="{{ url('school') }}">
 						AP-Hogeschool
@@ -63,14 +55,6 @@
 				</a>
 			</div>
 			<div class="nieuws tekst">
-			<!--
-				<div class="datum">
-					24-05-2017
-				</div>
-				<div class="auteur">
-					Peter Selie
-				</div>
-				-->
 				<h2 class="titel">
 					<a href="{{ url('school') }}">
 						Karel De Grote-Hogeschool
@@ -98,14 +82,6 @@
 				</a>
 			</div>
 			<div class="nieuws tekst">
-			<!--
-				<div class="datum">
-					25-05-2017
-				</div>
-				<div class="auteur">
-					Nonkel Jef
-				</div>
-				-->
 				<h2 class="titel">
 					<a href="{{ url('school') }}">
 						Thomas More
@@ -116,46 +92,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
-<!---------------------->
-<!---------------------->
-<!---------------------->
-
-<!--
-		<div class="kolom">
-		<li>
-			<div class="foto">
-			<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-				<defs>
-			    	<pattern id="img3" patternUnits="userSpaceOnUse" width="100" height="100">
-			    		<image xlink:href="img/school3.jpg" y="-25" x="-25" width="150" height="150" />
-			    	</pattern>
-				</defs>
-				<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img3)"/>
-			</svg>
-			</div>
-			<div class="nieuws tekst">
-				<div class="datum">
-					25-05-2017
-				</div>
-				<div class="auteur">
-					Nonkel Jef
-				</div>
-				<div class="titel">
-					<a href="school/#">
-						Thomas More
-					</a>
-				</div>
-				<div class="introtekst">
-					Hallo, dit is de Thomas More Hogeschool. Hierboven ziet u normaalgezien een foto van de campus in Mechelen. U kan er vanalle richtingen volgen. Deze tekst is slechts een test.
-				</div>
-			</div>
-		</li>
-		</div>
--->
 
 	</div>
 	</div>
