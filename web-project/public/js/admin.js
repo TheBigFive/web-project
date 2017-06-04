@@ -18,6 +18,7 @@ $(document).ready(function() {
     });
 
     $('.afwijzingForm').hide();
+    $('#tagForm').hide();
 
 
 });
@@ -28,11 +29,13 @@ $('.nav-tabs a').click(function (e) {
   $(this).tab('show')
 })
 
+//Knop reden van afwijzing in alle openPaginas in admin
 $('#afwijzingKnop').click(function () {
 	$(this).hide();
 	$('.afwijzingForm').slideDown();
 })
 
+//Knop reden van afwijzing annuleren in alle openPaginas in admin
 $('#afwijzingAnnulerenKnop').click(function () {
 	$('.afwijzingForm').slideUp(function() {
    		$('#afwijzingKnop').show();
@@ -40,3 +43,16 @@ $('#afwijzingAnnulerenKnop').click(function () {
 	
 })
 
+//Knop tag toevoegen in tags admin pagina
+$('#tagToevoegenKnop').click(function () {
+	$(this).hide();
+	$('#tagForm').slideDown();
+})
+
+//Knop tag toevoegen annuleren in tags admin pagina
+$('#tagAnnulerenKnop').click(function () {
+	$('#tagForm').slideUp(function() {
+   		$('#tagToevoegenKnop').show();
+	});	
+	
+})

@@ -272,10 +272,12 @@ class TestimonialController extends Controller
         $testimonialsId = $id;
         $datumEnTijd = new DateTime();
         $goedkeuringsstatus = 'Goedgekeurd';
+        $redenVanAfwijzing = null;
      
         $testimonial->wijzigTestimonial($testimonialsId,[
                 'goedkeuringsstatus' => $goedkeuringsstatus,
-                'goedgekeurdop' => $datumEnTijd
+                'goedgekeurdop' => $datumEnTijd,
+                'redenVanAfwijzing' => $redenVanAfwijzing
             ]);
         
 
@@ -336,7 +338,7 @@ class TestimonialController extends Controller
                 'publicatieStatus' => $publicatieStatus
             ]);
 
-        return Redirect::back()->with('succesBericht', 'De testimonial werd succsvol offline gehaald.');
+        return Redirect::back()->with('succesBericht', 'De testimonial werd succesvol offline gehaald.');
         
     }
 

@@ -32,7 +32,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="#">Bezienswaardigheden</a></li>
-                <li><a href="#about">Studeren</a></li>
+                <li><a href="{{ url('scholen') }}">Studeren</a></li>
                 <li class="dropdown">
                   <a href="{{ url('praktisch') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
                   <ul class="dropdown-menu">

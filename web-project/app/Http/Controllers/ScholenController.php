@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Gebruikers;
-use App\Nieuwsitems;
+use App\Scholen;
 use App\Tags;
 use App\Media;
 use Auth;
@@ -19,73 +19,42 @@ use Input;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Http\Response;
 
-class NieuwsitemController extends Controller
+class ScholenController extends Controller
 {
     public function index()
     {
-        $nieuwsitem = new Nieuwsitems();
-        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+        $school = new Scholen();
+        $alleScholen = $school->alleScholenOpvragen();
 
-        return view('admin/nieuwsitems/nieuwsitems',
-            ['alleNieuwsitems' => $alleNieuwsitems
+        return view('admin/scholen/scholen',
+            ['alleScholen' => $alleScholen
             ]);
     }
 
     //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
-    public function openNieuwsitem($id){
+    /*public function openSchool($id){*/
+    public function openSchool(){
+/*
+        $school = new Scholen();
+        $scholenId = $id;
 
-       
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemId = $id;
-        $aantalAfbeeldingen = 0;
-        $aantalVideos = 0;
-
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
-
-        $media = new Media;
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
-
-        foreach ($alleNieuwsitemMedia as $media) {
-            if($media->mediaType == "Afbeelding"){
-                $aantalAfbeeldingen++;
-            }
-
-            if($media->mediaType == "Video"){
-                $aantalVideos++;
-            }
-        }
-
-        return view('user/nieuwsbericht', 
+        $geopendeSchool = $school->schoolOpvragenViaId($scholenId)->first();
+        */
+        return view('user/school'/*, 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos]);
+            ]*/);
+        
     }
 
-    public function ophalenNieuwsitem()
+    public function ophalenSchool()
     {
-        $media = new Media();
-        $nieuwsitem = new Nieuwsitems();
-        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
-
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
-
-        return view('user/nieuwsberichten',
-            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
+        $school = new Scholen();
+        $alleScholen = $school->alleScholenOpvragen();
+        return view('user/scholen'/*,
+            ['alleScholen' => $alleScholen
+            ]*/);
     }
-
-    public function ophalenNieuwsitemWelkom()
-    {
-        $media = new Media();
-        $nieuwsitem = new Nieuwsitems();
-        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
-
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
-
-        return view('welkom',
-            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
-    }
-    
+/*    
     public function openToevoegenNieuwsitem()
     {
         $tag = new Tags();
@@ -351,7 +320,7 @@ class NieuwsitemController extends Controller
         return redirect('/admin/nieuwsitems');
         
     }
-
+*/
     public function openNieuwsitemAdmin($id, Request $request){
 
         $nieuwsitem = new Nieuwsitems();
@@ -382,7 +351,7 @@ class NieuwsitemController extends Controller
             ]);
         
     }
-
+/*
     public function goedkeurenNieuwsitem($id){
 
         $nieuwsitem = new Nieuwsitems();
@@ -458,5 +427,5 @@ class NieuwsitemController extends Controller
         return Redirect::back()->with('succesBericht', 'Het artikel werd succsvol offline gehaald.');
         
     }
-    
+*/
 }

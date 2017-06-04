@@ -40,6 +40,11 @@
 	padding-right: 5%;
 }
 
+.tekst .col-lg-6{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
 .fototekst{
 	text-align: center;
 	font-family: Antwerpen;
@@ -72,5 +77,5 @@
 }
 
 .praktisch #kot .tekst{
-	background-color: #4F758A;
+	background-color: #009883;
 }

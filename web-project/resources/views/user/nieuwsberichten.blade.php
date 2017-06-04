@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-	<div class="nieuwsberichten container">
+	<div class="container">
 	<div class="nieuwsitems">
 	@foreach($alleNieuwsitems as $key => $nieuwsitem)
 		<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
