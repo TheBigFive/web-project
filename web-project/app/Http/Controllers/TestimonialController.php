@@ -277,7 +277,7 @@ class TestimonialController extends Controller
         $testimonial->wijzigTestimonial($testimonialsId,[
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'goedgekeurdop' => $datumEnTijd,
-                'redenVanAfwijzing' = $redenVanAfwijzing
+                'redenVanAfwijzing' => $redenVanAfwijzing
             ]);
         
 

@@ -9,14 +9,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 Route::get('/', function () {
     return view('welkom');
 });
+
 Route::get('/', 'NieuwsitemController@ophalenNieuwsitemWelkom');
 Route::get('/home', 'HomeController@index');
 Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
 Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');
+Route::get('scholen', 'ScholenController@ophalenSchool');
+Route::get('school', 'ScholenController@openSchool');
+/*Route::get('school/{id}', 'ScholenController@openSchool');*/
+
+
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
 	Route::get('admin', 'AdminController@index');
@@ -32,6 +39,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitemAdmin');
 	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
 	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
+
 	//Testimonials routes
 	Route::get('admin/testimonials','TestimonialController@index');
 	Route::get('admin/testimonials/toevoegen','TestimonialController@openToevoegenTestimonial');
@@ -41,6 +49,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonial');
 	Route::post('admin/testimonials/toevoegenMedia/{id}', 'TestimonialController@toevoegenMediaTestimonial');
 	Route::get('admin/testimonials/verwijderMedia/{id}', 'TestimonialController@verwijderMediaTestimonial');
+
 	//Bezienswaardigheden
 	Route::get('admin/bezienswaardigheden','BezienswaardigheidController@index');
 	Route::get('admin/bezienswaardigheden/toevoegen','BezienswaardigheidController@openToevoegenBezienswaardigheid');
@@ -50,6 +59,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/bezienswaardigheden/open/{id}', 'BezienswaardigheidController@openBezienswaardigheidAdmin');
 	Route::post('admin/bezienswaardigheden/toevoegenMedia/{id}', 'BezienswaardigheidController@toevoegenMediaBezienswaardigheid');
 	Route::get('admin/bezienswaardigheden/verwijderMedia/{id}', 'BezienswaardigheidController@afbeeldingVerwijderen');
+
 	//Tags
 	Route::get('admin/tags','TagsController@index');
 	Route::post('admin/tags/toevoegen/','TagsController@voegTagToe');
@@ -58,6 +68,8 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	
 	
 });
+
+
 //Administratieroutes die Approver en Admin mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver'], function () {	
 	
@@ -74,6 +86,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::post('admin/testimonials/afwijzen/{id}', 'TestimonialController@afwijzenTestimonial');
 	Route::get('admin/testimonials/publiceren/{id}', 'TestimonialController@publicerenTestimonial');
 	Route::get('admin/testimonials/offlineHalen/{id}', 'TestimonialController@offlineHalenTestimonial');
+
 	//Bezienswaardigheden routes
 	Route::get('admin/bezienswaardigheden/verwijder/{id}', 'BezienswaardigheidController@verwijderBezienswaardigheid');
 	Route::get('admin/bezienswaardigheden/goedkeuren/{id}', 'BezienswaardigheidController@goedkeurenBezienswaardigheid');
@@ -82,6 +95,8 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::get('admin/bezienswaardigheden/offlineHalen/{id}', 'BezienswaardigheidController@offlineHalenBezienswaardigheid');
 	
 });
+
+
 //Administratieroutes die de Admin mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator'], function () {
 	//Gebruikers routes
@@ -89,6 +104,8 @@ Route::group(['middleware' => 'rol:Administrator'], function () {
 	Route::post('admin/gebruikers/wijzig/{id}', 'AdminController@wijzigGebruiker');
 	Route::get('admin/gebruikers/verwijder/{id}', 'AdminController@verwijderGebruiker');
 });
+
+
 //Inlog routes
 Route::get('logout','Auth\LoginController@logout');
 Route::get('profiel','ProfielController@index');

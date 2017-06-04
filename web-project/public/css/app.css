@@ -23,10 +23,51 @@
 	font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
 
 
+.schoolheroimage img{
+	width: 1345px;
+	margin-bottom: 50px;
+}
+
+.schoolapartcontainer{
+	padding-top: 50px;
+}
+
+.schoolapartcontainer h1{
+	float: left;
+	margin: 150px 100px 0px 120px;
+}
+
+.paragraffotoapart{
+	float: left;
+	height: 280px;
+	width: 300px;
+	margin: 120px 60px 0px 100px;
+}
+
+.fotoschoolapart{
+	width: 350px;
+	height: 350px;
+	/*margin-left: 450px;*/
+	float: left;
+}
+
+.centerheader{
+	margin-top: 50px;
+	margin-bottom: 60px;
+	text-align: center;
+}
+
+
+.inhoud h4{
+	text-align: center;
+	margin-bottom: 50px;
+}
 
 body{
 	margin:0;
-	margin-top: 50px;}
+	margin-top: 50px;
+	padding-top:10px;}
+	padding-top:10px;
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{
 	display:block}
 audio,canvas,progress,video{
@@ -105,21 +146,12 @@ td,th{
 	padding:0}
 
 .nieuwsitems{
-    	column-count: 1;
     }
 
-.kolom li{
-	display: initial;
-}
-
-.nieuwsitems svg:hover{
-    	opacity: 0.5;
-}
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 
 @media (min-width:500px){
 	.nieuwsitems{
-    	column-count: 2;
     }
 }
 
@@ -955,7 +987,8 @@ blockquote{
 	padding:11px 22px;
 
 margin:0 0 22px;
- font-size:17.5px;
+ font-size:18px;
+ color: #0099cc;
  border-left:5px solid #eee}
  blockquote ol:last-child,blockquote p:last-child,blockquote ul:last-child{
  	margin-bottom:0}
@@ -2786,7 +2819,6 @@ padding-right:0}
 
 @media (min-width:768px){
 	.nieuwsitems{
-    	column-count: 3;
     }
 	.container-fluid>.navbar-collapse,.container-fluid>.navbar-header,.container>.navbar-collapse,.container>.navbar-header{}
 }
@@ -4719,6 +4751,9 @@ color:transparent;
 	position: static;
 }
 
+
+
+
 .hero img{
 	width: 100%;
 }
@@ -4813,46 +4848,27 @@ height:50px;
 	margin-right: 1em;
 }
 
-	.kolom .foto {
-		margin: 1%;
-		clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-		font-family: SunAntwerpen;
-	}
-
-	kolom image{
-	}
-
+<<<<<<< HEAD
 	.clip-svg {
         width: 0;
         height: 0;
     }
+=======
+.clip-svg {
+    width: 0;
+    height: 0;
+}
 
-    .auteur{
-    	font-family: georgia;
-    }
+.auteur{
+   	font-family: georgia;
+}
+>>>>>>> 908836debaaa5972d1ca10ebcbb841cb91e61a68
 
-    .nieuws{
-    	text-align: center;
-    }
+.nieuws{
+   	text-align: center;
+}
 
-    .nieuws .titel{
-    	color: #0099cc;
-    	font-size: 1.8em;
-    	text-decoration: none;
-    	line-height: 1em;
-    	margin-bottom: .1em;
-    }
-
-    .nieuws .titel:hover{
-    	text-decoration: underline;
-    }
-
-
-
-    .kolom li{
-    	display: table;
-    }
-
+<<<<<<< HEAD
     table{
     	column-gap: 10px;
     }
@@ -4867,9 +4883,91 @@ height:50px;
     	color: #0099cc;
     }
 
-    .nieuwsbericht img{
-    	width: 100%;
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////
+	NIEUWSBERICHTEN LAY-OUT 
+////////////////////////////////////////////////////////////////////////////////////////////////////// */
+    .nieuws{
+    	text-align: center;
+    }
+=======
+.nieuws .titel{
+   	color: #0099cc;
+   	font-size: 1.8em;
+   	text-decoration: none;
+   	line-height: 1em;
+   	margin-bottom: .1em;
+}
+>>>>>>> 908836debaaa5972d1ca10ebcbb841cb91e61a68
+
+.nieuws .titel:hover{
+   	text-decoration: underline;
+}
+
+.kolom{
+
+<<<<<<< HEAD
+    .nieuwsbericht
+    	padding-left: 0em;
     }
 
-    .nieuwsbericht table{
-    }
+	.cover img:hover{
+    	opacity: 0.5;
+	}
+
+	.artikel{
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.artikel img{
+	}
+
+    .cover img{
+	mask: url(http://puu.sh/w3Xax/4787e376eb.png) no-repeat;
+	height: calc();
+	width: auto;
+=======
+}
+
+.kolom .nieuws{
+	min-height: 15em;
+}
+
+#aangemeldAccount{
+   	padding-left: 1em;
+   	display: ruby;
+   	padding-left: .1em;
+   	color: #0099cc;
+}
+
+.nieuwsbericht img{
+   	width: 100%;
+}
+
+.nieuwsitem img{
+	width: 100%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+>>>>>>> 908836debaaa5972d1ca10ebcbb841cb91e61a68
+}
