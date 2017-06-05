@@ -20,7 +20,7 @@
 			</div>
 			<div class="paragraffotoapart">
 				<p>
-					Hallo, dit is de AP Hogeschool. Hierboven ziet u normaalgezien een foto van de campus op Park Spoor Noord. U kan er vanalle richtingen volgen. Deze tekst is slechts een test.
+					AP is een hogeschool met zo’n 12.000 studenten, 19 HBO5-opleidingen, 24 professionele bachelor- en 8 artistieke opleidingen, verdeeld over 4 departementen en 2 schools of arts. Ook al is de fusiehogeschool nieuw, toch hebben we al een lange geschiedenis, denk maar aan de Koninklijke Academie voor Schone Kunsten en het Koninklijk Conservatorium Antwerpen. 
 				</p>
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 					<h3>Onderwijs en training</h3>
 				</div>
 
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4" style="margin-top: 20px; margin-left: 200px; margin-bottom: 40px;">
+				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4" style="margin-top: 1.6%; margin-left: 16%; margin-bottom: 3.155%;">
 					<div class="foto">
 					<a href="{{ url('school') }}">
 					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,7 @@
 					<h3>Koninklijke academie</h3>
 				</div>
 
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4" style="margin-top: 20px; margin-bottom: 40px;">
+				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4" style="margin-top: 1.6%; margin-bottom: 3.155%;">
 					<div class="foto">
 					<a href="{{ url('school') }}">
 					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +127,7 @@
 
 
 
-<div class="kaartje" style="margin-left: 280px; margin-bottom: 60px;">
+<div class="kaartje">
 
 <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
 <div style='overflow:hidden; height:440px; width:700px;'>
