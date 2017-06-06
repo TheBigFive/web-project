@@ -24,7 +24,7 @@ class NieuwsitemController extends Controller
     public function index()
     {
         $nieuwsitem = new Nieuwsitems();
-        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragenVoorAdmin();
 
         return view('admin/nieuwsitems/nieuwsitems',
             ['alleNieuwsitems' => $alleNieuwsitems
