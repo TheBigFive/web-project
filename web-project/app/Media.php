@@ -26,10 +26,11 @@ class Media extends Model
       ->get();
     }
 
-    public function nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding()
+    public function hoofdafbeeldingaOphalenViaNieuwsitemId($id)
     {
       return DB::table('media')
-      ->where('isHoofdafbeelding', '1')
+      ->where('nieuwsitem_id',$id)
+      ->where('isHoofdafbeelding', true)
       ->get();
     }
 
@@ -77,5 +78,11 @@ class Media extends Model
       ->where('media_id', $id)
       ->delete();
 
+    }
+
+    public function wijzigMedia($id, $media){
+      return DB::table('media')
+      ->where('media_id', $id)
+      ->update($media);
     }
 }

@@ -43,6 +43,9 @@
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
 			     		@if($media->mediaType == "Afbeelding")
 							<img height="60px" src="{{ asset($media->link)  }}">
+							@if($media->isHoofdafbeelding)
+								Ingesteld als hoofdafbeelding
+							@endif
 						@endif
 					@endforeach
 				@else
@@ -71,8 +74,6 @@
     					Artikel Afwijzen en reden meegeven
   					</button>
 				</span>
-				
-
 				<form class="afwijzingForm" action="/admin/nieuwsitems/afwijzen/{{ $geopendeNieuwsitem->nieuwsitem_id }}" method="post">     	
 				 	{!! csrf_field() !!}
 					<div class="form-group">
@@ -109,7 +110,7 @@
 	  					</button>
 					</span>					
 
-					<form class="tagForm" action="/admin/tags/toevoegen/" method="post">     	
+					<form class="afwijzingForm" action="/admin/tags/toevoegen/" method="post">     	
 					 	{!! csrf_field() !!}
 						<div class="form-group">
 						    <label for="titel">Reden van afwijzing</label>
