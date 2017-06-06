@@ -34,7 +34,7 @@
 					</a>
 				</h2>
 				<div class="introtekst">
-					Hallo, dit is de AP Hogeschool. Hierboven ziet u normaalgezien een foto van de campus op Park Spoor Noord. U kan er vanalle richtingen volgen. Deze tekst is slechts een test.
+					AP is een hogeschool met zo’n 12.000 studenten, 19 HBO5-opleidingen, 24 professionele bachelor- en 8 artistieke opleidingen, verdeeld over 4 departementen en 2 schools of arts. Ook al is de fusiehogeschool nieuw, toch hebben we al een lange geschiedenis, denk maar aan de Koninklijke Academie voor Schone Kunsten en het Koninklijk Conservatorium Antwerpen. 
 				</div>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 					</a>
 				</h2>
 				<div class="introtekst">
-					Hallo, dit is de Karel De Grote-Hogeschool. Hierboven ziet u normaalgezien een foto van de nieuwe campus op het Zuid. U kan er vanalle richtingen volgen. Deze tekst is slechts een test.
+					De Karel de Grote Hogeschool is een katholieke hogeschool in Antwerpen met ongeveer 12.000 studenten en ongeveer 1.200 werknemers. De school is genoemd naar Karel de Grote (742-814). Vóór het ontstaan van de hogescholen UCLL en Vives, was de Karel de Grote-hogeschool de derde hogeschool van Vlaanderen na de Hogeschool Gent en de Arteveldehogeschool.
 				</div>
 			</div>
 		</div>
@@ -88,7 +88,7 @@
 					</a>
 				</h2>
 				<div class="introtekst">
-					Hallo, dit is de Thomas More Hogeschool. Hierboven ziet u normaalgezien een foto van de campus in Mechelen. U kan er vanalle richtingen volgen. Deze tekst is slechts een test.
+					Thomas More is een unie van hogescholen binnen de Associatie KU Leuven. Zij biedt studenten innovatief professioneel hoger onderwijs in nauwe samenwerking met het werkveld. Door haar toonaangevend onderwijs, toepassingsgericht onderzoek en dienstverlening vormt zij een motor van regionale ontwikkeling.
 				</div>
 			</div>
 		</div>
