@@ -52,7 +52,7 @@
                 
                 <ul class="dropdown-menu">
                   <ul><a href="{{ route('login') }}">Inloggen</a></ul>
-                  <ul><a href="{{ route('register') }}">Registratiepagina</a></ul>
+                  <ul><a href="{{ route('register') }}">Registreer</a></ul>
                 @else
                 <ul class="dropdown-menu">
                   <li><a href="{{ url('/profiel') }}">Aangemeld als <div id="aangemeldAccount">{{ Auth::user()->voornaam }}</div></a></li>

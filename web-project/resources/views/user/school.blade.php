@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('content')
+       <link rel="stylesheet" href="{{ asset('css/school.css') }}" >
 	<div class="container">
+		<div class="schoolapartcontainer">
+			<div class="kind col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<h1>AP-Hogeschool</h1>
+			</div>
 
-		<div class="schoolapartcontainer cfx">
-
-			<h1>AP-Hogeschool</h1>
-
-			<div class="fotoschoolapart">
+			<div class="kind col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				<a href="https://www.ap.be/">
 					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
 						<defs>
@@ -18,7 +19,7 @@
 					</svg>
 				</a>
 			</div>
-			<div class="paragraffotoapart">
+			<div class="kind col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				<p>
 					Hallo, dit is de AP Hogeschool. Hierboven ziet u normaalgezien een foto van de campus op Park Spoor Noord. U kan er vanalle richtingen volgen. Deze tekst is slechts een test.
 				</p>
