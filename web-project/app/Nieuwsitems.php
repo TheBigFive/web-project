@@ -12,7 +12,9 @@ class Nieuwsitems extends Model
       return DB::table('nieuwsitems')
       ->join('gebruikers', 'nieuwsitems.toegevoegddoor_id', '=', 'gebruikers.id')
       ->join('tags', 'nieuwsitems.tag_id', '=', 'tags.tag_id')
-      ->select('nieuwsitems.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam')
+      ->join('media','nieuwsitems.nieuwsitem_id','=','media.nieuwsitem_id')
+      ->where('isHoofdafbeelding', True)
+      ->select('nieuwsitems.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam','media.link as media_link')
       ->get();
     }
 

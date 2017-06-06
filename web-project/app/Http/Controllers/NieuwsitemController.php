@@ -68,10 +68,8 @@ class NieuwsitemController extends Controller
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
 
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
-
         return view('user/nieuwsberichten',
-            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
+            ['alleNieuwsitems' => $alleNieuwsitems]);
     }
 
     public function ophalenNieuwsitemWelkom()
@@ -80,10 +78,8 @@ class NieuwsitemController extends Controller
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
 
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
-
         return view('welkom',
-            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
+            ['alleNieuwsitems' => $alleNieuwsitems]);
     }
     
     public function openToevoegenNieuwsitem()
@@ -104,6 +100,7 @@ class NieuwsitemController extends Controller
         $publicatieStatus = 'Nog niet gepubliceerd';
         $goedkeuringsstatus = 'Nieuw artikel';
         $datumEnTijd = new DateTime();
+        $isHoofdafbeelding = true;
 
         $media = new Media();
 
@@ -129,7 +126,7 @@ class NieuwsitemController extends Controller
             //Toevoegen van afbeeldingen 
             if(Input::file('afbeeldingen')){
                 $afbeeldingen = Input::file('afbeeldingen');
-                foreach ($afbeeldingen as $afbeelding) {
+                foreach ($afbeeldingen as $key =>  $afbeelding) {
                     $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
                     $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
                     
@@ -140,12 +137,26 @@ class NieuwsitemController extends Controller
                         $filePath = 'img/nieuwsitems/'.$afbeeldingNaam;
                         $mediaType = "Afbeelding";
 
-                        //Afbeelding toevoegen in de database
-                        $media->voegMediaToe([
-                        'link' => $filePath,
-                        'mediaType' => $mediaType,
-                        'nieuwsitem_id' => $nieuwsitem_id
-                        ]);
+                        if($key == 0){
+                            //Afbeelding toevoegen in de database met eerste afbeelding als hoofdafbeelding
+                            $media->voegMediaToe([
+                            'link' => $filePath,
+                            'mediaType' => $mediaType,
+                            'nieuwsitem_id' => $nieuwsitem_id,
+                            'isHoofdafbeelding' => $isHoofdafbeelding 
+                            ]);
+
+                        } else{
+                            //Afbeelding toevoegen in de database
+                            $media->voegMediaToe([
+                            'link' => $filePath,
+                            'mediaType' => $mediaType,
+                            'nieuwsitem_id' => $nieuwsitem_id
+                            ]);
+
+                        }
+
+                        
                     }
                 }
             }
@@ -268,7 +279,35 @@ class NieuwsitemController extends Controller
         return Redirect::back()->withErrors($validator);
     }
 
-    
+    public function stelHoofdafbeeldingIn($id){
+        $media = new Media;
+        $mediaId = $id;
+
+        $inTeStellenMedia =  $media->nieuwsitemMediaOphalenViaId($mediaId)->first();
+        $geopendeNieuwsitemId = $inTeStellenMedia->nieuwsitem_id;
+
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($geopendeNieuwsitemId);
+
+        //De afbeelding die ervoor hoofdafbeelding was, niet meer instellen als hoofdafbeelding
+        foreach ($alleNieuwsitemMedia as $afbeelding) {
+            if($afbeelding->isHoofdafbeelding){
+                $afbeeldingId = $afbeelding->media_id;
+
+                $media->wijzigMedia($afbeeldingId,[
+                    'isHoofdafbeelding' => false
+                    ]);
+            }
+        }
+
+        //Nieuwe afbeelding als hoofdafbeelding instellen
+        $media->wijzigMedia($mediaId,[
+                'isHoofdafbeelding' => true
+            ]);
+
+        return Redirect::back();
+
+
+    }
 
     public function openWijzigingNieuwsitem($id, Request $request){
 
