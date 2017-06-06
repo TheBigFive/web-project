@@ -82,6 +82,9 @@
 						@if($media->mediaType == "Afbeelding")
 							<img height="60px" src="{{ asset($media->link)  }}">
 							<a href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
+							@if($media->isHoofdafbeelding == false)
+								<a href="/admin/nieuwsitems/stelHoofdafbeeldingIn/{{ $media->media_id }}">Instellen als hoofdafbeelding</a>
+							@endif
 						@endif
 					@endforeach
 				@else

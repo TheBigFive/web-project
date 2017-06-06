@@ -11,10 +11,6 @@
 */
 
 Auth::routes();
-Route::get('/', function () {
-    return view('welkom');
-});
-
 Route::get('/', 'NieuwsitemController@ophalenNieuwsitemWelkom');
 Route::get('/home', 'HomeController@index');
 Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
@@ -40,6 +36,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitemAdmin');
 	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
 	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
+	Route::get('admin/nieuwsitems/stelHoofdafbeeldingIn/{id}', 'NieuwsitemController@stelHoofdafbeeldingIn');
 
 	//Testimonials routes
 	Route::get('admin/testimonials','TestimonialController@index');

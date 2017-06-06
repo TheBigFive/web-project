@@ -59,7 +59,6 @@ class TestimonialController extends Controller
             'naam_persoon' => 'required',
             'leeftijd_persoon' => 'required',
             'functie_persoon' => 'required',
-            'beschrijving_persoon' => 'required',
             'tekstvorm_testimonial' => 'required',
         ]);
 
@@ -126,7 +125,7 @@ class TestimonialController extends Controller
                     $videoId = $id[1];
                 } else {   
                     // not an youtube video
-                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
+                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtubelink');
                 }
 
                 //youtubelink toevoegen in de database
