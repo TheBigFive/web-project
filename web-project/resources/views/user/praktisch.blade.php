@@ -2,7 +2,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/onepager.css') }}">
 	<div class="container-fluid praktisch">
-
+	
 	<div id="vervoer" class="hoofdstuk"><!-- start van een hoofdstuk/onderdeel vervoer-->
 		<div class="parallax" style="background-image: url('{{ asset('img/heroimages/hero6.jpg') }}');">
 		<div class="fototekst">

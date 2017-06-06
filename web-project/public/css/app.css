@@ -4692,12 +4692,6 @@ color:transparent;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	.footerRechts{
-		padding-left: 1em;
-	}
-	.footerLinks{
-		padding-left: 1em;
-	}
 }
 
 @media screen and (min-width:1260px){
@@ -4802,24 +4796,6 @@ height:50px;
 .dropdown-menu a:hover,.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover{
 	color: #0099cc;
 	text-decoration: none;
-}
-
-.footer {
-	background-color: #0099cc;
-	height: 100px;
-	bottom: 0;
-	position: relative;
-	color: #ffffff;
-	font-family: SunAntwerpen;
-	margin-top: 1em;
-}
-
-.footer .footerTop{
-	padding-top: 2em;
-}
-
-.footer a{
-	color: yellow;
 }
 
 .dot{

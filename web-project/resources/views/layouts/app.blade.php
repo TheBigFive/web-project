@@ -10,6 +10,7 @@
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sticky-footer.css') }}">
         
 
 
@@ -72,24 +73,16 @@
 
         @yield('content')
         <div class="footer">
-          <table class="inhoud container">
-            <tr>
-              <td class="footerRechts footerTop">
-                GROTE MARKT 15
-              </td>
-              <td class="footerLinks footerTop">
-                TEL +32 3 234 98 76
-              </td>
-            </tr>
-            <tr>  
-              <td class="footerRechts footerOnder">
-                2000 ANTWERPEN
-              </td>
-              <td class="footerLinks footerOnder">
-                <a>INFO@HANDLEIDING.BE</a>
-              </td>
-            </tr>
-          </table>
+        <div class="container">
+          <div class="col-md-4 col-lg-4">
+            <p>GROTE MARKT 15</p>
+            <p>2000 ANTWERPEN</p>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <p>TEL +32 3 234 98 76</p>
+            <a>INFO@HANDLEIDING.BE</a>
+          </div>
+        </div>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/admin.js') }}"></script>
