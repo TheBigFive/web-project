@@ -3,7 +3,7 @@
     background-image: url("{{ asset('img/hero1.jpg') }}");
 
     /* Set a specific height */
-    height: 100vh;
+    height: 50vh;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -18,6 +18,7 @@
 	color: white;
     display: block;
     overflow: auto;
+    min-height: 50vh;
 }
 
 .praktisch .tekst p{
@@ -52,7 +53,7 @@
 	color: white;
 	position: relative;
 	overflow: hidden;
-	top: 70%;
+	top: 20vh;
 }
 
 .footer{
@@ -62,20 +63,25 @@
 /* achtergrondkleuren per hoofdstuk */
 .praktisch #vervoer .tekst{
 	background-color: #0091D2;
+	padding-bottom: 2em;
 }
 
 .praktisch #fuiven .tekst{
 	background-color: #8431A5;
+	padding-bottom: 2em;
 }
 
 .praktisch #parken .tekst{
 	background-color: #6DC24B;
+	padding-bottom: 2em;
 }
 
 .praktisch #sport .tekst{
 	background-color: #0091D2;
+	padding-bottom: 2em;
 }
 
 .praktisch #kot .tekst{
 	background-color: #009883;
+	padding-bottom: 2em;
 }

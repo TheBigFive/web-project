@@ -1,0 +1,15 @@
+@media (min-width: 768px) {
+	.schoolapartcontainer{
+	    display: table;
+	}
+
+	.schoolapartcontainer .kind{
+	    display: table-cell;
+	    vertical-align: middle;
+	    float: none;
+	}
+}
+
+.schoolapartcontainer{
+	    text-align: center;
+}
