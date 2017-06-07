@@ -86,7 +86,6 @@
     </body>
         <script src="{{ asset('js/slideshow.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/admin.js') }}"></script>
         <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
         <script src="{{ asset('js/datumFirefox.js') }}"></script>   
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('admincontent')
 
-<div class="gebruikerswrapper">
+<div class="gebruikerswrapper bevatMap">
 
 	<h2>Bezienswaardigheden Toevoegen</h2>
 	<form action="/admin/bezienswaardigheden/toevoegen" enctype="multipart/form-data" method="post">
