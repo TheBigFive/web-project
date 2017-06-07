@@ -46,7 +46,8 @@
                 </li>
                 <li><a href="#contact">Verhalen</a></li>
                 <li><a href="{{ url('nieuwsartikels') }}">Nieuws</a></li>
-                <li><a href="{{ url('nieuwsberichten') }}"><i class="fa fa-gamepad" aria-hidden="true"></i></a></li>
+                <li><a href="{{ url('spel') }}"><i class="fa fa-gamepad" aria-hidden="true"></i></a></li>
+
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle icon" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="caret"></span></a>
                 @if (Auth::guest())

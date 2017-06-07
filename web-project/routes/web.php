@@ -20,6 +20,7 @@ Route::get('praktisch','PraktischController@index');
 Route::get('scholen', 'ScholenController@ophalenSchool');
 Route::get('school', 'ScholenController@openSchool');
 /*Route::get('school/{id}', 'ScholenController@openSchool');*/
+Route::get('spel','SpelController@index');
 
 Route::get('nieuwsartikels/{id}','NieuwsitemController@openNieuwsartikel');
 

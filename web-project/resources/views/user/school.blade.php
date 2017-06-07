@@ -131,7 +131,7 @@
 <div class="kaartje">
 
 <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-<div style='overflow:hidden; height:440px; width:700px;'>
+<div style='overflow:hidden; height:100%; width:100%;'>  <!--heigth:440px; width:700px;-->
 	<div id='gmap_canvas' style='height:440px;width:700px;'></div>
 	<style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
 	</div>
