@@ -1,6 +1,5 @@
 .heroafbeelding{
 	width: 100%;
-	min-height: 40vh;
 	overflow: hidden;
 	display: inline-block;
 	vertical-align: center;
@@ -12,12 +11,11 @@
     margin: auto;
 }
 
-.geopendNieuwsitem .heroafbeelding .titel{
-	bottom: -100%;
-	top: -100%;
-	margin: auto;
-	text-align: center;
+.geopendNieuwsitem .titel{
 	color: #0099cc;
+	font-family: Antwerpen;
+	top: 20em;
+	text-align: center;
 }
 
 .extraNieuwsitems h2{
@@ -32,14 +30,51 @@
 	font-size: 1.2em;
 }
 
+.geopendNieuwsitem .datum{
+	font-family: georgia;
+}
+
+.geopendNieuwsitem h2{
+	font-family: SunAntwerpen;
+	font-size: 1.6em;
+}
+
+.geopendNieuwsitem .tag{
+	font-size: 1em;
+	margin-bottom: 1em;
+}
+
+.geopendNieuwsitem .tag .tagbutton{
+	background-color: #0099cc;
+	color: white;
+	border: none;
+	text-align: center;
+	cursor: pointer;
+	padding: 1em;
+}
+
+.afbeeldingenNieuwsitem img{
+	width: 100%;
+	margin-top: 1em;
+}
+
+.extraNieuwsitems{
+	margin-bottom: 7em;
+}
+
 @media (min-width: 768px) {
 	.heroafbeelding img{
 	top:-100%;
 	bottom:-100%;
 	position: absolute;
+	min-height: 40vh;
 	}
 
 	.heroafbeelding{
 		height: 60vh;
+	}
+
+	.inhoudNieuwsitem{
+		margin-bottom: 7em;
 	}
 }
