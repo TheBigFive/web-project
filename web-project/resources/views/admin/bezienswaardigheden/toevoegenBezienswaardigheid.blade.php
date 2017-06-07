@@ -17,7 +17,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="beschrijving">Beschrijving</label>
-		    <textarea rows="5" name="beschrijving" class="form-control" placeholder="Typ hier de beschrijving van de bezienswaardigheid"></textarea>
+		    <textarea rows="5" name="beschrijving" class="form-control summernote" placeholder="Typ hier de beschrijving van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('beschrijving'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('beschrijving') }}</strong>
