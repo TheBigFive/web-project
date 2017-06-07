@@ -66,12 +66,15 @@
 		</div>
 		<div class="form-group">
 		    <label for="adres">Adres</label>
-		    <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
+		    <div id="map">
+		    	
+		    </div>
+		    <!-- <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('adres'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('adres') }}</strong>
 			    </span>
-			@endif
+			@endif -->
 		</div>
 		
 		<div class="form-group">

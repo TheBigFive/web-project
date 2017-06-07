@@ -103,6 +103,11 @@
 				</div>
 			<div class="col-md-4">
 				<h4>Afbeeldingen</h4>
+				@if( session()->has('hoofdafbeeldingmelding'))
+					<div class="alert alert-danger">
+					    {{ session()->get('hoofdafbeeldingmelding') }}
+					</div>							    
+				@endif
 				@if($aantalAfbeeldingen > 0 )
 					@foreach($alleTestimonialMedia as $media)
 						@if($media->mediaType == "Afbeelding")

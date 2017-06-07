@@ -33,7 +33,7 @@
 		@if($key<3)
 		<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<div class="foto">
-				<a href="nieuwsbericht/{{ $nieuwsitem->nieuwsitem_id }}">
+				<a href="nieuwsartikels/{{ $nieuwsitem->nieuwsitem_id }}">
 					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
 						<defs>
 					    	<pattern id="img{{ $nieuwsitem->nieuwsitem_id }}" patternUnits="userSpaceOnUse" width="100" height="100">
@@ -52,7 +52,7 @@
 					{{ $nieuwsitem->toegevoegddoor_voornaam }} {{ $nieuwsitem->toegevoegddoor_achternaam }}
 				</div>
 				<div class="titel">
-					<a href="nieuwsbericht/{{ $nieuwsitem->nieuwsitem_id }}">
+					<a href="nieuwsartikels/{{ $nieuwsitem->nieuwsitem_id }}">
 						{{ $nieuwsitem->titel }}
 					</a>
 				</div>

@@ -20,8 +20,15 @@ $(document).ready(function() {
     $('.afwijzingForm').hide();
     $('#tagForm').hide();
 
+    new GMaps({
+	  el: '#admin-map',
+	  lat: 51.2154075,
+	  lng: 4.409795,
+	  zoom: 12
+	});	
 
 });
+
 
 //Tabs gebruikers in het adminpaneel
 $('.nav-tabs a').click(function (e) {

@@ -31,36 +31,7 @@ class NieuwsitemController extends Controller
             ]);
     }
 
-    //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
-    public function openNieuwsitem($id){
-
-       
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemId = $id;
-        $aantalAfbeeldingen = 0;
-        $aantalVideos = 0;
-
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
-
-        $media = new Media;
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
-
-        foreach ($alleNieuwsitemMedia as $media) {
-            if($media->mediaType == "Afbeelding"){
-                $aantalAfbeeldingen++;
-            }
-
-            if($media->mediaType == "Video"){
-                $aantalVideos++;
-            }
-        }
-
-        return view('user/nieuwsbericht', 
-            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos]);
-    }
+    
 
     public function ophalenNieuwsitem()
     {
@@ -76,29 +47,17 @@ class NieuwsitemController extends Controller
     {
         $nieuwsitem = new Nieuwsitems();
         $nieuwsitemId = $id;
-        $aantalAfbeeldingen = 0;
-        $aantalVideos = 0;
-
         $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
 
         $media = new Media;
         $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
 
-        foreach ($alleNieuwsitemMedia as $media) {
-            if($media->mediaType == "Afbeelding"){
-                $aantalAfbeeldingen++;
-            }
-
-            if($media->mediaType == "Video"){
-                $aantalVideos++;
-            }
-        }
 
         return view('user/nieuwsartikel', 
             ['geopendeNieuwsitem' => $geopendeNieuwsitem,
             'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos]);    }
+            ]);    
+    }
 
     public function ophalenNieuwsitemWelkom()
     {

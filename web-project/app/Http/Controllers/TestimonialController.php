@@ -32,6 +32,25 @@ class TestimonialController extends Controller
         
     }
     
+    //Deze functie wordt uitgevoerd bij het openen van de pagina testimonial
+    public function openTestimonial($id){
+
+       
+        $testimonial = new Testimonials();
+        $testimonialId = $id;
+
+        $geopendeTestimonial = $testimonial->testimonialOpvragenViaId($testimonialId)->first();
+
+        $media = new Media;
+        $alleTestimonialMedia = $media->testimonialMediaOphalenViaTestimonialId($testimonialId);
+
+
+        return view('user/testimonial', 
+            ['geopendeTestimonial' => $geopendeTestimonial,
+            'alleTestimonialMedia' => $alleTestimonialMedia
+            ]);
+    }
+
     public function openToevoegenTestimonial()
     {
         $tag = new Tags();
@@ -250,7 +269,7 @@ class TestimonialController extends Controller
         
     }
 
-    public function openTestimonial($id, Request $request){
+    public function openTestimonialAdmin($id, Request $request){
 
         $testimonial = new Testimonials();
         $testimonialId = $id;
