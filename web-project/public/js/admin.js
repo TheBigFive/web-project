@@ -91,7 +91,7 @@ GMaps.on('click', map.map, function(event) {
  $('#locatieKnop').click(function(e){
         e.preventDefault();
 	GMaps.geocode({
-	  adres: $('#locatie-text').val(),
+	  address: $('#locatie-text').val(),
 	  callback: function(results, status) {
 	    if (status == 'OK') {
 	      var latlng = results[0].geometry.location;
@@ -107,4 +107,4 @@ GMaps.on('click', map.map, function(event) {
 	    }
 	  }
 	});
-}
+});

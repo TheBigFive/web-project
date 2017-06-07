@@ -343,7 +343,6 @@ class NieuwsitemController extends Controller
 
         $validated = Validator::make($request->all(), [
           'titel' => 'required',
-          'introtekst' => 'required',
           'artikel' => 'required',
         ]);
 
