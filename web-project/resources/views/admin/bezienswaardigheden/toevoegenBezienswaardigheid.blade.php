@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('admincontent')
 
-<div class="gebruikerswrapper bevatMap">
+<div class="gebruikerswrapper bevatNieuweBezienswaardigheidMap">
 
 	<h2>Bezienswaardigheden Toevoegen</h2>
 	<form action="/admin/bezienswaardigheden/toevoegen" enctype="multipart/form-data" method="post">
@@ -66,17 +66,11 @@
 		</div>
 		<div class="form-group">
 		    <label for="adres">Locatie</label>
-		    <p>Kies een locatie op de map of geef het adres in</p>
-		    <input type="text" id="locatie-text" placeholder="Typ hier het adres" class="form-control"/><br/>
-		    <button id="locatieKnop" class="btn btn-primary">Zoek locatie op</button>
-		    <div id="admin-map"></div>
-		    <input id="locatie-input" type="hidden" name="locatie">
-		    <!-- <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
-		    @if ($errors->has('adres'))
-			    <span class="help-block">
-			        <strong>{{ $errors->first('adres') }}</strong>
-			    </span>
-			@endif -->
+		    <p>Geef het volledige adres in van de bezienswaardigheid</p>
+		    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control"/><br/>
+		    <button id="locatieBezienswaardigheidKnop" class="btn btn-primary">Zoek locatie op</button>
+		    <div id="voegBezienswaardigheidToe-map"></div>
+		    <input id="locatie-input" type="hidden" name="coordinaten">
 		</div>
 		
 		<div class="form-group">

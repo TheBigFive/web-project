@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('admincontent')
-<div class="gebruikerswrapper">
+<div class="gebruikerswrapper bevatOpenBezienswaardigheidMap">
 
 	<h2>Bezienswaardigheid: {{ $geopendeBezienswaardigheid->naam }}</h2>
 
@@ -17,7 +17,27 @@
 			    <h4>Bezienswaardigheid</h4>    
 				<p>{{ $geopendeBezienswaardigheid->naam }}</p>
 				<h4>Beschrijving</h4>
-				<p>{{ $geopendeBezienswaardigheid->beschrijving }}</p>
+				<p>{!! $geopendeBezienswaardigheid->beschrijving !!}</p>
+				<h4>Adres</h4>
+				<p id="adres">{!! $geopendeBezienswaardigheid->adres !!}</p>
+				<div></div>
+				<input id="coordinaten" type="hidden" name="coordinaten" value="{{ $geopendeBezienswaardigheid->coordinaten }}">
+				@if ($geopendeBezienswaardigheid->openingsuren)
+					<h4>Openingsuren</h4>
+					<p>{!! $geopendeBezienswaardigheid->openigngsuren !!}</p>
+				@endif
+				@if ($geopendeBezienswaardigheid->vervoer)
+					<h4>Info vervoer</h4>
+					<p>{!! $geopendeBezienswaardigheid->vervoer !!}</p>
+				@endif
+				@if ($geopendeBezienswaardigheid->kostprijs)
+					<h4>Kostprijs</h4>
+					<p>{!! $geopendeBezienswaardigheid->kostprijs !!}</p>
+				@endif
+				@if ($geopendeBezienswaardigheid->contact)
+					<h4>Contact</h4>
+					<p>{!! $geopendeBezienswaardigheid->contact !!}</p>
+				@endif
 				<h4>Toegevoegd door</h4>
 				<p>{{ $geopendeBezienswaardigheid->toegevoegddoor_voornaam }} {{ $geopendeBezienswaardigheid->toegevoegddoor_achternaam }}</p>
 				<h4>Goedkeuringsstatus:</h4>

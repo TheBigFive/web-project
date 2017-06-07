@@ -20,42 +20,17 @@ $(function(){
     $('.afwijzingForm').hide();
     $('#tagForm').hide();
 
-
-
-
-  	if($('.gebruikerswrapper').hasClass('bevatMap')){
+  	if($('.gebruikerswrapper').hasClass('bevatNieuweBezienswaardigheidMap')){
 	    var thereIsAMarker = false;
 		var map = new GMaps({
-		  el: '#admin-map',
+		  el: '#voegBezienswaardigheidToe-map',
 		  lat: 51.2154075,
 		  lng: 4.409795,
 		  zoom: 12
 		});
 
-		GMaps.on('click', map.map, function(event) {
 
-		  if(thereIsAMarker){
-		    map.removeMarkers();
-		  }
-
-		  var index = map.markers.length;
-		  var lat = event.latLng.lat();
-		  var lng = event.latLng.lng();
-
-		  var locatie_input = document.getElementById("locatie-input");
-		  locatie_input.value = lat + "," + lng;
-
-		  map.addMarker({
-		    lat: lat,
-		    lng: lng,
-		  });
-
-		  thereIsAMarker = true;
-
-
-		});
-
-		$('#locatieKnop').click(function(e){
+		$('#locatieBezienswaardigheidKnop').click(function(e){
 			if(thereIsAMarker){
 			    map.removeMarkers();
 			}
@@ -70,13 +45,36 @@ $(function(){
 			      locatie_input.value = latlng.lat() + "," + latlng.lng();	      
 			      map.addMarker({
 			        lat: latlng.lat(),
-			        lng: latlng.lng()
+			        lng: latlng.lng(),
+			        title: $('#locatie-text').val(),
+			        infoWindow: {
+					  content: $('#locatie-text').val()
+					}
 			      });
 			    }
 			  }
 			});
 		});
 
+  	}
+
+  	if($('.gebruikerswrapper').hasClass('bevatOpenBezienswaardigheidMap')){
+
+  		var locatie = coordinaten.value.split(",");
+  		var map = new GMaps({
+			el: '#openBezienswaardigheidToe-map',
+			lat: locatie[0],
+			lng: locatie[1],
+		});
+
+		map.addMarker({
+		  lat: locatie[0],
+			lng: locatie[1],
+			title: $('#adres').val(),
+			infoWindow: {
+				content: $('#adres').val()
+			}
+		});
   	}
 });
 

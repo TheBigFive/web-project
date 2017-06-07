@@ -1,4 +1,9 @@
-#admin-map {
-  width: 100%;
+#voegBezienswaardigheidToe-map {
+  width: 75%;
+  height: 400px;
+  background-color: #CCC; }
+
+#openBezienswaardigheidToe-map {
+  width: 75%;
   height: 400px;
   background-color: #CCC; }

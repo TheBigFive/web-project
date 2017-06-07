@@ -80,6 +80,8 @@ class BezienswaardigheidController extends Controller
         $validator = Validator::make($request->all(), [
           'naam' => 'required',
           'beschrijving' => 'required',
+          'adres' => 'required'
+
         ]);
 
         if($validator->passes()){
@@ -89,7 +91,8 @@ class BezienswaardigheidController extends Controller
                 'openingsuren' => $request->input('openingsuren'),
                 'vervoer' => $request->input('vervoer'),
                 'kostprijs' => $request->input('kostprijs'),
-                'adres' => $request->input('adres'),
+                'adres' => $request->input('locatie-text'),
+                'coordinaten' => $request->input('coordinaten'),
                 'contact' => $request->input('contact'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'publicatieStatus' => $publicatieStatus,
@@ -106,7 +109,7 @@ class BezienswaardigheidController extends Controller
 
         }
 
-        return redirect('/admin/bezienswaardigheden/')->withErrors($validator);
+        return redirect('/admin/bezienswaardigheden/open/'.$bezienswaardigheid_id)->withErrors($validator);
 
     }
 
