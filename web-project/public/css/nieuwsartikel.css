@@ -77,4 +77,8 @@
 	.inhoudNieuwsitem{
 		margin-bottom: 7em;
 	}
+
+	.geopendNieuwsitem .titel{
+		text-align: left;
+	}
 }

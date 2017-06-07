@@ -73,22 +73,20 @@
 
         @yield('content')
         
+        <div class="footer">
+          <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+              <p>GROTE MARKT 15</p>
+              <p>2000 ANTWERPEN</p>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+              <p>TEL +32 3 234 98 76</p>
+              <a>INFO@HANDLEIDING.BE</a>
+            </div>
+          </div>
+    </body>
+        <script src="{{ asset('js/slideshow.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/admin.js') }}"></script>
-        <script src="{{ asset('js/slideshow.js') }}"></script>
         <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
-        <script src="{{ asset('js/datumFirefox.js') }}"></script>
-    </body>
-    <footer>
-    <div class="footer">
-          <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-            <p>GROTE MARKT 15</p>
-            <p>2000 ANTWERPEN</p>
-          </div>
-          <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-            <p>TEL +32 3 234 98 76</p>
-            <a>INFO@HANDLEIDING.BE</a>
-          </div>
-        </div>
-    </footer>
+        <script src="{{ asset('js/datumFirefox.js') }}"></script>   
 </html>

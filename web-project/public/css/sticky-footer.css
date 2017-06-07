@@ -22,5 +22,8 @@ body {
 }
 
 .footer p{
-  margin-top: 1em;
+}
+
+body{
+  padding-bottom: 1em;
 }
