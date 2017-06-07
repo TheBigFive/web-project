@@ -24,6 +24,7 @@ Route::get('praktisch','PraktischController@index');
 Route::get('scholen', 'ScholenController@ophalenSchool');
 Route::get('school', 'ScholenController@openSchool');
 /*Route::get('school/{id}', 'ScholenController@openSchool');*/
+Route::get('spel','SpelController@index');
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
