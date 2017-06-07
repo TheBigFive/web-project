@@ -1,0 +1,45 @@
+.heroafbeelding{
+	width: 100%;
+	min-height: 40vh;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: center;
+}
+
+.heroafbeelding img{
+	width: 100%;
+    left:0; right: 0;
+    margin: auto;
+}
+
+.geopendNieuwsitem .heroafbeelding .titel{
+	bottom: -100%;
+	top: -100%;
+	margin: auto;
+	text-align: center;
+	color: #0099cc;
+}
+
+.extraNieuwsitems h2{
+	text-align: center;
+}
+
+.extraNieuwsitems p{
+	margin-bottom: 5px;
+}
+
+.geopendNieuwsitem p{
+	font-size: 1.2em;
+}
+
+@media (min-width: 768px) {
+	.heroafbeelding img{
+	top:-100%;
+	bottom:-100%;
+	position: absolute;
+	}
+
+	.heroafbeelding{
+		height: 60vh;
+	}
+}
