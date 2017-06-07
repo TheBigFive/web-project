@@ -174,9 +174,8 @@
       
 
       <script src="{{ asset('vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
-
-
-
+      <script  type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBShkDsUqnZDbfk2mnY2zXDQgck-U0NDEo"
+  ></script>
       <script src="{{ asset('dist/js/init.js') }}"></script>
       <script src="{{ asset('dist/js/dashboard-data.js') }}"></script>
 
@@ -256,8 +255,6 @@
       <!-- Summernote zorgt voor toolbar in textarea's-->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
       <script src="{{ asset('js/summernote-nl-NL.js') }}"></script>
-      <script  type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBShkDsUqnZDbfk2mnY2zXDQgck-U0NDEo"
-  ></script>
       <!-- <script src="{{ asset('js/googlemaps.js') }}"></script> -->
       <script src="{{ asset('js/gmaps.js') }}"></script>
       <!-- Bevat summernote, tabs gebruikers -->
