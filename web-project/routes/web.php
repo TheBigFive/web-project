@@ -11,20 +11,21 @@
 */
 
 Auth::routes();
-Route::get('/', function () {
-    return view('welkom');
-});
-
 Route::get('/', 'NieuwsitemController@ophalenNieuwsitemWelkom');
 Route::get('/home', 'HomeController@index');
-Route::get('nieuwsberichten','NieuwsitemController@ophalenNieuwsitem');
-Route::get('nieuwsbericht/{id}','NieuwsitemController@openNieuwsitem');
+Route::get('nieuwsartikels','NieuwsitemController@ophalenNieuwsitem');
+Route::get('testimonials/{id}','TestimonialController@openTestimonial');
 
 Route::get('praktisch','PraktischController@index');
 Route::get('scholen', 'ScholenController@ophalenSchool');
 Route::get('school', 'ScholenController@openSchool');
 /*Route::get('school/{id}', 'ScholenController@openSchool');*/
 Route::get('spel','SpelController@index');
+
+Route::get('nieuwsartikels/{id}','NieuwsitemController@openNieuwsartikel');
+
+
+
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
@@ -41,6 +42,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/nieuwsitems/open/{id}', 'NieuwsitemController@openNieuwsitemAdmin');
 	Route::get('admin/nieuwsitems/verwijderMedia/{id}', 'NieuwsitemController@verwijderMediaNieuwsitem');
 	Route::post('admin/nieuwsitems/toevoegenMedia/{id}', 'NieuwsitemController@toevoegenMediaNieuwsitem');
+	Route::get('admin/nieuwsitems/stelHoofdafbeeldingIn/{id}', 'NieuwsitemController@stelHoofdafbeeldingIn');
 
 	//Testimonials routes
 	Route::get('admin/testimonials','TestimonialController@index');
@@ -48,9 +50,10 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::post('admin/testimonials/toevoegen','TestimonialController@voegTestimonialToe');
 	Route::get('admin/testimonials/wijzig/{id}', 'TestimonialController@openWijzigingTestimonial');
 	Route::post('admin/testimonials/wijzig/{id}', 'TestimonialController@wijzigTestimonial');
-	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonial');
+	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonialAdmin');
 	Route::post('admin/testimonials/toevoegenMedia/{id}', 'TestimonialController@toevoegenMediaTestimonial');
 	Route::get('admin/testimonials/verwijderMedia/{id}', 'TestimonialController@verwijderMediaTestimonial');
+	Route::get('admin/testimonials/stelHoofdafbeeldingIn/{id}', 'TestimonialController@stelHoofdafbeeldingIn');
 
 	//Bezienswaardigheden
 	Route::get('admin/bezienswaardigheden','BezienswaardigheidController@index');

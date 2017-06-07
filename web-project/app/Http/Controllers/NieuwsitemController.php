@@ -24,43 +24,14 @@ class NieuwsitemController extends Controller
     public function index()
     {
         $nieuwsitem = new Nieuwsitems();
-        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
+        $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragenVoorAdmin();
 
         return view('admin/nieuwsitems/nieuwsitems',
             ['alleNieuwsitems' => $alleNieuwsitems
             ]);
     }
 
-    //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
-    public function openNieuwsitem($id){
-
-       
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemId = $id;
-        $aantalAfbeeldingen = 0;
-        $aantalVideos = 0;
-
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
-
-        $media = new Media;
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
-
-        foreach ($alleNieuwsitemMedia as $media) {
-            if($media->mediaType == "Afbeelding"){
-                $aantalAfbeeldingen++;
-            }
-
-            if($media->mediaType == "Video"){
-                $aantalVideos++;
-            }
-        }
-
-        return view('user/nieuwsbericht', 
-            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos]);
-    }
+    
 
     public function ophalenNieuwsitem()
     {
@@ -68,10 +39,24 @@ class NieuwsitemController extends Controller
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
 
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
-
         return view('user/nieuwsberichten',
-            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
+            ['alleNieuwsitems' => $alleNieuwsitems]);
+    }
+
+    public function openNieuwsartikel($id)
+    {
+        $nieuwsitem = new Nieuwsitems();
+        $nieuwsitemId = $id;
+        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
+
+        $media = new Media;
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+
+
+        return view('user/nieuwsartikel', 
+            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
+            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
+            ]);    
     }
 
     public function ophalenNieuwsitemWelkom()
@@ -80,10 +65,8 @@ class NieuwsitemController extends Controller
         $nieuwsitem = new Nieuwsitems();
         $alleNieuwsitems = $nieuwsitem->alleNieuwsitemsOpvragen();
 
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemIsHoofdafbeelding();
-
         return view('welkom',
-            ['alleNieuwsitems' => $alleNieuwsitems,'alleNieuwsitemMedia' => $alleNieuwsitemMedia]);
+            ['alleNieuwsitems' => $alleNieuwsitems]);
     }
     
     public function openToevoegenNieuwsitem()
@@ -109,8 +92,8 @@ class NieuwsitemController extends Controller
 
         $validator = Validator::make($request->all(), [
           'titel' => 'required',
-          'introtekst' => 'required',
           'artikel' => 'required',
+          'afbeeldingen' => 'required'
         ]);
 
 
@@ -129,7 +112,7 @@ class NieuwsitemController extends Controller
             //Toevoegen van afbeeldingen 
             if(Input::file('afbeeldingen')){
                 $afbeeldingen = Input::file('afbeeldingen');
-                foreach ($afbeeldingen as $afbeelding) {
+                foreach ($afbeeldingen as $key =>  $afbeelding) {
                     $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
                     $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
                     
@@ -140,12 +123,27 @@ class NieuwsitemController extends Controller
                         $filePath = 'img/nieuwsitems/'.$afbeeldingNaam;
                         $mediaType = "Afbeelding";
 
-                        //Afbeelding toevoegen in de database
-                        $media->voegMediaToe([
-                        'link' => $filePath,
-                        'mediaType' => $mediaType,
-                        'nieuwsitem_id' => $nieuwsitem_id
-                        ]);
+                        if($key == 0){
+                            //Afbeelding toevoegen in de database met eerste afbeelding als hoofdafbeelding
+                            $isHoofdafbeelding = true;
+                            $media->voegMediaToe([
+                            'link' => $filePath,
+                            'mediaType' => $mediaType,
+                            'nieuwsitem_id' => $nieuwsitem_id,
+                            'isHoofdafbeelding' => $isHoofdafbeelding 
+                            ]);
+
+                        } else{
+                            //Afbeelding toevoegen in de database
+                            $media->voegMediaToe([
+                            'link' => $filePath,
+                            'mediaType' => $mediaType,
+                            'nieuwsitem_id' => $nieuwsitem_id
+                            ]);
+
+                        }
+
+                        
                     }
                 }
             }
@@ -170,7 +168,7 @@ class NieuwsitemController extends Controller
                     $videoId = $id[1];
                 } else {   
                     // not an youtube video
-                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youutbelink');
+                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
                 }
 
                 //youtubelink toevoegen in de database
@@ -193,6 +191,12 @@ class NieuwsitemController extends Controller
         $media = new Media();
         $opgehaaldeMedia = $media->nieuwsitemMediaOphalenViaId($mediaId)->first();
         if($opgehaaldeMedia->mediaType == "Afbeelding"){
+            if($opgehaaldeMedia->isHoofdafbeelding){
+
+                return Redirect::back()->with('hoofdafbeeldingmelding','Een hoofdafbeelding kan niet verwijderd worden. Stel eerst een ander afbeelding in als hoofdafbeelding.');
+            }
+
+
             $filePath = $media->nieuwsitemMediaOphalenViaId($mediaId)->first()->link;
             $media->verwijderMedia($mediaId);
             unlink($filePath);
@@ -268,7 +272,35 @@ class NieuwsitemController extends Controller
         return Redirect::back()->withErrors($validator);
     }
 
-    
+    public function stelHoofdafbeeldingIn($id){
+        $media = new Media;
+        $mediaId = $id;
+
+        $inTeStellenMedia =  $media->nieuwsitemMediaOphalenViaId($mediaId)->first();
+        $geopendeNieuwsitemId = $inTeStellenMedia->nieuwsitem_id;
+
+        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($geopendeNieuwsitemId);
+
+        //De afbeelding die ervoor hoofdafbeelding was, niet meer instellen als hoofdafbeelding
+        foreach ($alleNieuwsitemMedia as $afbeelding) {
+            if($afbeelding->isHoofdafbeelding){
+                $afbeeldingId = $afbeelding->media_id;
+
+                $media->wijzigMedia($afbeeldingId,[
+                    'isHoofdafbeelding' => false
+                    ]);
+            }
+        }
+
+        //Nieuwe afbeelding als hoofdafbeelding instellen
+        $media->wijzigMedia($mediaId,[
+                'isHoofdafbeelding' => true
+            ]);
+
+        return Redirect::back();
+
+
+    }
 
     public function openWijzigingNieuwsitem($id, Request $request){
 
@@ -311,7 +343,6 @@ class NieuwsitemController extends Controller
 
         $validated = Validator::make($request->all(), [
           'titel' => 'required',
-          'introtekst' => 'required',
           'artikel' => 'required',
         ]);
 

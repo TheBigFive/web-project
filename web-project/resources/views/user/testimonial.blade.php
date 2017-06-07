@@ -14,9 +14,9 @@
 				<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img)"/>
 			</svg>
 			<div class="datum">
-				{{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}
+				{{ date('d-m-Y', strtotime($geopendeTestimonial->toegevoegdop)) }}
 			</div>
-			@foreach($alleNieuwsitemMedia as $media)
+			@foreach($alleTestimonialMedia as $media)
 				@if($media->mediaType == "Afbeelding")
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 miniatuurAfbeelding">
 					<img src="{{ asset($media->link)  }}" >
@@ -25,9 +25,8 @@
 			@endforeach
 		</div>
 		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
-			<h1>{!! $geopendeNieuwsitem->titel !!}</h1>
-			<b>{!! $geopendeNieuwsitem->introtekst !!}</b>
-			<p>{!! $geopendeNieuwsitem->artikel !!}</p>
+			<h1>{!! $geopendeTestimonial->titel !!}</h1>
+			<p>{!! $geopendeTestimonial->tekstvorm_testimonial !!}</p>
 			
 		</div><!-- 
 		<div class="col-lg-1">

@@ -65,13 +65,18 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="adres">Adres</label>
-		    <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
+		    <label for="adres">Locatie</label>
+		    <p>Kies een locatie op de map of geef het adres in</p>
+		    <input type="text" id="locatie-text" placeholder="Typ hier het adres" class="form-control"/><br/>
+		    <button id="locatieKnop" class="btn btn-primary">Zoek locatie op</button>
+		    <div id="admin-map"></div>
+		    <input id="locatie-input" type="hidden" name="locatie">
+		    <!-- <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('adres'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('adres') }}</strong>
 			    </span>
-			@endif
+			@endif -->
 		</div>
 		
 		<div class="form-group">
@@ -90,5 +95,6 @@
 	</form>
 
 </div>
+
 
 @endsection

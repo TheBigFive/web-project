@@ -103,11 +103,19 @@
 				</div>
 			<div class="col-md-4">
 				<h4>Afbeeldingen</h4>
+				@if( session()->has('hoofdafbeeldingmelding'))
+					<div class="alert alert-danger">
+					    {{ session()->get('hoofdafbeeldingmelding') }}
+					</div>							    
+				@endif
 				@if($aantalAfbeeldingen > 0 )
 					@foreach($alleTestimonialMedia as $media)
 						@if($media->mediaType == "Afbeelding")
 							<img height="60px" src="{{ asset($media->link)  }}">
 							<a href="/admin/testimonials/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
+							@if($media->isHoofdafbeelding == false)
+								<a href="/admin/testimonials/stelHoofdafbeeldingIn/{{ $media->media_id }}">Instellen als hoofdafbeelding</a>
+							@endif
 						@endif
 					@endforeach
 				@else

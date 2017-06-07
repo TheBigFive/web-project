@@ -77,16 +77,25 @@
 			</div>
 			<div class="col-md-4">
 				<h4>Afbeeldingen</h4>
+				@if( session()->has('hoofdafbeeldingmelding'))
+					<div class="alert alert-danger">
+					    {{ session()->get('hoofdafbeeldingmelding') }}
+					</div>							    
+				@endif
 				@if($aantalAfbeeldingen > 0 )
 					@foreach($alleNieuwsitemMedia as $media)
 						@if($media->mediaType == "Afbeelding")
 							<img height="60px" src="{{ asset($media->link)  }}">
 							<a href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
+							@if($media->isHoofdafbeelding == false)
+								<a href="/admin/nieuwsitems/stelHoofdafbeeldingIn/{{ $media->media_id }}">Instellen als hoofdafbeelding</a>
+							@endif
 						@endif
 					@endforeach
 				@else
 					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
 				@endif
+				
 				<h4>Video</h4>
 				@if($aantalVideos > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
