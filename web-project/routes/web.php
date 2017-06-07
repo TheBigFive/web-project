@@ -47,6 +47,7 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/testimonials/open/{id}', 'TestimonialController@openTestimonial');
 	Route::post('admin/testimonials/toevoegenMedia/{id}', 'TestimonialController@toevoegenMediaTestimonial');
 	Route::get('admin/testimonials/verwijderMedia/{id}', 'TestimonialController@verwijderMediaTestimonial');
+	Route::get('admin/testimonials/stelHoofdafbeeldingIn/{id}', 'TestimonialController@stelHoofdafbeeldingIn');
 
 	//Bezienswaardigheden
 	Route::get('admin/bezienswaardigheden','BezienswaardigheidController@index');

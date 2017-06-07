@@ -100,7 +100,6 @@ class NieuwsitemController extends Controller
         $publicatieStatus = 'Nog niet gepubliceerd';
         $goedkeuringsstatus = 'Nieuw artikel';
         $datumEnTijd = new DateTime();
-        $isHoofdafbeelding = true;
 
         $media = new Media();
 
@@ -108,6 +107,7 @@ class NieuwsitemController extends Controller
           'titel' => 'required',
           'introtekst' => 'required',
           'artikel' => 'required',
+          'afbeeldingen' => 'required'
         ]);
 
 
@@ -139,6 +139,7 @@ class NieuwsitemController extends Controller
 
                         if($key == 0){
                             //Afbeelding toevoegen in de database met eerste afbeelding als hoofdafbeelding
+                            $isHoofdafbeelding = true;
                             $media->voegMediaToe([
                             'link' => $filePath,
                             'mediaType' => $mediaType,
@@ -181,7 +182,7 @@ class NieuwsitemController extends Controller
                     $videoId = $id[1];
                 } else {   
                     // not an youtube video
-                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youutbelink');
+                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
                 }
 
                 //youtubelink toevoegen in de database
@@ -204,6 +205,12 @@ class NieuwsitemController extends Controller
         $media = new Media();
         $opgehaaldeMedia = $media->nieuwsitemMediaOphalenViaId($mediaId)->first();
         if($opgehaaldeMedia->mediaType == "Afbeelding"){
+            if($opgehaaldeMedia->isHoofdafbeelding){
+
+                return Redirect::back()->with('hoofdafbeeldingmelding','Een hoofdafbeelding kan niet verwijderd worden. Stel eerst een ander afbeelding in als hoofdafbeelding.');
+            }
+
+
             $filePath = $media->nieuwsitemMediaOphalenViaId($mediaId)->first()->link;
             $media->verwijderMedia($mediaId);
             unlink($filePath);

@@ -77,6 +77,11 @@
 			</div>
 			<div class="col-md-4">
 				<h4>Afbeeldingen</h4>
+				@if( session()->has('hoofdafbeeldingmelding'))
+					<div class="alert alert-danger">
+					    {{ session()->get('hoofdafbeeldingmelding') }}
+					</div>							    
+				@endif
 				@if($aantalAfbeeldingen > 0 )
 					@foreach($alleNieuwsitemMedia as $media)
 						@if($media->mediaType == "Afbeelding")
@@ -90,6 +95,7 @@
 				@else
 					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
 				@endif
+				
 				<h4>Video</h4>
 				@if($aantalVideos > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)

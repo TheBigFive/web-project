@@ -60,6 +60,7 @@ class TestimonialController extends Controller
             'leeftijd_persoon' => 'required',
             'functie_persoon' => 'required',
             'tekstvorm_testimonial' => 'required',
+            'afbeeldingen' => 'required'
         ]);
 
         if($validator->passes()){
@@ -80,7 +81,7 @@ class TestimonialController extends Controller
             //Toevoegen van afbeeldingen 
             if(Input::file('afbeeldingen')){
                 $afbeeldingen = Input::file('afbeeldingen');
-                foreach ($afbeeldingen as $afbeelding) {
+                foreach ($afbeeldingen as $key => $afbeelding) {
                     $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
                     $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
                     
@@ -91,12 +92,27 @@ class TestimonialController extends Controller
                         $filePath = 'img/testimonials/'.$afbeeldingNaam;
                         $mediaType = "Afbeelding";
 
-                        //Afbeelding toevoegen in de database
-                        $media->voegMediaToe([
-                        'link' => $filePath,
-                        'mediaType' => $mediaType,
-                        'testimonial_id' => $testimonialId
-                        ]);
+
+                        if($key == 0){
+                            //Afbeelding toevoegen in de database met eerste afbeelding als hoofdafbeelding
+                            $isHoofdafbeelding = true;
+                            $media->voegMediaToe([
+                            'link' => $filePath,
+                            'mediaType' => $mediaType,
+                            'testimonial_id' => $testimonialId,
+                            'isHoofdafbeelding' => $isHoofdafbeelding 
+                            ]);
+
+                        } else{
+                            //Afbeelding toevoegen in de database
+                            $media->voegMediaToe([
+                            'link' => $filePath,
+                            'mediaType' => $mediaType,
+                            'testimonial_id' => $testimonialId
+                            ]);
+
+                        }
+                        
                     }else{
                         return "tis ni valid";
                     }
@@ -412,6 +428,12 @@ class TestimonialController extends Controller
 
         //Afbeelding moet locaal ook verwijderd worden
         if($opgehaaldeMedia->mediaType == "Afbeelding"){
+
+            if($opgehaaldeMedia->isHoofdafbeelding){
+
+                return Redirect::back()->with('hoofdafbeeldingmelding','Een hoofdafbeelding kan niet verwijderd worden. Stel eerst een ander afbeelding in als hoofdafbeelding.');
+            }
+
             $filePath = $media->testimonialMediaOphalenViaId($mediaId)->first()->link;
             $media->verwijderMedia($mediaId);
             unlink($filePath);
@@ -422,6 +444,36 @@ class TestimonialController extends Controller
         }
 
         return Redirect::back();
+    }
+
+    public function stelHoofdafbeeldingIn($id){
+        $media = new Media;
+        $mediaId = $id;
+
+        $inTeStellenMedia =  $media->testimonialMediaOphalenViaId($mediaId)->first();
+        $geopendeTestimonialId = $inTeStellenMedia->testimonial_id;
+
+        $alleTestimonialMedia = $media->testimonialMediaOphalenViaTestimonialId($geopendeTestimonialId);
+
+        //De afbeelding die ervoor hoofdafbeelding was, niet meer instellen als hoofdafbeelding
+        foreach ($alleTestimonialMedia as $afbeelding) {
+            if($afbeelding->isHoofdafbeelding){
+                $afbeeldingId = $afbeelding->media_id;
+
+                $media->wijzigMedia($afbeeldingId,[
+                    'isHoofdafbeelding' => false
+                    ]);
+            }
+        }
+
+        //Nieuwe afbeelding als hoofdafbeelding instellen
+        $media->wijzigMedia($mediaId,[
+                'isHoofdafbeelding' => true
+            ]);
+
+        return Redirect::back();
+
+
     }
     
 }
