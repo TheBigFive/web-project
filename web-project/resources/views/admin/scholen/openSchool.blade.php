@@ -97,7 +97,7 @@
 				@if($geopendeSchool->goedkeuringsstatus == "Nieuwe school")
 					<span>
 						<button type="button" id="afwijzingKnop" class="btn btn-danger">
-		    				School Afwijzen en reden meegeven
+		    				Scholen Afwijzen en reden meegeven
 		  				</button>
 					</span>
 					<form class="afwijzingForm" action="/admin/scholen/afwijzen/{{ $geopendeSchool->school_id }}" method="post">     	
@@ -136,7 +136,7 @@
 
 	@endif
 	<span>
-		<a href="/admin/scholen/wijzig/{{ $geopendeSchool->school_id }}" class="btn btn-primary">Wijzig scholen</a>
+		<a href="/admin/scholen/wijzig/{{ $geopendeSchool->school_id }}" class="btn btn-primary">Wijzig school</a>
 	</span>
 	</div>
 	
@@ -163,7 +163,7 @@
 													@foreach($alleCampussen as $key => $campus)
 															<tr>
 																<td>{{ $key+1 }}</td>
-																<td><a href="/admin/campus/open/{{ $campus->campus_id }}">{{ $campus->naam }}</a></td>
+																<td>{{ $campus->naam }}</td>
 																<td>{{ $campus->adres }}</td>
 																@if (Auth::user()->rol_id!=4)
 																	<td><a href="/admin/scholen/campus/verwijder/{{ $campus->campus_id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>

@@ -23,17 +23,19 @@
 				<div class="form-group">
 				    <label for="adres" class="nieuwstoevoegen">Locatie</label>
 				    <p>Geef het volledige adres in van de campus</p>
-				    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control"/><br/>
+				    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control zoeklocatieveld"/>
 				    <button id="locatieSchoolKnop" class="btn btn-primary">Zoek locatie op</button>
-				    <div id="voegSchoolToe-map"></div>
+				    <div id="voegSchoolToe-map" style="margin-top: 2%;"></div>
 				    <input id="locatie-input" type="hidden" name="coordinaten">
 				</div>
-				<button type="button" id="campusAnnulerenKnop" class="btn btn-primary">
+				<div class="knoponderaan">
+				<span>
+					<input type="submit" class="btn btn-primary" value="Campus toevoegen">
+				</span>	
+				<button type="button" id="campusAnnulerenKnop" class="btn btn-danger">
 					Annuleren
 				</button>
-				<span>
-					<input type="submit" class="btn btn-danger" value="Campus toevoegen">
-				</span>	
+				</div>
 			</form>
 			@if( session()->has('foutmelding'))
 		       	@if(!$errors->all())
