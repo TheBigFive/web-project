@@ -8,6 +8,11 @@
   height: 400px;
   background-color: #CCC; }
 
+#wijzigBezienswaardigheid-map{
+  width: 75%;
+  height: 400px;
+  background-color: #CCC; }
+
 body{
 	padding-top: 0;
 	min-height: 0;
