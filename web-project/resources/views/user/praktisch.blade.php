@@ -82,7 +82,7 @@
 
 			<div class="col-md-4 col-lg-4">
 				<div class="icon">
-					<i class="fa fa-tree fa-1x" aria-hidden="true"></i>
+					<i class="fa fa-envira fa-1x" aria-hidden="true"></i>
 				</div>
 				<h1>Parken</h1>
 				<p>Goei weer en zin om ergens rustig te ontspannen? Bezoek dan éen van onze 54 parken in en rond Antwerpen. Geniet van een fris pintje in het park bij de schuur aan park spoor noord of ga eens rustig wandelen in de rozentuin in Rivierenhof.</p>

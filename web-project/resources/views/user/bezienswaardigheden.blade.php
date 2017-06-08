@@ -2,10 +2,16 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/bezienswaardigheden.css') }}">
 <div class="container">
-	<img class="heroImage"src="{{ asset('img/bezienswaardigheden/bezienswaardigheid-6-4xnqJde ruien.jpg') }}">
-	<h1>
-		bezienswaardigheden
-	</h1>
+	<div class="heroImage">
+		<img src="{{ asset('img/bezienswaardigheden/bezienswaardigheid-6-4xnqJde ruien.jpg') }}">
+	</div>
+	<div class="introPagina">
+		<h1>
+			Bezienswaardigheden
+		</h1>
+		<h3>Antwerpen is de stad van die ene grote overtuiging dat alles altijd nét iets anders kan</h3>
+	</div>
+
 	@foreach($alleBezienswaardigheden as $key => $bezienswaardigheid)
 	<div class="bezienswaardigheidKort col-xs-12 col-sm-4 col-md-4 col-lg-4">
 		<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
