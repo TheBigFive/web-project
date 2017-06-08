@@ -48,17 +48,19 @@
 		     	@if($aantalAfbeeldingen > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
 			     		@if($media->mediaType == "Afbeelding")
+			     			<div class="compleet">
 							<img class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}">
 							@if($media->isHoofdafbeelding)
-								Ingesteld als hoofdafbeelding
+								<i class="fa fa-home text middle thuisicoon"></i>
 							@endif
+							</div>
 						@endif
 					@endforeach
 				@else
 					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
 				@endif
 
-				<h4>Video's</h4>
+				<h4 class="videotitel">Video's</h4>
 				@if($aantalVideos > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
 			     		@if($media->mediaType == "Video")

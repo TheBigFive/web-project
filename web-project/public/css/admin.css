@@ -88,6 +88,10 @@ body{
 	margin-top: 4%;
 }
 
+.bezienswaardigheidtoevoegen{
+	margin-top: 8%;
+}
+
 .nieuwsgoedkeuren{
 	margin-top: 8%;
 }
@@ -104,40 +108,43 @@ body{
 /*------------*/
 
 .geheel {
-	margin-bottom: 1%;
-}
-/*
-.pic {
-  opacity: 1;
-  display: block;
-  transition: .5s ease;
-  backface-visibility: hidden;
+	margin-bottom: 3%;
 }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
+.pic{
+	float:left;
+	margin-right: 5%;
 }
 
-.geheel:hover .image {
-  opacity: 0.3;
+.middle{
+	margin-left: 5%;
 }
 
-.geheel:hover .middle {
-  opacity: 1;
-}
-*/
 .text {
   color: #5c5c5c;
-  font-size: 3em;
+  font-size: 2.5em;
 }
 
-.omlijnd{
-	border: 1px solid #5c5c5c;
-	border-radius: 10px
+/*----------*/
+
+.videotitel{
+	margin-top: 50px;
+}
+
+.thuisicoon{
+	margin-top: 2px;
+}
+
+.tagknop{
+	margin-bottom: 2%;
+}
+
+.tagknoppen{
+	margin-top: 20px;
+}
+
+.zoeklocatieveld{
+	width: 60%;
+	margin-right: 4%;
+	float: left;
 }

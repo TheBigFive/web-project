@@ -22,7 +22,7 @@
 			        			@endif        	
 				 	{!! csrf_field() !!}
 					<div class="form-group">
-					    <label for="titel">Titel nieuwsartikel</label>
+					    <label for="titel" class="nieuwstoevoegen">Titel nieuwsartikel</label>
 					    <input type="text" name="titel" class="form-control" value="{{ $geopendeNieuwsitem->titel }}" placeholder="Typ hier de titel van het nieuwsartikel">
 					    @if ($errors->has('titel'))
 						    <span class="help-block">
@@ -31,7 +31,7 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="introtekst">Introtekst</label>
+					    <label for="introtekst" class="nieuwstoevoegen">Introtekst</label>
 					    <textarea rows="5" name="introtekst" class="form-control summernote" placeholder="Typ hier je introtekst">{{ $geopendeNieuwsitem->introtekst }}</textarea>
 					    @if ($errors->has('introtekst'))
 						    <span class="help-block">
@@ -40,7 +40,7 @@
 						@endif
 					</div>
 					  <div class="form-group">
-					    <label for="beschrijving">Artikel</label>
+					    <label for="beschrijving" class="nieuwstoevoegen">Artikel</label>
 					    <textarea rows="5" name="artikel" class="form-control summernote" placeholder="Typ hier je artikel">{{ $geopendeNieuwsitem->artikel }}</textarea>
 					    @if ($errors->has('artikel'))
 						    <span class="help-block">
@@ -49,7 +49,7 @@
 						@endif
 					  </div>
 					<div class="form-group{{ $errors->has('tag') ? ' has-error' : '' }}">
-					    <label for="tag">Tag</label>
+					    <label for="tag" class="nieuwstoevoegen">Tag</label>
 					    <select class="form-control" name="tag">
 					    @foreach ($alleTags as $tag)
 					    	@if ($geopendeNieuwsitem->tag_naam == $tag->naam)
@@ -66,7 +66,7 @@
 						@endif
 					</div>
 					
-					<div class="form-group">
+					<div class="form-group knoponderaan">
 					  		@if (Auth::user()->rol_id!=4)
 							  	<span>
 							        <a href="/admin/nieuwsitems/verwijder/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-danger">Nieuwsitem verwijderen</a>
@@ -88,18 +88,24 @@
 				@if($aantalAfbeeldingen > 0 )
 					@foreach($alleNieuwsitemMedia as $media)
 						@if($media->mediaType == "Afbeelding")
+							<div class="geheel">
 							<img height="60px" src="{{ asset($media->link)  }}">
-							<a href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
-							@if($media->isHoofdafbeelding == false)
-								<a href="/admin/nieuwsitems/stelHoofdafbeeldingIn/{{ $media->media_id }}">Instellen als hoofdafbeelding</a>
+							<div class="middle">
+							@if($media->isHoofdafbeelding == true)
+								<p style="margin-bottom: -3%;">Momenteel ingesteld als hoofdafbeelding</p>
+							@else
+								<a class="text" href="/admin/nieuwsitems/stelHoofdafbeeldingIn/{{ $media->media_id }}" title="Zet als hoofdafbeelding" data-toggle="tooltip"><i class="fa fa-home"></i></a>
 							@endif
+							<a class="text" href="/admin/nieuwsitems/verwijderMedia/{{ $media->media_id }}"><i class="fa fa-trash" title="Verwijderen" data-toggle="tooltip"></i></a>
+							</div>
+							</div>
 						@endif
 					@endforeach
 				@else
 					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
 				@endif
 				
-				<h4>Video</h4>
+				<h4 class="videotitel">Video</h4>
 				@if($aantalVideos > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
 			     		@if($media->mediaType == "Video")

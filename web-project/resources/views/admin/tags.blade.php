@@ -9,11 +9,10 @@
 
 <div class="gebruikerswrapper">
 
-	<button class="btn btn-primary" id="tagToevoegenKnop">Tag toevoegen</button>
+	<button class="btn btn-primary tagknop" id="tagToevoegenKnop">Tag toevoegen</button>
 	<form id="tagForm" action="/admin/tags/toevoegen/" method="post">     	
 		{!! csrf_field() !!}
-		<div class="form-group">
-		    <label for="tag">Tagnaam</label>
+		<div class="form-group zoekgebruikersveld">
 		    <input type="text" name="tag" class="form-control" placeholder="Typ hier de tagnaam"></input>
 		    @if ($errors->has('tag'))
 			    <span class="help-block">
@@ -21,12 +20,14 @@
 			    </span>
 			@endif
 		</div>
-		<button type="button" id="tagAnnulerenKnop" class="btn btn-primary">
+		<div class="tagknoppen">
+		<span>
+			<input type="submit" class="btn btn-primary" value="Tag toevoegen">
+		</span>	
+		<button type="button" id="tagAnnulerenKnop" class="btn btn-danger">
 			Annuleren
 		</button>
-		<span>
-			<input type="submit" class="btn btn-danger" value="Tag toevoegen">
-		</span>	
+		</div>
 	</form>
 	@if( session()->has('foutmelding'))
        	@if(!$errors->all())

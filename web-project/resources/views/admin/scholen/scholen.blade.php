@@ -1,9 +1,14 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">Scholen</h2>
+    </div>
+</div>
+
 	<div class="gebruikerswrapper">
-		<h2>Scholen</h2>
-		<a class="btn btn-primary" href="/admin/scholen/toevoegen">School Toevoegen</a>
+		<a class="btn btn-primary nieuwstoevoegenknop" href="/admin/scholen/toevoegen">School Toevoegen</a>
 
 		@if ($aantalNieuweEnGewijzigdeScholen > 0)
 			<h4>Moeten nog goedgekeurd worden:</h4>

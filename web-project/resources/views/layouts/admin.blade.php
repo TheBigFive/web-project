@@ -113,7 +113,7 @@
             </ul>
           </li>
           <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#chart_dr"><i class="fa fa-fw fa-mortar-board"></i> Scholen <span class="pull-right"><span class="label label-primary mr-10">7</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+            <a href="javascript:void(0);" data-toggle="collapse" data-target="#chart_dr"><i class="fa fa-fw fa-mortar-board"></i> Scholen <span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
             <ul id="chart_dr" class="collapse collapse-level-1">
               <li>
                 <a href="{{ url('admin/scholen') }}">Alle scholen</a>
