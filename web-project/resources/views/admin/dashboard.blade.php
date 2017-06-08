@@ -4,8 +4,7 @@
 <div class="container">
 <div class="gebruikerswrapper">
     <div class="row">
-        <h1>Dashboard</h1>
-
+    
         	<h2 class="dashboardheading">Welkom {{ Auth::user()->voornaam }},</h2>
 			<div class="dashboardcontent">
         		<h4>Profielgegevens</h4>

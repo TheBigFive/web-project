@@ -73,7 +73,7 @@
     <div class="fixed-sidebar-left">
         <ul class="nav navbar-nav side-nav nicescroll-bar">
           <li>
-            <a  class="active" href="{{ url('/admin') }}" data-toggle="collapse" data-target="#dashboard_dr"><i class="fa fa-fw fa-home"></i> Dashboard <span class="pull-right"><span class="label label-success mr-10">4</span></span></a>
+            <a  class="active" href="{{ url('/admin') }}" data-toggle="collapse" data-target="#dashboard_dr"><i class="fa fa-fw fa-home"></i> Dashboard </a>
           </li>
           <li>
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-fw fa-users"></i> Gebruikers<span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
@@ -96,7 +96,7 @@
             </ul>
           </li>
           <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><i class="fa fa-fw fa-file-text-o"></i> Nieuwsitems <span class="pull-right"><span class="label label-info mr-10">9</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+            <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><i class="fa fa-fw fa-file-text-o"></i> Nieuwsitems <span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
             <ul id="app_dr" class="collapse collapse-level-1">
               <li>
                 <a href="{{ url('admin/nieuwsitems') }}">Alle nieuwsitems</a>
