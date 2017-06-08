@@ -106,7 +106,7 @@ body{
 .geheel {
 	margin-bottom: 1%;
 }
-
+/*
 .pic {
   opacity: 1;
   display: block;
@@ -131,8 +131,13 @@ body{
 .geheel:hover .middle {
   opacity: 1;
 }
-
+*/
 .text {
   color: #5c5c5c;
   font-size: 3em;
+}
+
+.omlijnd{
+	border: 1px solid #5c5c5c;
+	border-radius: 10px
 }
