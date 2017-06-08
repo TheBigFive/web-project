@@ -20,7 +20,7 @@ class Bezienswaardigheden extends Model
       return DB::table('bezienswaardigheden')
       ->join('gebruikers', 'bezienswaardigheden.toegevoegddoor_id', '=', 'gebruikers.id')
       ->select('bezienswaardigheden.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
-      ->where('bezienswaardigheden.goedkeuringsstatus','Goedgekeurd')
+      ->where('bezienswaardigheden.publicatieStatus','Gepubliceerd')
       ->get();
     }
 

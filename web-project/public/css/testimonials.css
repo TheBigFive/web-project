@@ -83,10 +83,11 @@
 }
 
 .miniatuurAfbeelding{
-	height: 6em;
+	max-height: 10em;
 	overflow: hidden;
 	margin-bottom: 1em;
 }
 @media (min-width: 768px) {
 
 }
+

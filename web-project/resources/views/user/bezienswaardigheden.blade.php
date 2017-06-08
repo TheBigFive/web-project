@@ -23,15 +23,14 @@
 		<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img)"/>
 		</svg>
 		<h2><a href="/bezienswaardigheden/{{ $bezienswaardigheid->bezienswaardigheid_id }}">{{ $bezienswaardigheid->naam }}</a></h2>
-		<p>Beschrijving: {{ substr($bezienswaardigheid->beschrijving,0,140).'...' }}</p>
 	</div>
 	@endforeach
-	<div class="informatie">
+<!-- 	<div class="informatie">
 	@foreach($alleBezienswaardigheden as $key => $bezienswaardigheid)
 	<div class="bezienswaardigheidLang col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 			<h1>{{ $bezienswaardigheid->naam }}</h1>
-			<p>{{ $bezienswaardigheid->beschrijving }}</p>
+			<p>{!! $bezienswaardigheid->beschrijving !!}</p>
 		</div>
 		<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 				<img src="{{ asset('img/bezienswaardigheden/bezienswaardigheid-6-4xnqJde ruien.jpg') }}">
@@ -52,6 +51,6 @@
 		</div>
 	</div>
 	@endforeach
-	</div>
+	</div> -->
 </div>
 @endsection
