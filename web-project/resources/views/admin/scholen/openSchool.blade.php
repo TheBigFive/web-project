@@ -154,7 +154,7 @@
 													@foreach($alleCampussen as $key => $campus)
 															<tr>
 																<td>{{ $key+1 }}</td>
-																<td><a href="/admin/bezienswaardigheden/open/{{ $campus->campus_id }}">{{ $campus->naam }}</a></td>
+																<td>{{ $campus->naam }}</td>
 																<td>{{ $campus->adres }}</td>
 																@if (Auth::user()->rol_id!=4)
 																	<td><a href="/admin/scholen/campus/verwijder/{{ $campus->campus_id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
