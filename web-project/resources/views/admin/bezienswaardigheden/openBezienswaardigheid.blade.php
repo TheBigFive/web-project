@@ -24,7 +24,7 @@
 				<input id="coordinaten" type="hidden" name="coordinaten" value="{{ $geopendeBezienswaardigheid->coordinaten }}">
 				@if ($geopendeBezienswaardigheid->openingsuren)
 					<h4>Openingsuren</h4>
-					<p>{!! $geopendeBezienswaardigheid->openigngsuren !!}</p>
+					<p>{!! $geopendeBezienswaardigheid->openingsuren !!}</p>
 				@endif
 				@if ($geopendeBezienswaardigheid->vervoer)
 					<h4>Info vervoer</h4>

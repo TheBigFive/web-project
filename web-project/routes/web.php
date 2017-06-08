@@ -14,7 +14,10 @@ Auth::routes();
 Route::get('/', 'NieuwsitemController@ophalenNieuwsitemWelkom');
 Route::get('/home', 'HomeController@index');
 Route::get('nieuwsartikels','NieuwsitemController@ophalenNieuwsitem');
+Route::get('nieuwsartikels/{id}','NieuwsitemController@openNieuwsartikel');
+Route::get('testimonials','TestimonialController@ophalenTestimonials');
 Route::get('testimonials/{id}','TestimonialController@openTestimonial');
+Route::get('bezienswaardigheden','BezienswaardigheidController@ophalenBezienswaardigheden');
 
 Route::get('praktisch','PraktischController@index');
 Route::get('scholen', 'ScholenController@ophalenSchool');
@@ -22,7 +25,6 @@ Route::get('school', 'ScholenController@openSchool');
 /*Route::get('school/{id}', 'ScholenController@openSchool');*/
 Route::get('spel','SpelController@index');
 
-Route::get('nieuwsartikels/{id}','NieuwsitemController@openNieuwsartikel');
 
 Route::get('bezienswaardigheden/open360/{id}','BezienswaardigheidController@open360');
 

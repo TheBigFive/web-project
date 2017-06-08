@@ -15,6 +15,15 @@ class Bezienswaardigheden extends Model
       ->get();
     }
 
+    public function goedgekeurdeBezienswaardighedenOpvragen()
+    {
+      return DB::table('bezienswaardigheden')
+      ->join('gebruikers', 'bezienswaardigheden.toegevoegddoor_id', '=', 'gebruikers.id')
+      ->select('bezienswaardigheden.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
+      ->where('bezienswaardigheden.goedkeuringsstatus','Goedgekeurd')
+      ->get();
+    }
+
     public function bezienswaardigheidOpvragenViaId($id)
     {
       return DB::table('bezienswaardigheden')

@@ -28,61 +28,57 @@
 
 		<div class="onderkant"></div>
 
-		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-		</div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-			<div class="afbeelding">
-				<img src="img/game_afbeelding1.png" style="text-align: center;">
+		<div class="gameInfo1">
+			<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 			</div>
-		</div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-			<div class="afbeeldingtekst">
-				<h3 style="text-align: center;">Speel 3 verschillende levels!</h3>
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+				<div class="afbeelding">
+					<img src="img/game_afbeelding1.png" style="text-align: center;">
+				</div>
+			</div>
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+				<div class="afbeeldingtekst">
+					<h3 style="text-align: center;">Speel 3 verschillende levels!</h3>
+				</div>
+			</div>
+			<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 			</div>
 		</div>
 		
-		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-		</div>
-		
-		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-		</div>
-
-		<div class="achtergrondkleur"></div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3" >
-			<div class="afbeeldingtekst uitzondering">
-				<h3 style="text-align: center;">Ontdek de stad terwijl je vliegt!</h3>
+		<div class="gameInfo2 achtergrondkleur">
+			<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+			</div>
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3" >
+				<div class="afbeeldingtekst uitzondering">
+					<h3 style="text-align: center;">Ontdek de stad terwijl je vliegt!</h3>
+				</div>
+			</div>
+			<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+				<div class="afbeelding">
+					<img src="img/game_afbeelding2.png" style="text-align: center;">
+				</div>
+			</div>
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 			</div>
 		</div>
 
-		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-			<div class="afbeelding">
-				<img src="img/game_afbeelding2.png" style="text-align: center;">
+		<div class="gameInfo3">
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+			</div>
+			<div class="beker khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3" style="margin-bottom: 5%;">
+				<div class="afbeelding">
+					<img src="img/game_afbeelding3.png" style="text-align: center;">
+				</div>
+			</div>
+
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+				<div class="afbeeldingtekst">
+					<h3 class="laatste" style="text-align: center;">Speel tegen je vrienden!</h3>
+				</div>
+			</div>
+			<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 			</div>
 		</div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 		</div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-		</div>
-
-		<div class="beker khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3" style="margin-bottom: 5%;">
-			<div class="afbeelding">
-				<img src="img/game_afbeelding3.png" style="text-align: center;">
-			</div>
-		</div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-			<div class="afbeeldingtekst">
-				<h3 class="laatste" style="text-align: center;">Speel tegen je vrienden!</h3>
-			</div>
-		</div>
-
-		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
-		</div>
-
 	</div>
 @endsection

@@ -1,0 +1,24 @@
+.bezienswaardigheidKort{}
+
+.bezienswaardigheidLang{
+	margin-bottom: 2em;
+	border: 1px solid red;
+}
+.bezienswaardigheidLang img{
+	width: 100%;
+}
+
+.bezienswaardigheidLang .col-md-6,.bezienswaardigheidLang .col-lg6{
+	border: 1px solid yellow;
+}
+
+.bezienswaardigheidLang .col-md-2,.bezienswaardigheidLang .col-lg2{
+	border: 1px solid purple;
+}
+
+.bezienswaardigheidLang .col-md-4,.bezienswaardigheidLang .col-lg4{
+	border: 1px solid green;
+}
+@media (min-width: 768px) {
+
+}
