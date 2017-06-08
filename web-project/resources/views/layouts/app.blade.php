@@ -11,9 +11,6 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/sticky-footer.css') }}">
-        
-
-
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -89,6 +86,4 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
         <script src="{{ asset('js/datumFirefox.js') }}"></script>
-        <script src="{{ asset('js/jquery-3.2.1.min.js') }}" > </script> 
-        <script src="{{ asset('js/bootstrap.min.js') }}" > </script> 
 </html>

@@ -25,9 +25,11 @@
 		<div class="afbeeldingenNieuwsitem col-xs-12 col-sm-4 col-md-4 col-lg-4">
 		@foreach($alleNieuwsitemMedia as $media)
 				@if($media->mediaType == "Afbeelding")
+					@if($media->isHoofdafbeelding == 0)
 						<div class="enkeleAfbeelding">
 							<img src="{{ asset($media->link)  }}"></img>
 						</div>
+					@endif
 				@endif
 			@endforeach
 
