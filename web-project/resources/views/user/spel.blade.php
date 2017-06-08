@@ -26,7 +26,7 @@
 			<img src="img/line-png-32.png" style="width: 100%; margin-bottom: 3%;">
 		</div>
 
-
+	<div class="onderkant">
 		<div class="gameInfo gameInfo1">
 			<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
 
@@ -75,9 +75,11 @@
 					<h3 class="laatste" style="text-align: center;">Speel tegen je vrienden!</h3>
 				</div>
 			</div>
-			
+
 			<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
 		</div>
-		</div>
+
+	</div>
+	
 	</div>
 @endsection

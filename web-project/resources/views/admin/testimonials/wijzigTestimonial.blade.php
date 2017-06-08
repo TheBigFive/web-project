@@ -3,7 +3,7 @@
 
 <div class="row heading-bg  bg-blue">
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h2 class="txt-light" style="margin-top: 3%; margin-left: 6%; width: 100%;">Testimonial wijzigen</h2>
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">Testimonial wijzigen</h2>
     </div>
 </div>
 
@@ -116,11 +116,18 @@
 				@if($aantalAfbeeldingen > 0 )
 					@foreach($alleTestimonialMedia as $media)
 						@if($media->mediaType == "Afbeelding")
-							<img height="60px" src="{{ asset($media->link)  }}">
-							<a href="/admin/testimonials/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
-							@if($media->isHoofdafbeelding == false)
-								<a href="/admin/testimonials/stelHoofdafbeeldingIn/{{ $media->media_id }}">Instellen als hoofdafbeelding</a>
+							<div class="geheel">
+							<img height="60px" class="pic" src="{{ asset($media->link)  }}">
+							<div class="middle">
+							@if($media->isHoofdafbeelding == true)
+								<i class="fa fa-home"></i>
 							@endif
+							<a class="text" href="/admin/testimonials/verwijderMedia/{{ $media->media_id }}"><i class="fa fa-trash" title="Verwijderen" data-toggle="tooltip"></i></a>
+							@if($media->isHoofdafbeelding == false)
+								<a class="text" href="/admin/testimonials/stelHoofdafbeeldingIn/{{ $media->media_id }}" title="Zet als hoofdafbeelding" data-toggle="tooltip"><i class="fa fa-home"></i></a>
+							@endif
+							</div>
+							</div>
 						@endif
 					@endforeach
 				@else

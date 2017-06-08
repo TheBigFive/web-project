@@ -48,7 +48,7 @@
         <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
         <a href="{{ url('/admin') }}"><img class="pull-left adminlogo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}" alt="brand"/></a>
         <ul class="nav navbar-right top-nav pull-right">
-          <li class="terugtekst"><a href="{{ url('/') }}"><i class="fa fa-arrow-circle-right"></i> Terug naar de website</a></li>
+          <li class="terugtekst"><a href="{{ url('/') }}"><i class="fa fa-arrow-circle-left"></i> Terug naar de website</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><i class="fa fa-cog top-nav-icon"></i></a>
             <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
