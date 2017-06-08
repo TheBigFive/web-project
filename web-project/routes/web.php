@@ -83,6 +83,17 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::post('admin/scholen/toevoegenMedia/{id}', 'ScholenController@toevoegenMediaSchool');
 	Route::get('admin/scholen/verwijderMedia/{id}', 'ScholenController@afbeeldingVerwijderen');
 
+	//Campussen
+	Route::get('admin/scholen/campus/toevoegen/{id}', 'ScholenController@openVoegCampusToe');
+	Route::post('admin/scholen/campus/toevoegen/{id}', 'ScholenController@voegCampusToe');
+	Route::get('admin/scholen/campus/verwijder/{id}', 'ScholenController@verwijderCampus');
+
+	//Interessegebieden
+	Route::get('admin/scholen/interessegebied/toevoegen/{id}', 'ScholenController@openVoegInteressegebiedToe');
+	Route::post('admin/scholen/interessegebied/toevoegen/{id}', 'ScholenController@voegInteressegebiedToe');
+	Route::get('admin/scholen/interessegebied/verwijder/{id}', 'ScholenController@verwijderInteressegebied');
+
+
 	//Tags
 	Route::get('admin/tags','TagsController@index');
 	Route::post('admin/tags/toevoegen/','TagsController@voegTagToe');

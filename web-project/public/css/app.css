@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-@import "font-awesome/scss/font-awesome";
 @font-face {
     font-family: AntwerpenRegular;
     src: url('../fonts/Antwerpen/AntwerpenRegular.otf');
@@ -8,11 +7,6 @@
     font-family: SunAntwerpen;
     src: url('../fonts/SunAntwerpen/SunAntwerpen-5_Regular.otf');
 }
-@font-face {
-    font-family: FontAwesome;
-    src: url('../fonts/FontAwesome/FontAwesome.otf');
-}
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
