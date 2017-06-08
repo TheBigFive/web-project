@@ -87,6 +87,22 @@ class BezienswaardigheidController extends Controller
             ]);
     }
 
+        public function openBezienswaardigheidUser($id){
+
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $bezienswaardigheidId = $id;
+        $erIsEen360Afbeelding = False;
+
+        $geopendeBezienswaardigheid = $bezienswaardigheid->bezienswaardigheidOpvragenViaId($bezienswaardigheidId)->first();
+
+        $media = new Media;
+        $alleBezienswaardigheidMedia = $media->bezienswaardigheidMediaOphalenViaBezienswaardigheidId($bezienswaardigheidId);
+        
+        return view('/user/bezienswaardigheid', 
+            ['geopendeBezienswaardigheid' => $geopendeBezienswaardigheid,
+            'alleBezienswaardigheidMedia' => $alleBezienswaardigheidMedia]);
+    }
+
     public function openToevoegenBezienswaardigheid()
     {
         return view('admin/bezienswaardigheden/toevoegenBezienswaardigheid');

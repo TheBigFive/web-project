@@ -18,6 +18,9 @@ Route::get('nieuwsartikels/{id}','NieuwsitemController@openNieuwsartikel');
 Route::get('testimonials','TestimonialController@ophalenTestimonials');
 Route::get('testimonials/{id}','TestimonialController@openTestimonial');
 Route::get('bezienswaardigheden','BezienswaardigheidController@ophalenBezienswaardigheden');
+Route::get('bezienswaardigheden/{id}','BezienswaardigheidController@openBezienswaardigheidUser');
+
+
 
 Route::get('praktisch','PraktischController@index');
 Route::get('scholen', 'ScholenController@ophalenSchool');
