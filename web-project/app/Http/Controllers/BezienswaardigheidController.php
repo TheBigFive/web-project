@@ -40,6 +40,7 @@ class BezienswaardigheidController extends Controller
 
         public function ophalenBezienswaardigheden()
     {   
+        $media = new Media();
         $bezienswaardigheid = new Bezienswaardigheden();
         $alleBezienswaardigheden = $bezienswaardigheid->GoedgekeurdeBezienswaardighedenOpvragen();
         return view('user/bezienswaardigheden',
@@ -91,12 +92,23 @@ class BezienswaardigheidController extends Controller
 
         $bezienswaardigheid = new Bezienswaardigheden();
         $bezienswaardigheidId = $id;
+        $aantalAfbeeldingen = 0;
         $erIsEen360Afbeelding = False;
 
         $geopendeBezienswaardigheid = $bezienswaardigheid->bezienswaardigheidOpvragenViaId($bezienswaardigheidId)->first();
 
         $media = new Media;
         $alleBezienswaardigheidMedia = $media->bezienswaardigheidMediaOphalenViaBezienswaardigheidId($bezienswaardigheidId);
+
+        foreach ($alleBezienswaardigheidMedia as $media) {
+            if($media->mediaType == "Afbeelding"){
+                $aantalAfbeeldingen++;
+            }
+
+            if($media->mediaType == "360"){
+                $erIsEen360Afbeelding = True;
+            }
+        }
         
         return view('/user/bezienswaardigheid', 
             ['geopendeBezienswaardigheid' => $geopendeBezienswaardigheid,

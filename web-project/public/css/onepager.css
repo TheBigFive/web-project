@@ -3,7 +3,7 @@
     background-image: url("{{ asset('img/hero1.jpg') }}");
 
     /* Set a specific height */
-    height: 50vh;
+    height: 100vh;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -57,7 +57,7 @@
 }
 
 .footer{
-	margin-top: -.7em;
+	padding-top: .5em;
 }
 
 /* achtergrondkleuren per hoofdstuk */
@@ -84,4 +84,10 @@
 .praktisch #kot .tekst{
 	background-color: #009883;
 	padding-bottom: 2em;
+}
+
+@media (min-width: 768px) {
+	.parallax{
+		height: 50vh;
+	}
 }

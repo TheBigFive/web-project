@@ -19,8 +19,9 @@ class Bezienswaardigheden extends Model
     {
       return DB::table('bezienswaardigheden')
       ->join('gebruikers', 'bezienswaardigheden.toegevoegddoor_id', '=', 'gebruikers.id')
-      ->select('bezienswaardigheden.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
-      ->where('bezienswaardigheden.publicatieStatus','Gepubliceerd')
+      ->join('media','bezienswaardigheden.bezienswaardigheid_id','=','media.bezienswaardigheid_id')
+      ->select('bezienswaardigheden.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','media.link as media_link')
+      ->where('isHoofdafbeelding', True)
       ->get();
     }
 
