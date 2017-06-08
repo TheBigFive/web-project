@@ -18,7 +18,7 @@
 				<p>{{ $geopendeSchool->naam }}</p>
 				<h4>Beschrijving</h4>
 				<p>{!! $geopendeSchool->beschrijving !!}</p>
-				<h4>website</h4>
+				<h4>Website</h4>
 				<p><a href="{{ $geopendeSchool->website }}">{{ $geopendeSchool->website }}</a></p>
 				<h4>Toegevoegd door</h4>
 				<p>{{ $geopendeSchool->toegevoegddoor_voornaam }} {{ $geopendeSchool->toegevoegddoor_achternaam }}</p>
@@ -40,7 +40,7 @@
 						<img height="60px" src="{{ asset($media->link)  }}">
 					@endif
 				@endforeach
-				<h4>Afbeeldingen</h4>
+				<h4>Afbeelding</h4>
 				@foreach($alleSchoolMedia as $key => $media)
 			     	@if($media->mediaType == "Afbeelding")
 						<img height="60px" src="{{ asset($media->link)  }}">
@@ -129,7 +129,96 @@
 	<span>
 		<a href="/admin/scholen/wijzig/{{ $geopendeSchool->school_id }}" class="btn btn-primary">Wijzig scholen</a>
 	</span>
+
+	
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Campussen</h3>
+			<a href="/admin/scholen/campus/toevoegen/{{ $geopendeSchool->school_id }}"><button class="btn btn-primary" id="campusToevoegenKnop">Campus toevoegen</button></a>
+			<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="tab-content table-wrap mt-40">
+											<div class="tab-pane active table-responsive active">
+												<table class="table">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Campus</th>
+														<th>adres</th>
+													</tr>				
+												</thead>
+												<tbody>
+													@foreach($alleCampussen as $key => $campus)
+															<tr>
+																<td>{{ $key+1 }}</td>
+																<td><a href="/admin/bezienswaardigheden/open/{{ $campus->campus_id }}">{{ $campus->naam }}</a></td>
+																<td>{{ $campus->adres }}</td>
+																@if (Auth::user()->rol_id!=4)
+																	<td><a href="/admin/scholen/campus/verwijder/{{ $campus->campus_id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+																@endif
+															</tr>
+													@endforeach
+												</tbody>
+																
+											</table>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+
+		<div class="col-md-6">
+			<h3>Interessegebieden</h3>
+			<a href="/admin/scholen/interessegebied/toevoegen/{{ $geopendeSchool->school_id }}"><button class="btn btn-primary" id="interessegebiedToevoegenKnop" >Interessegebied toevoegen</button></a>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default card-view">
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<div class="tab-content table-wrap mt-40">
+									<div class="tab-pane active table-responsive active">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Interessegebied</th>
+													<th>link</th>
+												</tr>				
+											</thead>
+											<tbody>
+												@foreach($alleInteressegebieden as $key => $interessegebied)
+														<tr>
+															<td>{{ $key+1 }}</td>
+															<td>{{ $interessegebied->naam }}</td>
+															<td>{{ $interessegebied->link }}</td>
+															@if (Auth::user()->rol_id!=4)
+																<td><a href="/admin/scholen/interessegebied/verwijder/{{ $interessegebied->interessegebied_id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+															@endif
+														</tr>
+												@endforeach
+											</tbody>
+															
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+	
 </div>
+
+
 	
 
 @endsection
