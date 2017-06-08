@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('admincontent')
 
-<div class="gebruikerswrapper">
+<div class="gebruikerswrapper bevatNieuweBezienswaardigheidMap">
 
 	<h2>Bezienswaardigheden Toevoegen</h2>
 	<form action="/admin/bezienswaardigheden/toevoegen" enctype="multipart/form-data" method="post">
@@ -17,7 +17,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="beschrijving">Beschrijving</label>
-		    <textarea rows="5" name="beschrijving" class="form-control" placeholder="Typ hier de beschrijving van de bezienswaardigheid"></textarea>
+		    <textarea rows="5" name="beschrijving" class="form-control summernote" placeholder="Typ hier de beschrijving van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('beschrijving'))
 			    <span class="help-block">
 			        <strong>{{ $errors->first('beschrijving') }}</strong>
@@ -25,15 +25,13 @@
 			@endif
 		</div>
 
-		<h4>Afbeeldingen</h4>
-		<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
-			<label for="afbeeldingen">Voeg één of meerdere afbeeldingen toe</label>
-			<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
-			@if ($errors->has('afbeeldingen'))
-			    <span class="help-block">
-				    <strong>{{ $errors->first('afbeeldingen') }}</strong>
-			    </span>
-			@endif
+		<div class="form-group">
+		    <label for="adres">Locatie</label>
+		    <p>Geef het volledige adres in van de bezienswaardigheid</p>
+		    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control"/><br/>
+		    <button id="locatieBezienswaardigheidKnop" class="btn btn-primary">Zoek locatie op</button>
+		    <div id="voegBezienswaardigheidToe-map"></div>
+		    <input id="locatie-input" type="hidden" name="coordinaten">
 		</div>
 
 		<div class="form-group">
@@ -64,20 +62,6 @@
 			    </span>
 			@endif
 		</div>
-		<div class="form-group">
-		    <label for="adres">Locatie</label>
-		    <p>Kies een locatie op de map of geef het adres in</p>
-		    <input type="text" id="locatie-text" placeholder="Typ hier het adres" class="form-control"/><br/>
-		    <button id="locatieKnop" class="btn btn-primary">Zoek locatie op</button>
-		    <div id="admin-map"></div>
-		    <input id="locatie-input" type="hidden" name="locatie">
-		    <!-- <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid"></textarea>
-		    @if ($errors->has('adres'))
-			    <span class="help-block">
-			        <strong>{{ $errors->first('adres') }}</strong>
-			    </span>
-			@endif -->
-		</div>
 		
 		<div class="form-group">
 		    <label for="contact">Contact</label>
@@ -87,6 +71,38 @@
 			        <strong>{{ $errors->first('contact') }}</strong>
 			    </span>
 			@endif
+		</div>
+
+		
+
+		<h3>Media</h3>
+		
+		<div class="row">
+			<div class="col-md-5">
+				<h4>Afbeeldingen</h4>
+				<div class="form-group{{ $errors->has('afbeeldingen') ? ' has-error' : '' }}">
+					<label for="afbeeldingen">Voeg één of meerdere afbeeldingen toe</label>
+					<input type="file" name="afbeeldingen[]" multiple="true" /><br/>
+					@if ($errors->has('afbeeldingen'))
+					    <span class="help-block">
+						    <strong>{{ $errors->first('afbeeldingen') }}</strong>
+					    </span>
+					@endif
+				</div>
+			</div>
+			<div class="col-md-5">
+				<h4>360 Foto</h4>
+				<div class="form-group{{ $errors->has('afbeelding360') ? ' has-error' : '' }}">
+					<label for="afbeelding360">Voeg een 360 foto toe</label>
+					<input type="file" name="afbeelding360"/><br/>
+					@if ($errors->has('afbeelding360'))
+					    <span class="help-block">
+						    <strong>{{ $errors->first('afbeelding360') }}</strong>
+					    </span>
+					@endif
+				</div>				
+			</div>
+			
 		</div>
 
 		<div class="form-group">

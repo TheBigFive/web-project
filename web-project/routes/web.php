@@ -24,6 +24,8 @@ Route::get('spel','SpelController@index');
 
 Route::get('nieuwsartikels/{id}','NieuwsitemController@openNieuwsartikel');
 
+Route::get('bezienswaardigheden/open360/{id}','BezienswaardigheidController@open360');
+
 
 
 

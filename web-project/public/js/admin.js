@@ -1,12 +1,4 @@
-var thereIsAMarker = false;
-var map = new GMaps({
-  el: '#admin-map',
-  lat: 51.2154075,
-  lng: 4.409795,
-  zoom: 12
-});
-
-$(document).ready(function() {
+$(function(){
 	//Summernote textarea plugin
   	$('.summernote').summernote({
 	    lang: 'nl-NL',
@@ -28,8 +20,63 @@ $(document).ready(function() {
     $('.afwijzingForm').hide();
     $('#tagForm').hide();
 
-});
+  	if($('.gebruikerswrapper').hasClass('bevatNieuweBezienswaardigheidMap')){
+	    var thereIsAMarker = false;
+		var map = new GMaps({
+		  el: '#voegBezienswaardigheidToe-map',
+		  lat: 51.2154075,
+		  lng: 4.409795,
+		  zoom: 12
+		});
 
+
+		$('#locatieBezienswaardigheidKnop').click(function(e){
+			if(thereIsAMarker){
+			    map.removeMarkers();
+			}
+		    e.preventDefault();
+			GMaps.geocode({
+			  address: $('#locatie-text').val(),
+			  callback: function(results, status) {
+			    if (status == 'OK') {
+			      var latlng = results[0].geometry.location;
+			      map.setCenter(latlng.lat(), latlng.lng());
+			      var locatie_input = document.getElementById("locatie-input");
+			      locatie_input.value = latlng.lat() + "," + latlng.lng();	      
+			      map.addMarker({
+			        lat: latlng.lat(),
+			        lng: latlng.lng(),
+			        title: $('#locatie-text').val(),
+			        infoWindow: {
+					  content: $('#locatie-text').val()
+					}
+			      });
+			    }
+			  }
+			});
+		});
+
+  	}
+
+  	if($('.gebruikerswrapper').hasClass('bevatOpenBezienswaardigheidMap')){
+
+  		var locatie = coordinaten.value.split(",");
+  		var map = new GMaps({
+			el: '#openBezienswaardigheid-map',
+			lat: locatie[0],
+			lng: locatie[1],
+		});
+
+		map.addMarker({
+		  lat: locatie[0],
+			lng: locatie[1],
+			title: $('#adres').val(),
+			infoWindow: {
+				content: $('#adres').val()
+			}
+		});
+  	}
+});
 
 //Tabs gebruikers in het adminpaneel
 $('.nav-tabs a').click(function (e) {
@@ -65,46 +112,3 @@ $('#tagAnnulerenKnop').click(function () {
 	
 })
 
-GMaps.on('click', map.map, function(event) {
-
-  if(thereIsAMarker){
-    map.removeMarkers();
-  }
-
-  var index = map.markers.length;
-  var lat = event.latLng.lat();
-  var lng = event.latLng.lng();
-
-  var locatie_input = document.getElementById("locatie-input");
-  locatie_input.value = lat + "," + lng;
-
-  map.addMarker({
-    lat: lat,
-    lng: lng,
-  });
-
-  thereIsAMarker = true;
-
-
-});
-
- $('#locatieKnop').click(function(e){
-        e.preventDefault();
-	GMaps.geocode({
-	  address: $('#locatie-text').val(),
-	  callback: function(results, status) {
-	    if (status == 'OK') {
-	      var latlng = results[0].geometry.location;
-	      map.setCenter(latlng.lat(), latlng.lng());
-	      locatie_input.value = latlng.lat() + "," + latlng.lng();
-	      if(thereIsAMarker){
-		    map.removeMarkers();
-		  }
-	      map.addMarker({
-	        lat: latlng.lat(),
-	        lng: latlng.lng()
-	      });
-	    }
-	  }
-	});
-});

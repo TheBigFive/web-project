@@ -27,7 +27,7 @@
 					</div>
 					<div class="form-group">
 					    <label for="beschrijving">Beschrijving</label>
-					    <textarea rows="5" name="beschrijving" class="form-control" placeholder="Typ hier de beschrijving van de bezienswaardigheid">{{ $geopendeBezienswaardigheid->beschrijving }}</textarea>
+					    <textarea rows="5" name="beschrijving" class="form-control summernote" placeholder="Typ hier de beschrijving van de bezienswaardigheid">{{ $geopendeBezienswaardigheid->beschrijving }}</textarea>
 					    @if ($errors->has('beschrijving'))
 						    <span class="help-block">
 						        <strong>{{ $errors->first('beschrijving') }}</strong>
@@ -104,6 +104,17 @@
 				@else
 					<p>Dit bezienswaardigheid heeft geen afbeeldingen.</p>
 				@endif
+				<h4>360 Foto's</h4>
+				@if($erIsEen360Afbeelding)
+			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
+			     		@if($media->mediaType == "360")
+							<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img height="60px" src="{{ asset($media->link)  }}"></a>
+							<a href="/admin/bezienswaardigheden/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
+						@endif
+					@endforeach
+				@else
+					<p>Deze bezienswaardigheid heeft geen 360 foto.</p>
+				@endif
 			</div>
 		</div>
 
@@ -123,6 +134,20 @@
 							@endif
 						</div>
     				</div>
+    				<div class="col-md-3">
+    					@if(!$erIsEen360Afbeelding)
+	    					<h4>360 Foto</h4>
+							<div class="form-group{{ $errors->has('afbeelding360') ? ' has-error' : '' }}">
+								<label for="afbeelding360">Voeg een 360 foto toe</label>
+								<input type="file" name="afbeelding360"/><br/>
+								@if ($errors->has('afbeelding360'))
+								    <span class="help-block">
+									    <strong>{{ $errors->first('afbeelding360') }}</strong>
+								    </span>
+								@endif
+							</div>
+						@endif
+    				</div>    							
     			</div>
     			<input type="submit" class="btn btn-primary" value="Media Toevoegen">
 			</form>	
