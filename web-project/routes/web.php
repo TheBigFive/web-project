@@ -26,6 +26,8 @@ Route::get('school', 'ScholenController@openSchool');
 Route::get('spel','SpelController@index');
 
 
+Route::get('bezienswaardigheden/open360/{id}','BezienswaardigheidController@open360');
+
 
 
 

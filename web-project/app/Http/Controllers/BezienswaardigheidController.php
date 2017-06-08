@@ -47,11 +47,22 @@ class BezienswaardigheidController extends Controller
             ]);        
     }
 
+    public function open360($id){
+        $afbeelding360Id = $id;
+        $media = new Media;
+        $geopende360Afbeelding = $media->bezienswaardigheidMediaOphalenViaId($afbeelding360Id)->first();
+
+        return view('user/open360',
+            ['geopende360Afbeelding' => $geopende360Afbeelding
+            ]);
+    }
+
     public function openBezienswaardigheidAdmin($id, Request $request){
 
         $bezienswaardigheid = new Bezienswaardigheden();
         $bezienswaardigheidId = $id;
         $aantalAfbeeldingen = 0;
+        $erIsEen360Afbeelding = False;
 
         $geopendeBezienswaardigheid = $bezienswaardigheid->bezienswaardigheidOpvragenViaId($bezienswaardigheidId)->first();
 
@@ -62,12 +73,17 @@ class BezienswaardigheidController extends Controller
             if($media->mediaType == "Afbeelding"){
                 $aantalAfbeeldingen++;
             }
+
+            if($media->mediaType == "360"){
+                $erIsEen360Afbeelding = True;
+            }
         }
         
         return view('/admin/bezienswaardigheden/openBezienswaardigheid', 
             ['geopendeBezienswaardigheid' => $geopendeBezienswaardigheid,
             'alleBezienswaardigheidMedia' => $alleBezienswaardigheidMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen
+            'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'erIsEen360Afbeelding' => $erIsEen360Afbeelding
             ]);
     }
 
@@ -88,7 +104,7 @@ class BezienswaardigheidController extends Controller
         $validator = Validator::make($request->all(), [
           'naam' => 'required',
           'beschrijving' => 'required',
-          'adres' => 'required'
+          'locatie-text' => 'required'
 
         ]);
 
@@ -109,15 +125,24 @@ class BezienswaardigheidController extends Controller
             ]);
 
             $afbeeldingen = Input::file('afbeeldingen');
+            $afbeelding360 = Input::file('afbeelding360');
 
             if($afbeeldingen){
 
                 $validator = $this->afbeeldingToevoegen($bezienswaardigheid_id, $afbeeldingen);
             }
 
+            if($afbeelding360){
+                $validator = $this->afbeelding360Toevoegen($bezienswaardigheid_id, $afbeelding360);
+            }
+
+             return redirect('/admin/bezienswaardigheden/open/'.$bezienswaardigheid_id)->withErrors($validator);
+
+        } else{
+            return Redirect::back()->withErrors($validator);
         }
 
-        return redirect('/admin/bezienswaardigheden/open/'.$bezienswaardigheid_id)->withErrors($validator);
+       
 
     }
 
@@ -126,6 +151,7 @@ class BezienswaardigheidController extends Controller
         $bezienswaardigheidId = $id;
         $media = new Media();
         $aantalAfbeeldingen = 0;
+        $erIsEen360Afbeelding = False;
 
         $geopendeBezienswaardigheid = $bezienswaardigheid->bezienswaardigheidOpvragenViaId($bezienswaardigheidId)->first();
         $alleBezienswaardigheidMedia = $media->bezienswaardigheidMediaOphalenViabezienswaardigheidId($bezienswaardigheidId);
@@ -134,12 +160,17 @@ class BezienswaardigheidController extends Controller
             if($media->mediaType == "Afbeelding"){
                 $aantalAfbeeldingen++;
             }
+
+            if($media->mediaType == "360"){
+                $erIsEen360Afbeelding = True;
+            }
         }
         
         return view('/admin/bezienswaardigheden/wijzigBezienswaardigheid', 
             ['geopendeBezienswaardigheid' => $geopendeBezienswaardigheid,
             'alleBezienswaardigheidMedia' => $alleBezienswaardigheidMedia,
             'aantalAfbeeldingen' => $aantalAfbeeldingen,
+            'erIsEen360Afbeelding' => $erIsEen360Afbeelding,
             ]);
     }
 
@@ -184,7 +215,7 @@ class BezienswaardigheidController extends Controller
 
         if(sizeof($bezienswaardigheidMedia) >0){
             foreach ($bezienswaardigheidMedia as $media) {
-                if($media->mediaType == "Afbeelding"){
+                if($media->mediaType == "Afbeelding" || $media->mediaType == "360" ){
                     $filePath = $media->link;
                     unlink($filePath);
                 }
@@ -277,10 +308,15 @@ class BezienswaardigheidController extends Controller
         $bezienswaardigheid_id = $id;
 
         $afbeeldingen = Input::file('afbeeldingen');
+        $afbeelding360 = Input::file('afbeelding360');
 
             if($afbeeldingen){
 
                 $validator = $this->afbeeldingToevoegen($bezienswaardigheid_id, $afbeeldingen);
+            }
+
+            if($afbeelding360){
+                $validator = $this->afbeelding360Toevoegen($bezienswaardigheid_id, $afbeelding360);
             }
 
         return redirect('/admin/bezienswaardigheden/wijzig/'.$bezienswaardigheid_id)->withErrors($validator)->with('succesBericht', 'De afbeelding werd succesvol toegevoegd.');
@@ -306,7 +342,38 @@ class BezienswaardigheidController extends Controller
                 'mediaType' => $mediaType,
                 'bezienswaardigheid_id' => $bezienswaardigheid_id
                 ]);
+
+
+
+            } else{
+                return "het passeert ni";
             }
+        }
+
+        return $validator;
+
+    }
+
+    public function afbeelding360Toevoegen($bezienswaardigheid_id, $afbeelding360){
+
+        $media = new Media();
+
+        $regels = array('afbeelding360' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
+        $validator = Validator::make(array('afbeelding360'=> $afbeelding360), $regels);
+             
+        if($validator->passes()){  
+            $mediaType = "360";
+            $afbeeldingNaam = 'bezienswaardigheid-'.$bezienswaardigheid_id.'-'.str_random(5).$afbeelding360->getClientOriginalName();
+            $afbeelding360->move('img/bezienswaardigheden/', $afbeeldingNaam);
+            $filePath = 'img/bezienswaardigheden/'.$afbeeldingNaam;
+                        
+            //Afbeelding toevoegen in de database
+            $media->voegMediaToe([
+                'link' => $filePath,
+                'mediaType' => $mediaType,
+                'bezienswaardigheid_id' => $bezienswaardigheid_id
+            ]);
+        
         }
 
         return $validator;
@@ -319,7 +386,7 @@ class BezienswaardigheidController extends Controller
         $media = new Media();
         $opgehaaldeMedia = $media->bezienswaardigheidMediaOphalenViaId($mediaId)->first();
 
-        if($opgehaaldeMedia->mediaType == "Afbeelding"){
+        if($opgehaaldeMedia->mediaType == "Afbeelding" || $opgehaaldeMedia->mediaType == "360"){
             $filePath = $media->bezienswaardigheidMediaOphalenViaId($mediaId)->first()->link;
             $media->verwijderMedia($mediaId);
             unlink($filePath);
