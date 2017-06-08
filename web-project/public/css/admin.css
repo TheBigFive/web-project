@@ -7,3 +7,7 @@
   width: 75%;
   height: 400px;
   background-color: #CCC; }
+
+body{
+	padding-top: 0;
+}

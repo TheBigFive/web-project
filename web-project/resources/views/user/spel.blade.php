@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('css/spel.css') }}" >
+
 <div class="schoolheroimage container-fluid">
 	<img src="img/gamehero.jpg">
 </div>
@@ -24,46 +26,64 @@
 			<img src="img/line-png-32.png" style="width: 100%;">
 			<!--<p>________________________________________________________________________________________________________________________________________</p>-->
 		</div>
-	
-		<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
+
+		<div class="onderkant"></div>
+
+		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+		</div>
+
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 			<div class="afbeelding">
 				<img src="img/game_afbeelding1.png" style="text-align: center;">
 			</div>
 		</div>
 
-		<div class="kolom col-xs-12 col-sm-6 col-md-6 col-lg-6">
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 			<div class="afbeeldingtekst">
-				<h3>Speel 3 verschillende levels!</h3>
+				<h3 style="text-align: center;">Speel 3 verschillende levels!</h3>
 			</div>
 		</div>
 		
+		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+		</div>
+		
+		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+		</div>
+
 		<div class="achtergrondkleur"></div>
 
-		<div class="kolom col-xs-12 col-sm-6 col-md-6 col-lg-6">
-			<div class="afbeelding2">
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3" >
+			<div class="afbeeldingtekst uitzondering">
+				<h3 style="text-align: center;">Ontdek de stad terwijl je vliegt!</h3>
+			</div>
+		</div>
+
+		<div class="blok khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+			<div class="afbeelding">
 				<img src="img/game_afbeelding2.png" style="text-align: center;">
 			</div>
 		</div>
 
-		<div class="kolom col-xs-12 col-sm-6 col-md-6 col-lg-6">
-			<div class="afbeeldingtekst2">
-				<h3 style="color: white;">Ontdek de stad terwijl je vliegt!</h3>
-			</div>
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 		</div>
 
-		<div class="kolom col-xs-12 col-sm-6 col-md-6 col-lg-6">
-			<div class="afbeeldingtekst3">
-				<h3>Speel tegen je vrienden!</h3>
-			</div>
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
 		</div>
-		
-		<div class="kolom col-xs-12 col-sm-6 col-md-6 col-lg-6">
-			<div class="afbeelding3">
+
+		<div class="beker khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3" style="margin-bottom: 5%;">
+			<div class="afbeelding">
 				<img src="img/game_afbeelding3.png" style="text-align: center;">
 			</div>
 		</div>
 
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+			<div class="afbeeldingtekst">
+				<h3 class="laatste" style="text-align: center;">Speel tegen je vrienden!</h3>
+			</div>
+		</div>
 
+		<div class="khoogte kolom col-xs-12 col-sm-6 col-md-3 col-lg-3">
+		</div>
 
 	</div>
 @endsection
