@@ -10,39 +10,37 @@ class Scholen extends Model
 
     public function alleScholenOpvragen()
     {
-      return DB::table('scholen') /*
-      ->join('gebruikers', 'nieuwsitems.toegevoegddoor_id', '=', 'gebruikers.id')
-      ->join('tags', 'nieuwsitems.tag_id', '=', 'tags.tag_id')*/
-      ->select('scholen.*'/*, 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam'*/)
+      return DB::table('scholen')
+      ->select('scholen.*')
       ->get();
     }
-/*
+
     public function schoolOpvragenViaId($id)
     {
       return DB::table('scholen')
-      ->join('gebruikers', 'nieuwsitems.toegevoegddoor_id', '=', 'gebruikers.id')
-      ->join('tags', 'nieuwsitems.tag_id', '=', 'tags.tag_id')
-      ->select('scholen.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','tags.naam as tag_naam')
-      ->where('nieuwsitem_id', $id)
+      ->join('gebruikers', 'scholen.toegevoegddoor_id', '=', 'gebruikers.id')
+      ->select('scholen.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
+      ->where('school_id', $id)
       ->get();
     }
 
-    public function voegNieuwsitemToe($nieuwsitem){
-      return DB::table('nieuwsitems')
-      ->insertGetId($nieuwsitem);
+    public function voegschoolToe($school){
+      return DB::table('scholen')
+      ->insertGetId($school);
     }
 
-    public function wijzigNieuwsitem($id,$nieuwsitem){
-      return DB::table('nieuwsitems')
-      ->where('nieuwsitem_id', $id)
-      ->update($nieuwsitem);
+  
+    public function wijzigSchool($id, $school){
+      return DB::table('scholen')
+      ->where('school_id', $id)
+      ->update($school);
     }
 
-    public function verwijderNieuwsitem($id)
+    public function verwijderschool($id)
     {
-      return DB::table('nieuwsitems')
-      ->where('nieuwsitem_id', $id)
+      return DB::table('scholen')
+      ->where('school_id', $id)
       ->delete();
     }
-  */
+  
 }

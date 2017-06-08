@@ -336,6 +336,8 @@ class TestimonialController extends Controller
                 'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
                 'goedgekeurdop' => $goedgekeurdop
             ]); 
+
+            $this->offlineHalenTestimonial($testimonialId);
         };        
 
         return Redirect::back()->withErrors($validator)->with('succesBericht', 'De testimonial werd succesvol afgewezen.');

@@ -57,6 +57,9 @@
 			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
 			     		@if($media->mediaType == "Afbeelding")
 							<img height="60px" src="{{ asset($media->link)  }}">
+							@if($media->isHoofdafbeelding)
+								Ingesteld als hoofdafbeelding
+							@endif
 						@endif
 					@endforeach
 				@else

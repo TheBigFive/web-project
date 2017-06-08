@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('admincontent')
 
-<div class="gebruikerswrapper">
+<div class="gebruikerswrapper bevatWijzigBezienswaardigheidMap">
 
 	<h2>Bezienswaardigheden wijzigen</h2>
 	<div class="container">
@@ -63,13 +63,12 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="adres">Adres</label>
-					    <textarea rows="5" name="adres" class="form-control summernote" placeholder="Typ hier het adres van de bezienswaardigheid">{{ $geopendeBezienswaardigheid->adres }}</textarea>
-					    @if ($errors->has('adres'))
-						    <span class="help-block">
-						        <strong>{{ $errors->first('adres') }}</strong>
-						    </span>
-						@endif
+					    <label for="adres">Locatie</label>
+					    <p>Geef het volledige adres in van de bezienswaardigheid</p>
+					    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control" value="{{ $geopendeBezienswaardigheid->adres }}" /><br/>
+					    <button id="locatieBezienswaardigheidKnop" class="btn btn-primary">Zoek locatie op</button>
+					    <div id="wijzigBezienswaardigheid-map"></div>
+					    <input id="locatie-input" type="hidden" name="coordinaten" value="{{ $geopendeBezienswaardigheid->coordinaten }}">
 					</div>
 					
 					<div class="form-group">
@@ -99,6 +98,9 @@
 						@if($media->mediaType == "Afbeelding")
 							<img height="60px" src="{{ asset($media->link)  }}">
 							<a href="/admin/bezienswaardigheden/verwijderMedia/{{ $media->media_id }}">verwijderen</a>
+							@if($media->isHoofdafbeelding == false)
+								<a href="/admin/bezienswaardigheden/stelHoofdafbeeldingIn/{{ $media->media_id }}">Instellen als hoofdafbeelding</a>
+							@endif
 						@endif
 					@endforeach
 				@else
