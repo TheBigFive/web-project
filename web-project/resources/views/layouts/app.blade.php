@@ -32,7 +32,7 @@
             <div id="navbar" class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="#">Bezienswaardigheden</a></li>
+                <li><a href="{{ url('bezienswaardigheden') }}">Bezienswaardigheden</a></li>
                 <li><a href="{{ url('scholen') }}">Studeren</a></li>
                 <li class="dropdown">
                   <a href="{{ url('praktisch') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Praktisch<span class="caret"></span></a>
@@ -44,7 +44,7 @@
                     <li><a href="{{ url('praktisch') }}#kot">Op kot</a></li>
                   </ul>
                 </li>
-                <li><a href="#contact">Verhalen</a></li>
+                <li><a href="{{ url('testimonials') }}">Verhalen</a></li>
                 <li><a href="{{ url('nieuwsartikels') }}">Nieuws</a></li>
                 <li><a href="{{ url('spel') }}"><i class="fa fa-gamepad" aria-hidden="true"></i></a></li>
 
@@ -88,5 +88,7 @@
         <script src="{{ asset('js/slideshow.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
-        <script src="{{ asset('js/datumFirefox.js') }}"></script>   
+        <script src="{{ asset('js/datumFirefox.js') }}"></script>
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}" > </script> 
+        <script src="{{ asset('js/bootstrap.min.js') }}" > </script> 
 </html>
