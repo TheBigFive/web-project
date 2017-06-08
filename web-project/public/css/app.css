@@ -22,90 +22,7 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{
 	font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
 
-/*hieronder voor spel*/
 
-.videospel{
-	position: relative;
-	top: 80%;
-	/*left: 29%;/*201px;*/
-	left: 26%;
-	z-index: -1;
-}
-
-@media screen and (max-width: 780px)
-{
-	.legesmartphone{
-		display: none;
-	}
-	.videospel{
-		left: 0%;
-	}
-}
-
-.legesmartphone{
-	position: relative;
-	vertical-align: top;
-	left: -20.5%;
-	/*left: -17.5%;*/
-}
-
-.demo{
-	text-align: center;
-}
-
-.achtergrondkleur{
-	width: 100%;
-	height: 40%;
-	background-color: #387C70; /*#0099CC;*/
-	position: absolute;
-	top: 202%;
-	left: 0%;
-}
-
-
-.afbeelding img, .afbeelding2 img, .afbeelding3 img{
-	width: 100%;
-	height: auto;
-}
-
-.afbeelding{
-	margin-top: 20%;
-	margin-left: 80%;
-	width: 53%;
-}
-
-.afbeelding2{
-	margin-top: 23%;
-	margin-left: 50%;
-	width: 33%;
-}
-
-.afbeelding3{
-	margin-top: -19%;
-	margin-left: 51%;
-	width: 30%;
-	margin-bottom: 20%;
-}
-
-.afbeeldingtekst{
-	width: 60%;
-	margin-top: 28%;
-	margin-left: 40%;
-}
-
-.afbeeldingtekst2{
-	width: 60%;
-	margin-top: -23%;
-	margin-left: 40%;
-}
-
-.afbeeldingtekst3{
-	width: 60%;
-	margin-top: 21%;
-	margin-left: 11%;
-}
-
-/*tot hier voor spel*/
 
 .schoolheroimage img{
 	width: 100%;
@@ -4874,11 +4791,6 @@ height:50px;
 	15% {opacity: 1;}
 	70% {opacity: 1;}
 	85% {opacity: 0;}
-}
-
-.inhoud{
-	padding-left: 1em;
-	padding-right: 1em;
 }
 
 .dropdown-menu a{

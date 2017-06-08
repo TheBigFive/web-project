@@ -25,33 +25,35 @@
 		<div class="afbeeldingenNieuwsitem col-xs-12 col-sm-4 col-md-4 col-lg-4">
 		@foreach($alleNieuwsitemMedia as $media)
 				@if($media->mediaType == "Afbeelding")
-						<div class="col-xs-4 col-sm-6 col-md-6 col-lg-6">
+					@if($media->isHoofdafbeelding == 0)
+						<div class="enkeleAfbeelding">
 							<img src="{{ asset($media->link)  }}"></img>
 						</div>
+					@endif
 				@endif
 			@endforeach
 
-			<div class="extraNieuwsitems col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="extraNieuws col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h2>Nieuwe artikels</h2>
-			<div class="eerste col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h3>{!! $geopendeNieuwsitem->titel !!}</h3></a>
-				<p>{!! $geopendeNieuwsitem->tag_naam !!}</p>
+			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
+				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
 			</div>
-			<div class="eerste col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h3>{!! $geopendeNieuwsitem->titel !!}</h3></a>
-				<p>{!! $geopendeNieuwsitem->tag_naam !!}</p>
+			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
+				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
 			</div>
-			<div class="eerste col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h3>{!! $geopendeNieuwsitem->titel !!}</h3></a>
-				<p>{!! $geopendeNieuwsitem->tag_naam !!}</p>
+			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
+				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
 			</div>
-			<div class="eerste col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h3>{!! $geopendeNieuwsitem->titel !!}</h3></a>
-				<p>{!! $geopendeNieuwsitem->tag_naam !!}</p>
+			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
+				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
 			</div>
-			<div class="eerste col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h3>{!! $geopendeNieuwsitem->titel !!}</h3></a>
-				<p>{!! $geopendeNieuwsitem->tag_naam !!}</p>
+			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
+				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
 			</div>
 		</div>
 	</div>

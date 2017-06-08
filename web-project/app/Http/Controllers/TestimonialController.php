@@ -31,6 +31,17 @@ class TestimonialController extends Controller
             ]);
         
     }
+
+    public function ophalenTestimonials()
+    {
+        $testimonial = new Testimonials();
+        $alleTestimonials = $testimonial->alleTestimonialsOpvragen();
+
+        return view('user/testimonials',
+            ['alleTestimonials' => $alleTestimonials
+            ]);
+        
+    }
     
     //Deze functie wordt uitgevoerd bij het openen van de pagina testimonial
     public function openTestimonial($id){

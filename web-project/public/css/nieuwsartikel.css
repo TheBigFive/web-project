@@ -58,8 +58,52 @@
 	margin-top: 1em;
 }
 
-.extraNieuwsitems{
+.extraNieuws{
 	margin-bottom: 7em;
+	text-align: center;
+}
+
+.extraNieuws h2{
+	padding-bottom: 10px;
+	border-bottom: 2px solid #0099cc;
+}
+
+.extraNieuws p{
+	margin-top: 0px;
+}
+
+.extraNieuws .item{
+	margin-bottom: 1em;
+	left: 10%;
+	width: 80%;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+}
+
+.extraNieuws .item h4{
+	margin-bottom: 0px;
+	margin-left: -20%;
+	margin-right: -20%;
+}
+
+.extraNieuws .item:last-child{
+	border-bottom: 0px;
+}
+
+.enkeleAfbeelding{
+	height: 12em;
+	overflow: hidden;
+	float: right;
+}
+
+.afbeeldingenNieuwsitem .enkeleAfbeelding img{
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: -100%;
+	margin-bottom: -100%;
+	margin: auto;
+
 }
 
 @media (min-width: 768px) {

@@ -30,12 +30,20 @@ class BezienswaardigheidController extends Controller
             if($bezienswaardigheid->goedkeuringsstatus == "Nieuwe bezienswaardigheid" || $bezienswaardigheid->goedkeuringsstatus == "Gewijzigd"){
                 $aantalNieuweEnGewijzigdeBezienswaardigheden++;
             }
-
         }
 
         return view('admin/bezienswaardigheden/bezienswaardigheden',
             ['alleBezienswaardigheden' => $alleBezienswaardigheden,
             'aantalNieuweEnGewijzigdeBezienswaardigheden' => $aantalNieuweEnGewijzigdeBezienswaardigheden
+            ]);       
+    }
+
+        public function ophalenBezienswaardigheden()
+    {   
+        $bezienswaardigheid = new Bezienswaardigheden();
+        $alleBezienswaardigheden = $bezienswaardigheid->GoedgekeurdeBezienswaardighedenOpvragen();
+        return view('user/bezienswaardigheden',
+            ['alleBezienswaardigheden' => $alleBezienswaardigheden
             ]);        
     }
 
