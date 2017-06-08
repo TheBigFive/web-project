@@ -1,10 +1,13 @@
 @extends('layouts.admin')
-
 @section('admincontent')
 
-<div class="gebruikerswrapper">
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 6%; width: 100%;">Nieuwsitem wijzigen</h2>
+    </div>
+</div>
 
-	<h2>Nieuwsartikel wijzigen</h2>
+<div class="gebruikerswrapper">
 
 	<div class="container">
 		<div class="row">

@@ -1,15 +1,19 @@
 @extends('layouts.admin')
-
 @section('admincontent')
 
-<div class="gebruikerswrapper">
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 6%; width: 100%;">Testimonial toevoegen</h2>
+    </div>
+</div>
 
-	<h2>Testimonial toevoegen</h2>
+
+<div class="gebruikerswrapper">
 	
 	<form action="/admin/testimonials/toevoegen" enctype="multipart/form-data" method="post">
 		{!! csrf_field() !!}
 		<div class="form-group">
-		    <label for="titel">Titel testimonial</label>
+		    <label for="titel" class="nieuwstoevoegen">Titel testimonial</label>
 		    <input type="text" name="titel" class="form-control" placeholder="Typ hier de titel van de testimonial">
 		    @if ($errors->has('titel'))
 			    <span class="help-block">
@@ -18,7 +22,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="naam_persoon">Naam persoon</label>
+		    <label for="naam_persoon" class="nieuwstoevoegen">Naam persoon</label>
 		    <input type="text" name="naam_persoon" class="form-control" placeholder="Typ hier de naam van de persoon die het verhaal vertelt">
 		    @if ($errors->has('naam_persoon'))
 			    <span class="help-block">
@@ -27,7 +31,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="leeftijd_persoon">Leeftijd persoon</label>
+		    <label for="leeftijd_persoon" class="nieuwstoevoegen">Leeftijd persoon</label>
 		    <input type="number" name="leeftijd_persoon" class="form-control" placeholder="Typ hier de leeftijd van de persoon die het verhaal vertelt">
 		    @if ($errors->has('leeftijd_persoon'))
 			    <span class="help-block">
@@ -36,7 +40,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="functie_persoon">Functie persoon</label>
+		    <label for="functie_persoon" class="nieuwstoevoegen">Functie persoon</label>
 		    <input type="text" name="functie_persoon" class="form-control" placeholder="Typ hier de functie van de persoon die het verhaal vertelt: vb. Student Marketing">
 		    @if ($errors->has('functie_persoon'))
 			    <span class="help-block">
@@ -45,7 +49,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="beschrijving_persoon">Beschrijving persoon</label>
+		    <label for="beschrijving_persoon" class="nieuwstoevoegen">Beschrijving persoon</label>
 		    <textarea rows="5" name="beschrijving_persoon" class="form-control summernote" placeholder="Typ hier de beschrijving van de persoon"></textarea>
 		    @if ($errors->has('beschrijving_persoon'))
 			    <span class="help-block">
@@ -54,7 +58,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="tekstvorm_testimonial">Artikel</label>
+		    <label for="tekstvorm_testimonial" class="nieuwstoevoegen">Artikel</label>
 		    <textarea rows="5" name="tekstvorm_testimonial" class="form-control summernote" placeholder="Typ hier je artikel"></textarea>
 		    @if ($errors->has('teskstvorm_testimonial'))
 			    <span class="help-block">
@@ -64,7 +68,7 @@
 		</div>
 
 		<div class="form-group{{ $errors->has('tag') ? ' has-error' : '' }}">
-		    <label for="tag">Tag</label>
+		    <label for="tag" class="nieuwstoevoegen">Tag</label>
 		    <select class="form-control" name="tag">
 		    @foreach ($alleTags as $tag)
 			   		<option value="{{ $tag->tag_id }}">{{ $tag->naam }}</option>
@@ -77,7 +81,7 @@
 			@endif
 		</div>
 
-		<h3>Media</h3>
+		<h3 class="nieuwstoevoegen">Media</h3>
 		
 		<div class="row">
 			<div class="col-md-5">
@@ -114,7 +118,7 @@
 		</div>
 		
 		<div class="form-group">
-		    <input type="submit" class="btn btn-primary" value="Maak testimonial">
+		    <input type="submit" class="btn btn-primary nieuwsknoponderaan" value="Maak testimonial">
 		</div>
 	</form>
 

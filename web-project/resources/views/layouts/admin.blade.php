@@ -46,8 +46,9 @@
       <!-- Top Menu Items -->
      <nav class="navbar navbar-inverse navbar-fixed-top">
         <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-        <a href="{{ url('/') }}"><img class="brand-img pull-left logo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}" alt="brand"/></a>
+        <a href="{{ url('/admin') }}"><img class="pull-left adminlogo" src="{{ asset('img/A_logo_RGB_123x123.jpg') }}" alt="brand"/></a>
         <ul class="nav navbar-right top-nav pull-right">
+          <li class="terugtekst"><a href="{{ url('/') }}"><i class="fa fa-arrow-circle-right"></i> Terug naar de website</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><i class="fa fa-cog top-nav-icon"></i></a>
             <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
@@ -76,24 +77,7 @@
             <a  class="active" href="{{ url('/admin') }}" data-toggle="collapse" data-target="#dashboard_dr"><i class="fa fa-fw fa-home"></i> Dashboard </a>
           </li>
           <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-fw fa-users"></i> Gebruikers<span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
-            <ul id="ecom_dr" class="collapse collapse-level-1">
-              <li>
-                <a href="{{ url('/admin/gebruikers') }}">Alle gebruikers</a>
-              </li>
-              <li>
-                <a href="{{ url('/admin/gebruikers') }}">Administrators</a>
-              </li>
-              <li>
-                <a href="{{ url('/admin/gebruikers') }}">Approvers</a>
-              </li>
-              <li>
-                <a href="{{ url('/admin/gebruikers') }}">Editors</a>
-              </li>
-              <li>
-                <a href="{{ url('/admin/gebruikers') }}">Gebruikers</a>
-              </li>
-            </ul>
+            <a href="{{ url('/admin/gebruikers') }}" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-fw fa-users"></i> Gebruikers</a>
           </li>
           <li>
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><i class="fa fa-fw fa-file-text-o"></i> Nieuwsitems <span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
@@ -163,14 +147,9 @@
         </ul>
       </div>
 
+            
 
-
-        <div class="page-wrapper">
-            <div class="row heading-bg  bg-blue">
-              <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="txt-light" style="margin-top: 6%">Dashboard</h4>
-              </div>
-            </div>
+        <div class="page-wrapper">  
           @yield('admincontent')
         </div>
 

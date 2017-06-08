@@ -10,4 +10,83 @@
 
 body{
 	padding-top: 0;
+	min-height: 0;
+}
+
+.adminlogo{
+	margin: 0;
+	height: 60px;
+}
+
+.terugtekst{
+	margin-right: 50px;
+}
+
+.terugtekst:hover{
+	color: blue;
+	text-decoration: underline;
+}
+
+.page-wrapper{
+	margin: 0;
+}
+
+.gebruikerswrapper{
+	margin-left: 8%;
+	margin-right: 8%;
+}
+
+.knop{
+	margin: 5px;
+}
+
+.zoekgebruikersveld{
+	width: 60%;
+	margin-left: 10%;
+	margin-right: 5%;
+	float: left;
+}
+
+.gebruikerszoekform{
+	margin-bottom: 5%;
+}
+
+.gebruikersnav{
+	margin-left: 30%;
+}
+
+.gebruikersnav li{
+	margin: 5px 5px 5px 0px;
+}
+
+.knoponderaan{
+	margin-left: 35%;
+	margin-top: 5%;
+}
+
+.nieuwstitel{
+	margin-top: 4%;
+	text-align: center;
+}
+
+.nieuwsknoponderaan{
+	margin-left: 45%;
+	margin-top: 5%;
+}
+
+.nieuwstoevoegen{
+	margin-top: 4%;
+}
+
+.nieuwsgoedkeuren{
+	margin-top: 8%;
+}
+
+.nieuwsafbeelding{
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
+
+.opennieuwsknoppenonderaan{
+	margin-left: 25%;
 }

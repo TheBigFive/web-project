@@ -1,9 +1,14 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 6%; width: 100%;">Tags</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper">
 
-	<h2>Tags</h2>
 	<button class="btn btn-primary" id="tagToevoegenKnop">Tag toevoegen</button>
 	<form id="tagForm" action="/admin/tags/toevoegen/" method="post">     	
 		{!! csrf_field() !!}
