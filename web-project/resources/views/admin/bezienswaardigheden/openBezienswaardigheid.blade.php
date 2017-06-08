@@ -20,7 +20,7 @@
 				<p>{!! $geopendeBezienswaardigheid->beschrijving !!}</p>
 				<h4>Adres</h4>
 				<p id="adres">{!! $geopendeBezienswaardigheid->adres !!}</p>
-				<div></div>
+				<div id="openBezienswaardigheid-map"></div>
 				<input id="coordinaten" type="hidden" name="coordinaten" value="{{ $geopendeBezienswaardigheid->coordinaten }}">
 				@if ($geopendeBezienswaardigheid->openingsuren)
 					<h4>Openingsuren</h4>
@@ -61,6 +61,16 @@
 					@endforeach
 				@else
 					<p>Deze bezienswaardigheid heeft geen afbeeldingen.</p>
+				@endif
+				<h4>360 Foto's</h4>
+				@if($erIsEen360Afbeelding)
+			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
+			     		@if($media->mediaType == "360")
+							<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img height="60px" src="{{ asset($media->link)  }}"></a>
+						@endif
+					@endforeach
+				@else
+					<p>Deze bezienswaardigheid heeft geen 360 foto.</p>
 				@endif
 
 			</div>

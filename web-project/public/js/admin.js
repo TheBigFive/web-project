@@ -62,7 +62,7 @@ $(function(){
 
   		var locatie = coordinaten.value.split(",");
   		var map = new GMaps({
-			el: '#openBezienswaardigheidToe-map',
+			el: '#openBezienswaardigheid-map',
 			lat: locatie[0],
 			lng: locatie[1],
 		});
