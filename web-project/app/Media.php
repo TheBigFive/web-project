@@ -61,6 +61,19 @@ class Media extends Model
       ->where('media_id', $id)
       ->get();
     }
+
+    public function schoolMediaOphalenViaSchoolId($id){
+      return DB::table('media')
+      ->where('school_id', $id)
+      ->get();
+    }
+
+    public function schoolMediaOphalenViaId($id)
+    {
+      return DB::table('media')
+      ->where('media_id', $id)
+      ->get();
+    }
     
 
     public function voegMediaToe($media)

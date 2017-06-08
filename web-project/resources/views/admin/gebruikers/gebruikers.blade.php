@@ -1,13 +1,19 @@
 @extends('layouts.admin')
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 6%; width: 100%;">Gebruikers</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper">
     <div class="row">
-        <h2>Gebruikers</h2>
 
         <form action="{{ url('admin/gebruikers/zoeken') }}" method="post" class="gebruikerszoekform">
 	        {!! csrf_field() !!}
 
-	        <div class="form-group{{ $errors->has('teZoekenGebruiker') ? ' has-error' : '' }}">
+	        <div class="zoekgebruikersveld form-group{{ $errors->has('teZoekenGebruiker') ? ' has-error' : '' }}">
 	            <input type="text" class="form-control" name="teZoekenGebruiker" placeholder="Typ hier de naam van de gebruiker">
 	            @if ($errors->has('teZoekenGebruiker'))
 	                <span class="help-block">
@@ -16,7 +22,7 @@
 	            @endif
 	        </div>
 
-	        <input type="submit" name="zoeken" class="btn btn-primary" value="Gebruiker zoeken">
+	        <input type="submit" name="zoeken" class="btn btn-primary zoekgebruikerknop" value="Gebruiker zoeken">
 	    </form>
 	    
 	    <div class="spacer"></div>
@@ -45,17 +51,6 @@
 				<table class="table mb-0">
 
 
-<!--
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="panel panel-default card-view">
-					<div class="panel-wrapper collapse in">
-						<div class="panel-body">
-							<div class="tab-content table-wrap mt-40">
-
-			<div class="tab-pane active table-responsive active" id="alleGebruikersTab">
-				<table id="edit_datable_2" class="table mb-0">
--->
 					<thead>
 						<tr>
 							<th>#</th>
