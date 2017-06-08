@@ -1,6 +1,13 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">School</h2>
+    </div>
+</div>
+
+
 <div class="gebruikerswrapper">
 
 	<h2>School: {{ $geopendeSchool->naam }}</h2>
@@ -14,20 +21,20 @@
     @endif
     <div class="row">
     		<div class="col-md-6">
-			    <h4>Naam school</h4>    
+			    <h4 class="nieuwsgoedkeuren">Naam school</h4>    
 				<p>{{ $geopendeSchool->naam }}</p>
-				<h4>Beschrijving</h4>
+				<h4 class="nieuwsgoedkeuren">Beschrijving</h4>
 				<p>{!! $geopendeSchool->beschrijving !!}</p>
-				<h4>Website</h4>
+				<h4 class="nieuwsgoedkeuren">Website</h4>
 				<p><a href="{{ $geopendeSchool->website }}">{{ $geopendeSchool->website }}</a></p>
-				<h4>Toegevoegd door</h4>
+				<h4 class="nieuwsgoedkeuren">Toegevoegd door</h4>
 				<p>{{ $geopendeSchool->toegevoegddoor_voornaam }} {{ $geopendeSchool->toegevoegddoor_achternaam }}</p>
-				<h4>Goedkeuringsstatus:</h4>
+				<h4 class="nieuwsgoedkeuren">Goedkeuringsstatus:</h4>
 				<p>{{ $geopendeSchool->goedkeuringsstatus }}</p>
-				<h4>Publicatiestatus:</h4>
+				<h4 class="nieuwsgoedkeuren">Publicatiestatus:</h4>
 				<p>{{ $geopendeSchool->publicatieStatus }}</p>
 				@if ($geopendeSchool->redenVanAfwijzing)
-					<h4>Reden van afwijzing: </h4>
+					<h4 class="nieuwsgoedkeuren">Reden van afwijzing: </h4>
 					<p>{{ $geopendeSchool->redenVanAfwijzing }}</p>
 				@endif
 			</div>
@@ -40,7 +47,7 @@
 						<img height="60px" src="{{ asset($media->link)  }}">
 					@endif
 				@endforeach
-				<h4>Afbeelding</h4>
+				<h4 class="nieuwsgoedkeuren">Afbeelding</h4>
 				@foreach($alleSchoolMedia as $key => $media)
 			     	@if($media->mediaType == "Afbeelding")
 						<img height="60px" src="{{ asset($media->link)  }}">
@@ -49,6 +56,8 @@
 
 			</div>
 	</div>
+
+	<div class="opennieuwsknoppenonderaan">
 	@if (Auth::user()->rol_id!=4)
 			@if($geopendeSchool->goedkeuringsstatus == "Goedgekeurd")
 				<span>
@@ -129,12 +138,12 @@
 	<span>
 		<a href="/admin/scholen/wijzig/{{ $geopendeSchool->school_id }}" class="btn btn-primary">Wijzig scholen</a>
 	</span>
-
+	</div>
 	
 	<div class="row">
 		<div class="col-md-6">
 			<h3>Campussen</h3>
-			<a href="/admin/scholen/campus/toevoegen/{{ $geopendeSchool->school_id }}"><button class="btn btn-primary" id="campusToevoegenKnop">Campus toevoegen</button></a>
+			<a href="/admin/scholen/campus/toevoegen/{{ $geopendeSchool->school_id }}"><button class="btn btn-primary nieuwstoevoegenknop" id="campusToevoegenKnop" style="margin-bottom: 2%;">Campus toevoegen</button></a>
 			<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default card-view">
@@ -154,7 +163,7 @@
 													@foreach($alleCampussen as $key => $campus)
 															<tr>
 																<td>{{ $key+1 }}</td>
-																<td><a href="/admin/bezienswaardigheden/open/{{ $campus->campus_id }}">{{ $campus->naam }}</a></td>
+																<td><a href="/admin/campus/open/{{ $campus->campus_id }}">{{ $campus->naam }}</a></td>
 																<td>{{ $campus->adres }}</td>
 																@if (Auth::user()->rol_id!=4)
 																	<td><a href="/admin/scholen/campus/verwijder/{{ $campus->campus_id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
@@ -176,7 +185,7 @@
 
 		<div class="col-md-6">
 			<h3>Interessegebieden</h3>
-			<a href="/admin/scholen/interessegebied/toevoegen/{{ $geopendeSchool->school_id }}"><button class="btn btn-primary" id="interessegebiedToevoegenKnop" >Interessegebied toevoegen</button></a>
+			<a href="/admin/scholen/interessegebied/toevoegen/{{ $geopendeSchool->school_id }}"><button class="btn btn-primary nieuwstoevoegenknop" id="interessegebiedToevoegenKnop" style="margin-bottom: 2%;">Interessegebied toevoegen</button></a>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="panel panel-default card-view">

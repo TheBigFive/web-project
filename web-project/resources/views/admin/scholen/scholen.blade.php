@@ -11,7 +11,7 @@
 		<a class="btn btn-primary nieuwstoevoegenknop" href="/admin/scholen/toevoegen">School Toevoegen</a>
 
 		@if ($aantalNieuweEnGewijzigdeScholen > 0)
-			<h4>Moeten nog goedgekeurd worden:</h4>
+			<h4 class="nieuwstitel">Moeten nog goedgekeurd worden:</h4>
 
 			<div class="row">
 				<div class="col-sm-12">
@@ -62,7 +62,7 @@
 		@endif
 
 
-		<h4>Alle scholen</h4>
+		<h4 class="nieuwstitel">Alle scholen</h4>
 
 		<div class="row">
 			<div class="col-sm-12">
