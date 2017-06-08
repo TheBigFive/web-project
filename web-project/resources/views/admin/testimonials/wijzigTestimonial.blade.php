@@ -117,16 +117,20 @@
 					@foreach($alleTestimonialMedia as $media)
 						@if($media->mediaType == "Afbeelding")
 							<div class="geheel">
-							<img height="60px" class="pic" src="{{ asset($media->link)  }}">
-							<div class="middle">
 							@if($media->isHoofdafbeelding == true)
+								<div class="omlijnd">
 								<i class="fa fa-home"></i>
 							@endif
+							<img height="60px" class="pic" src="{{ asset($media->link)  }}">
+							<div class="middle">
 							<a class="text" href="/admin/testimonials/verwijderMedia/{{ $media->media_id }}"><i class="fa fa-trash" title="Verwijderen" data-toggle="tooltip"></i></a>
 							@if($media->isHoofdafbeelding == false)
 								<a class="text" href="/admin/testimonials/stelHoofdafbeeldingIn/{{ $media->media_id }}" title="Zet als hoofdafbeelding" data-toggle="tooltip"><i class="fa fa-home"></i></a>
 							@endif
 							</div>
+							@if($media->isHoofdafbeelding == true)
+							</div>
+							@endif
 							</div>
 						@endif
 					@endforeach
