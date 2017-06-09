@@ -14,7 +14,7 @@
 					    	<pattern id="img" patternUnits="userSpaceOnUse" width="100" height="100">
 					    		@foreach ($alleSchoolMedia as $key => $media)
 					    			@if( $media->mediaType == "Afbeelding" )
-					    				<image xlink:href="{{ asset(($media->link)) }}" y="-25" x="-25" width="150" height="150" />
+					    				<image xlink:href="{{ asset(($media->link)) }}" y="-80px" x="-70px" width="250px" height="250px" />
 					    			@endif
 					    		@endforeach
 					    	</pattern>
