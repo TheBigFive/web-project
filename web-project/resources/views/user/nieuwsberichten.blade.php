@@ -1,7 +1,15 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/nieuwsartikel.css') }}" >
 	<div class="container">
+	<div class="heroImage">
+		<img src="{{ asset('img/nieuwsitems/nieuwsitem-4-ZVEO76KtcdUU.jpg') }}">
+	</div>
 	<div class="nieuwsitems">
+		<div class="introPagina">
+		<h1>Nieuws</h1>
+		<p>Heet van de naald, een must know of gewoon droge informatie waar je niet omheen kan? Met dit nieuws ben je weer helemaal up-to-date en kan je meepraten met je vrienden.</p>
+		</div>
 	@foreach($alleNieuwsitems as $key => $nieuwsitem)
 		<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<div class="foto">

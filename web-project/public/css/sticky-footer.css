@@ -6,6 +6,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
+  margin-bottom: 5em;
 }
 .footer {
   position: absolute;
@@ -25,5 +26,4 @@ body {
 }
 
 body{
-  padding-bottom: 1em;
 }

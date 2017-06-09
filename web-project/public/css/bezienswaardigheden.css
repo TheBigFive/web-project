@@ -1,24 +1,68 @@
-.bezienswaardigheidKort{}
+h1 {
+	font-family: Antwerpen;
+}
+
+.heroImage{
+	width: 100%;
+	max-height: 40em;
+	overflow: hidden;
+}
+
+.heroImage img{
+	width: 100%;
+}
+
+.introPagina{
+	text-align: center;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.introPagina h1{
+	font-family: Antwerpen;
+}
+
+.introPagina h3{
+	font-family: georgia;
+}
+
+.bezienswaardigheidKort .titel{
+	text-align: center;
+}
 
 .bezienswaardigheidLang{
 	margin-bottom: 2em;
-	border: 1px solid red;
 }
 .bezienswaardigheidLang img{
 	width: 100%;
 }
 
-.bezienswaardigheidLang .col-md-6,.bezienswaardigheidLang .col-lg6{
-	border: 1px solid yellow;
+.streetview {
+  position: absolute;
+  top: 80%;
+  left: 50%;  
+  transform: translate(-50%, -50%);
+  font-size: 5em;
+  color: white;
 }
 
-.bezienswaardigheidLang .col-md-2,.bezienswaardigheidLang .col-lg2{
-	border: 1px solid purple;
+@media (min-width: 480px) {
+	.streetview{
+		font-size: 7em;
+	}
 }
 
-.bezienswaardigheidLang .col-md-4,.bezienswaardigheidLang .col-lg4{
-	border: 1px solid green;
-}
 @media (min-width: 768px) {
-
+	.streetview{
+		font-size: 10em;
+	}
 }
+
+
+
+.kaart{
+	width: 100%;
+	height: 60vh;
+}
+
