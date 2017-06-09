@@ -11,7 +11,8 @@ class Testimonials extends Model
     {
       return DB::table('testimonials')
       ->join('gebruikers', 'testimonials.toegevoegddoor_id', '=', 'gebruikers.id')
-      ->select('testimonials.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam')
+      ->join('media','testimonials.testimonial_id','=','media.testimonial_id')
+      ->select('testimonials.*', 'gebruikers.voornaam as toegevoegddoor_voornaam','gebruikers.achternaam as toegevoegddoor_achternaam','media.link as media_link')
       ->get();
     }
 

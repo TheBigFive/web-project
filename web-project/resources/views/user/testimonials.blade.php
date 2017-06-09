@@ -31,7 +31,7 @@
 				{{ date('d-m-Y', strtotime($testimonial->toegevoegdop))}}
 				</div>
 				<div class="auteur">
-					{{ $testimonial->toegevoegddoor_voornaam }} {{ $nieuwsitem->toegevoegddoor_achternaam }}
+					{{ $testimonial->toegevoegddoor_voornaam }} {{ $testimonial->toegevoegddoor_achternaam }}
 				</div>
 				<div class="titel">
 					<a href="testimonials/{{ $testimonial->testimonial_id }}">
