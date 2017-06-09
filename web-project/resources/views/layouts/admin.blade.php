@@ -11,8 +11,7 @@
       <!--VANAF HIER VOOR KENNY-->
 
   
-        <!-- Morris Charts CSS -->
-         <link rel="stylesheet" href="{{ asset('css/kenny/vendors/bower_components/morris.js/morris.css') }}" type="text/css"/>
+      
   
         <!-- Data table CSS -->
         <link rel="stylesheet" href="{{ asset('css/kenny/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css') }}" type="text/css"/>
@@ -80,14 +79,14 @@
             <a href="{{ url('/admin/gebruikers') }}" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-fw fa-users"></i> Gebruikers</a>
           </li>
           <li>
-            <a href="{{ url('admin/nieuwsitems') }}" data-toggle="collapse" 
+            <a href="{{ url('admin/nieuwsitems') }}" data-toggle="collapse" data-target="#chart_dr"
             ><i class="fa fa-fw fa-file-text-o"></i> Nieuwsitems <span class="pull-right"></span></a>
           </li>
           <li>
-            <a href="{{ url('admin/testimonials') }}" data-toggle="collapse" ><i class="fa fa-fw fa-comment"></i></i> Testimonials<span class="pull-right"></span></a>
+            <a href="{{ url('admin/testimonials') }}" data-toggle="collapse" data-target="#chart_dr"><i class="fa fa-fw fa-comment"></i></i> Testimonials<span class="pull-right"></span></a>
           </li>
           <li>
-            <a href="{{ url('admin/bezienswaardigheden') }}" data-toggle="collapse" ><i class="fa fa-fw fa-camera"></i> Bezienswaardigheden<span class="pull-right"></span></a>
+            <a href="{{ url('admin/bezienswaardigheden') }}" data-toggle="collapse" data-target="#chart_dr"><i class="fa fa-fw fa-camera"></i> Bezienswaardigheden<span class="pull-right"></span></a>
           </li>
           <li>
             <a href="{{ url('admin/scholen') }}" data-toggle="collapse" data-target="#chart_dr"><i class="fa fa-fw fa-mortar-board"></i> Scholen </a>
@@ -136,54 +135,21 @@
   <!-- Data table JavaScript -->
   <script src="{{ asset('vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
   <script src="{{ asset('vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-  <script src="{{ asset('vendors/bower_components/jszip/dist/jszip.min.js') }}"></script>
-  <script src="{{ asset('vendors/bower_components/pdfmake/build/pdfmake.min.js') }}"></script>
-  <script src="{{ asset('vendors/bower_components/pdfmake/build/vfs_fonts.js') }}"></script>
   
   <script src="{{ asset('vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
   <script src="{{ asset('vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ asset('dist/js/export-table-data.js') }}"></script>
 
     <script src="{{ asset('vendors/bower_components/jquery/dist/jquery.min.js') }}"></script> 
-
-    <!-- Bootstrap Core JavaScript --><!--
-    <script src="{{ asset('vendors/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     
   <!-- Data table JavaScript -->
   <script src="{{ asset('vendors/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
   
-  <!-- Slimscroll JavaScript --><!--
-  <script src="{{ asset('dist/js/jquery.slimscroll.js') }}"></script>
-  
-  <!-- simpleWeather JavaScript --><!--
-  <script src="{{ asset('vendors/bower_components/moment/min/moment.min.js') }}"></script>
-  <script src="{{ asset('vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js') }}"></script>
-  <script src="{{ asset('dist/js/simpleweather-data.js') }}"></script>
-  
-  <!-- Progressbar Animation JavaScript --><!--
-  <script src="{{ asset('vendors/bower_components/waypoints/lib/jquery.waypoints.min.js') }}"></script>
-  <script src="{{ asset('vendors/bower_components/Counter-Up/jquery.counterup.min.js') }}"></script>
-  
+
   <!-- Fancy Dropdown JS -->
   <script src="{{ asset('dist/js/dropdown-bootstrap-extended.js') }}"></script>
   
-  <!-- Sparkline JavaScript --><!--
-  <script src="{{ asset('vendors/jquery.sparkline/dist/jquery.sparkline.min.js') }}"></script>
   
-  <!-- ChartJS JavaScript --><!--
-  <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
-  
-  <!-- Morris Charts JavaScript --><!--
-    <script src="{{ asset('vendors/bower_components/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('vendors/bower_components/morris.js/morris.min.js') }}"></script>
-    <script src="{{ asset('dist/js/morris-data.js') }}"></script>
-  
-  <script src="{{ asset('vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js') }}"></script>
-  
-  <!-- Init JavaScript --><!--
-  <script src="{{ asset('dist/js/init.js') }}"></script>
-  <script src="{{ asset('dist/js/dashboard-data.js') }}"></script>
--->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
       
