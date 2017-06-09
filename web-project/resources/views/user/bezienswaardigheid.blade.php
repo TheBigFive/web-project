@@ -22,10 +22,18 @@
 	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 		@foreach($alleBezienswaardigheidMedia as $key => $media)
 			@if($media->mediaType == "360")
-							<p>Klik hier voor een virtuele ervaring</p>
-								<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img src="{{ asset($media->link)  }}"><i class="streetview fa fa-street-view fa-5x" aria-hidden="true"></i></a>
+				<div class="virtual">
+					<h3>Klik op de foto hieronder om al eens op bezoek te gaan!</h3>
+					<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img alt="$geopendeBezienswaardigheid->titel" src="{{ asset($media->link)  }}"><i class="streetview fa fa-street-view fa-5x" aria-hidden="true"></i></a>
+				</div>
 			@else
-			<img src="{{ asset($media->link)  }}">
+				@if($media->isHoofdafbeelding == 1)
+					<img alt="hier mist een afbeelding voor: $geopendeBezienswaardigheid->titel" src="{{ asset($media->link)  }}">
+				@else
+					<div class="afbeeldingen col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<img alt="hier mist een afbeelding voor: $geopendeBezienswaardigheid->titel" src="{{ asset($media->link) }}">
+					</div>
+				@endif
 			@endif
 		@endforeach
 	</div>

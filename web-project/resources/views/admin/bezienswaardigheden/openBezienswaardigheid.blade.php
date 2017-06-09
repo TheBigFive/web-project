@@ -63,7 +63,7 @@
 			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
 			     		@if($media->mediaType == "Afbeelding")
 			     			<div class="compleet">
-							<img class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}">
+							<img alt="$geopendeBezienswaardigheid->bezienswaardigheid_id" class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}">
 							@if($media->isHoofdafbeelding)
 								<i class="fa fa-home text middle thuisicoon"></i>
 							@endif
@@ -78,7 +78,7 @@
 			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
 			     		@if($media->mediaType == "360")
 			     			<div class="compleet">
-							<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}"></a>
+							<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img alt="$geopendeBezienswaardigheid->bezienswaardigheid_id" class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}"></a>
 						@endif
 					@endforeach
 				@else

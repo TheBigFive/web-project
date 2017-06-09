@@ -9,6 +9,7 @@
 
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/font.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/sticky-footer.css') }}">
     </head>

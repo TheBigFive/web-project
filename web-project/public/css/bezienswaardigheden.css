@@ -59,10 +59,15 @@ h1 {
 	}
 }
 
-
+.virtual{
+	text-align: center;
+}
 
 .kaart{
 	width: 100%;
 	height: 60vh;
 }
 
+.bezienswaardigheidLang .afbeeldingen{
+	margin-top: 1em;
+}
