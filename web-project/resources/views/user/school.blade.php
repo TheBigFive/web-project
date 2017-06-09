@@ -66,7 +66,7 @@
 			<p>____________________________________________________________________</p>
 		</div>
 		<input type="text" name="school" id="schoolId" value="{{ $geopendeSchool->school_id }}" hidden>
-		<div id="campus-map" style="height: 400px; width: 75%; "></div>
+		<div id="campus-map"></div>
 		<script src="{{ asset('vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
 		<script  type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBShkDsUqnZDbfk2mnY2zXDQgck-U0NDEo"
   ></script>

@@ -13,3 +13,9 @@
 .schoolapartcontainer{
 	    text-align: center;
 }
+
+#campus-map{
+	height: 400px;
+	width: 70%;
+	margin: 0 15%;
+}
