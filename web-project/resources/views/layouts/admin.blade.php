@@ -119,10 +119,7 @@
                 <a href="{{ url('admin/scholen') }}">Alle scholen</a>
               </li>
               <li>
-                <a href="#">Optie 2</a>
-              </li>
-              <li>
-                <a href="#">Optie 3</a>
+                <a href="{{ url('admin/scholen/toevoegen') }}">School Toevoegen</a>
               </li>
             </ul>
           </li>

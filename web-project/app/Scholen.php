@@ -11,7 +11,9 @@ class Scholen extends Model
     public function alleScholenOpvragen()
     {
       return DB::table('scholen')
-      ->select('scholen.*')
+      ->join('media','scholen.school_id','=','media.school_id')
+      ->select('scholen.*','media.link as media_link')
+      ->where('media.mediaType',"Afbeelding")
       ->get();
     }
 

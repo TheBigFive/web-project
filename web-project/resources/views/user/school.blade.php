@@ -1,18 +1,22 @@
 @extends('layouts.app')
 @section('content')
        <link rel="stylesheet" href="{{ asset('css/school.css') }}" >
-	<div class="container">
+	<div class="container row">
 		<div class="schoolapartcontainer">
 			<div class="kind col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<h1>AP-Hogeschool</h1>
+				<h1>{{ $geopendeSchool->naam }}</h1>
 			</div>
 
 			<div class="kind col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<a href="https://www.ap.be/">
+				<a href="{{ $geopendeSchool->website }}">
 					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
 						<defs>
 					    	<pattern id="img1" patternUnits="userSpaceOnUse" width="100" height="100">
-					    		<image xlink:href="img/school1.jpg" y="-25" x="-25" width="150" height="150" />
+					    		@foreach ($alleSchoolMedia as $key => $media)
+					    			@if( $media->mediaType == "Afbeelding" )
+					    				<image xlink:href="{{ asset(($media->link)) }}" y="-25" x="-25" width="150" height="150" />
+					    			@endif
+					    		@endforeach
 					    	</pattern>
 						</defs>
 						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img1)"/>
@@ -21,98 +25,34 @@
 			</div>
 			<div class="kind col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				<p>
-					AP is een hogeschool met zo’n 12.000 studenten, 19 HBO5-opleidingen, 24 professionele bachelor- en 8 artistieke opleidingen, verdeeld over 4 departementen en 2 schools of arts. Ook al is de fusiehogeschool nieuw, toch hebben we al een lange geschiedenis, denk maar aan de Koninklijke Academie voor Schone Kunsten en het Koninklijk Conservatorium Antwerpen. 
+					{!! $geopendeSchool->beschrijving !!}
 				</p>
 			</div>
 		</div>
 
 
-		<div class="centerheader">
+		<div class="centerheader row">
 			<p>____________________________________________________________________</p>
 				<h1>Studiegebieden</h1>
 			<p>____________________________________________________________________</p>
 
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="foto">
-					<a href="{{ url('school') }}">
-					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-						<defs>
-					    	<pattern id="img2" patternUnits="userSpaceOnUse" width="100" height="100">
-					    		<image xlink:href="img/studiegebied1.jpg" y="-25" x="-25" width="150" height="150" />
-					    	</pattern>
-						</defs>
-						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img2)"/>
-					</svg>
-					</a>
+				@foreach($alleInteressegebieden as $key => $interessegebied)
+					<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
+						<div class="foto">
+						<a href="{{ $interessegebied->link }}">
+						<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<defs>
+						    	<pattern id="img{{ $key }}" patternUnits="userSpaceOnUse" width="100" height="100">
+						    		<image xlink:href="{{ asset(($interessegebied->media_link)) }}" y="-25" x="-25" width="150" height="150" />
+						    	</pattern>
+							</defs>
+							<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img{{ $key }})"/>
+						</svg>
+						</a>
+						</div>
+						<h3>{{ $interessegebied->naam }}</h3>
 					</div>
-					<h3>Gezondheid en Welzijn</h3>
-				</div>
-
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="foto">
-					<a href="{{ url('school') }}">
-					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-						<defs>
-					    	<pattern id="img3" patternUnits="userSpaceOnUse" width="100" height="100">
-					    		<image xlink:href="img/studiegebied2.jpg" y="-25" x="-25" width="150" height="150" />
-					    	</pattern>
-						</defs>
-						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img3)"/>
-					</svg>
-					</a>
-					</div>
-					<h3>Management en communicatie</h3>
-				</div>
-
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="foto">
-					<a href="{{ url('school') }}">
-					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-						<defs>
-					    	<pattern id="img4" patternUnits="userSpaceOnUse" width="100" height="100">
-					    		<image xlink:href="img/studiegebied3.jpg" y="-25" x="-25" width="150" height="150" />
-					    	</pattern>
-						</defs>
-						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img4)"/>
-					</svg>
-					</a>
-					</div>
-					<h3>Onderwijs en training</h3>
-				</div>
-
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4" style="margin-top: 1.6%; margin-left: 16%; margin-bottom: 3.155%;">
-					<div class="foto">
-					<a href="{{ url('school') }}">
-					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-						<defs>
-					    	<pattern id="img5" patternUnits="userSpaceOnUse" width="100" height="100">
-					    		<image xlink:href="img/studiegebied4.jpg" y="-25" x="-25" width="150" height="150" />
-					    	</pattern>
-						</defs>
-						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img5)"/>
-					</svg>
-					</a>
-					</div>
-					<h3>Koninklijke academie</h3>
-				</div>
-
-				<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4" style="margin-top: 1.6%; margin-bottom: 3.155%;">
-					<div class="foto">
-					<a href="{{ url('school') }}">
-					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-						<defs>
-					    	<pattern id="img6" patternUnits="userSpaceOnUse" width="100" height="100">
-					    		<image xlink:href="img/studiegebied5.jpg" y="-25" x="-25" width="150" height="150" />
-					    	</pattern>
-						</defs>
-						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img6)"/>
-					</svg>
-					</a>
-					</div>
-					<h3>Koninklijk conservatorium</h3>
-				</div>
-
-					
+				@endforeach	
 					
 		</div>
 
@@ -120,7 +60,7 @@
 
 		
 
-		<div class="centerheader">
+		<div class="row centerheader">
 			<p>____________________________________________________________________</p>
 			<h1>Campussen</h1>
 			<p>____________________________________________________________________</p>

@@ -206,7 +206,7 @@
 														<tr>
 															<td>{{ $key+1 }}</td>
 															<td>{{ $interessegebied->naam }}</td>
-															<td>{{ $interessegebied->link }}</td>
+															<td>{{ substr($interessegebied->link,0,25).'...' }}</td>
 															@if (Auth::user()->rol_id!=4)
 																<td><a href="/admin/scholen/interessegebied/verwijder/{{ $interessegebied->interessegebied_id }}" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
 															@endif

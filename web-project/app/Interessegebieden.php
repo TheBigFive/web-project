@@ -10,7 +10,9 @@ class Interessegebieden extends Model
     public function alleInteressegebiedenOpvragen($id)
     {
       return DB::table('interessegebieden')
-      ->where('school_id', $id)
+      ->join('media','interessegebieden.interessegebied_id','=','media.interessegebied_id')
+      ->select('interessegebieden.*','media.link as media_link')
+      ->where('interessegebieden.school_id', $id)
       ->get();
     }
 

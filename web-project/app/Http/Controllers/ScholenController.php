@@ -43,17 +43,24 @@ class ScholenController extends Controller
     }
 
     //Deze functie wordt uitgevoerd bij het openen van de pagina nieuwsberichten
-    /*public function openSchool($id){*/
-    public function openSchool(){
-/*
+    public function openSchool($id){
+
         $school = new Scholen();
         $scholenId = $id;
 
+        $media = new Media();
+        $alleSchoolMedia = $media->schoolMediaOphalenViaSchoolId($scholenId);
+
         $geopendeSchool = $school->schoolOpvragenViaId($scholenId)->first();
-        */
-        return view('user/school'/*, 
-            ['geopendeschool' => $geopendeschool,
-            ]*/);
+
+        $interessegebied = new Interessegebieden();
+        $alleInteressegebieden = $interessegebied->alleInteressegebiedenOpvragen($scholenId);
+        
+        return view('user/school', 
+            ['geopendeSchool' => $geopendeSchool,
+            'alleSchoolMedia' => $alleSchoolMedia,
+            'alleInteressegebieden' => $alleInteressegebieden
+            ]);
         
     }
 
@@ -61,9 +68,9 @@ class ScholenController extends Controller
     {
         $school = new Scholen();
         $alleScholen = $school->alleScholenOpvragen();
-        return view('user/scholen'/*,
+        return view('user/scholen',
             ['alleScholen' => $alleScholen
-            ]*/);
+            ]);
     }
     
     public function openToevoegenschool()
