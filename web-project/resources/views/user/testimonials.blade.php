@@ -11,48 +11,36 @@
 		</h1>
 		<h3>Wat doen andere studenten in Antwerpen? Lees meer over hun projecten, interesses en verhalen en ontdek wat Antwerpen voor jou kan betekenen.</h3>
 	</div>
-
-	<div class="alleItems">
-		<div class="1item">
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<a href="#id1" class="testimonialItem" data-toggle="collapse">Klik om uit te schuiven</a>
+	<div class="testimonials">
+		@foreach($alleTestimonials as $key => $testimonial)
+		<div class="kolom col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="foto">
+				<a href="testimonials/{{ $testimonial->testimonial_id }}">
+					<svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<defs>
+					    	<pattern id="img{{ $testimonial->testimonial_id }}" patternUnits="userSpaceOnUse" width="100" height="100">
+					    		<image xlink:href="{{ asset($testimonial->media_link) }}" y="-25" x="-25" width="150" height="150" />
+					    	</pattern>
+						</defs>
+						<polygon points="50 1 100 25 100 75 50 99 0 75 0 25" fill="url(#img{{ $testimonial->testimonial_id }})"/>
+					</svg>
+				</a>
 			</div>
-			<div id="id1" class="testimonialInhoud col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h1>EEN HOOP CONTENT</h1>
-				<h2>meer inhoud</h2>
-				<h3>en nog een beetje</h3>
-			</div>
-		</div>
-		<div class="1item">
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<a href="#id2" class="testimonialItem" data-toggle="collapse">Klik om uit te schuiven</a>
-			</div>
-			<div id="id2" class="testimonialInhoud col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h1>EEN HOOP CONTENT</h1>
-				<h2>meer inhoud</h2>
-				<h3>en nog een beetje</h3>
-			</div>
-		</div>
-		<div class="1item">
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<a href="#id3" class="testimonialItem" data-toggle="collapse">Klik om uit te schuiven</a>
-			</div>
-			<div id="id3" class="testimonialInhoud col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h1>EEN HOOP CONTENT</h1>
-				<h2>meer inhoud</h2>
-				<h3>en nog een beetje</h3>
+			<div class="tekst">
+				<div class="datum">
+				{{ date('d-m-Y', strtotime($testimonial->toegevoegdop))}}
+				</div>
+				<div class="auteur">
+					{{ $testimonial->toegevoegddoor_voornaam }} {{ $testimonial->toegevoegddoor_achternaam }}
+				</div>
+				<div class="titel">
+					<a href="testimonials/{{ $testimonial->testimonial_id }}">
+						{{ $testimonial->titel }}
+					</a>
+				</div>
 			</div>
 		</div>
-		<div class="1item">
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<a href="#id4" class="testimonialItem" data-toggle="collapse">Klik om uit te schuiven</a>
-			</div>
-			<div id="id4" class="testimonialInhoud col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h1>EEN HOOP CONTENT</h1>
-				<h2>meer inhoud</h2>
-				<h3>en nog een beetje</h3>
-			</div>
-		</div>
+	@endforeach
 	</div>
 </div>
 @endsection

@@ -88,7 +88,8 @@ b,strong{
 dfn{
 	font-style:italic}
 h1{
-	font-size:2em;margin:.67em 0}
+	font-size:2em;margin:.67em 0;
+font-family: Antwerpen;}
 mark{
 	background:#ff0;color:#000}
 small{
