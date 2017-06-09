@@ -20,6 +20,7 @@ $(function(){
     $('.afwijzingForm').hide();
     $('#tagForm').hide();
 
+
   	if($('.gebruikerswrapper').hasClass('bevatNieuweBezienswaardigheidMap')){
 	    var thereIsAMarker = false;
 		var map = new GMaps({
@@ -31,6 +32,44 @@ $(function(){
 
 
 		$('#locatieBezienswaardigheidKnop').click(function(e){
+			if(thereIsAMarker){
+			    map.removeMarkers();
+			}
+		    e.preventDefault();
+			GMaps.geocode({
+			  address: $('#locatie-text').val(),
+			  callback: function(results, status) {
+			    if (status == 'OK') {
+			      var latlng = results[0].geometry.location;
+			      map.setCenter(latlng.lat(), latlng.lng());
+			      var locatie_input = document.getElementById("locatie-input");
+			      locatie_input.value = latlng.lat() + "," + latlng.lng();	      
+			      map.addMarker({
+			        lat: latlng.lat(),
+			        lng: latlng.lng(),
+			        title: $('#locatie-text').val(),
+			        infoWindow: {
+					  content: $('#locatie-text').val()
+					}
+			      });
+			    }
+			  }
+			});
+		});
+
+  	}
+
+  	if($('.gebruikerswrapper').hasClass('bevatNieuweCampusMap')){
+	    var thereIsAMarker = false;
+		var map = new GMaps({
+		  el: '#voegSchoolToe-map',
+		  lat: 51.2154075,
+		  lng: 4.409795,
+		  zoom: 12
+		});
+
+
+		$('#locatieSchoolKnop').click(function(e){
 			if(thereIsAMarker){
 			    map.removeMarkers();
 			}
@@ -76,6 +115,54 @@ $(function(){
 			}
 		});
   	}
+
+  	if($('.gebruikerswrapper').hasClass('bevatWijzigBezienswaardigheidMap')){
+
+  		var thereIsAMarker = true;
+
+  		var locatie = $('#locatie-input').attr('value').split(",");
+  		var map = new GMaps({
+			el: '#wijzigBezienswaardigheid-map',
+			lat: locatie[0],
+			lng: locatie[1],
+		});
+
+		map.addMarker({
+		  lat: locatie[0],
+			lng: locatie[1],
+			title: $('#adres').val(),
+			infoWindow: {
+				content: $('#adres').val()
+			}
+		});
+
+		$('#locatieBezienswaardigheidKnop').click(function(e){
+			if(thereIsAMarker){
+			    map.removeMarkers();
+			}
+		    e.preventDefault();
+			GMaps.geocode({
+			  address: $('#locatie-text').val(),
+			  callback: function(results, status) {
+			    if (status == 'OK') {
+			      var latlng = results[0].geometry.location;
+			      map.setCenter(latlng.lat(), latlng.lng());
+			      var locatie_input = document.getElementById("locatie-input");
+			      locatie_input.value = latlng.lat() + "," + latlng.lng();	      
+			      map.addMarker({
+			        lat: latlng.lat(),
+			        lng: latlng.lng(),
+			        title: $('#locatie-text').val(),
+			        infoWindow: {
+					  content: $('#locatie-text').val()
+					}
+			      });
+			    }
+			  }
+			});
+		});
+
+  	}
 });
 
 //Tabs gebruikers in het adminpaneel
@@ -111,4 +198,6 @@ $('#tagAnnulerenKnop').click(function () {
 	});	
 	
 })
+
+
 

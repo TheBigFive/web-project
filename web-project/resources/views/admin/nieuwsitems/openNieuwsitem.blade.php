@@ -1,6 +1,12 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">Nieuwsitem</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper">
 	<div class="container">
 		<h2>Nieuwsartikel: {{ $geopendeNieuwsitem->titel }}</h2>
@@ -16,22 +22,22 @@
 	
     	<div class="row">
     		<div class="col-md-6">
-				<h4>Introtekst:</h4>
+				<h4 class="nieuwsgoedkeuren">Introtekst:</h4>
 				<!-- Dit zorgt ervoor dat alles hetgeen in de database letterlijk wortd geplakt -->
 				{!! $geopendeNieuwsitem->introtekst !!}
-				<h4>Artikel:</h4>
+				<h4 class="nieuwsgoedkeuren">Artikel:</h4>
 				<!-- Dit zorgt ervoor dat alles hetgeen in de database letterlijk wortd geplakt -->
 				{!! $geopendeNieuwsitem->artikel !!}
-				<h4>Auteur:</h4>
+				<h4 class="nieuwsgoedkeuren">Auteur:</h4>
 				<p>{{ $geopendeNieuwsitem->toegevoegddoor_voornaam }} {{ $geopendeNieuwsitem->toegevoegddoor_achternaam }}</p>
-				<h4>Tag:</h4>
+				<h4 class="nieuwsgoedkeuren">Tag:</h4>
 				<p>{{ $geopendeNieuwsitem->tag_naam }}</p>
-				<h4>Goedkeuringsstatus:</h4>
+				<h4 class="nieuwsgoedkeuren">Goedkeuringsstatus:</h4>
 				<p> {{ $geopendeNieuwsitem->goedkeuringsstatus }}</p>
-				<h4>Publicatiestatus: </h4>
+				<h4 class="nieuwsgoedkeuren">Publicatiestatus: </h4>
 				<p>{{ $geopendeNieuwsitem->publicatieStatus }}</p>
 				@if ($geopendeNieuwsitem->redenVanAfwijzing)
-					<h4>Reden van afwijzing: </h4>
+					<h4 class="nieuwsgoedkeuren">Reden van afwijzing: </h4>
 					<p>{{ $geopendeNieuwsitem->redenVanAfwijzing }}</p>
 				@endif
 			</div>
@@ -42,17 +48,19 @@
 		     	@if($aantalAfbeeldingen > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
 			     		@if($media->mediaType == "Afbeelding")
-							<img height="60px" src="{{ asset($media->link)  }}">
+			     			<div class="compleet">
+							<img class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}">
 							@if($media->isHoofdafbeelding)
-								Ingesteld als hoofdafbeelding
+								<i class="fa fa-home text middle thuisicoon"></i>
 							@endif
+							</div>
 						@endif
 					@endforeach
 				@else
 					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
 				@endif
 
-				<h4>Video's</h4>
+				<h4 class="videotitel">Video's</h4>
 				@if($aantalVideos > 0 )
 			     	@foreach($alleNieuwsitemMedia as $key => $media)
 			     		@if($media->mediaType == "Video")
@@ -66,7 +74,7 @@
     		
     	</div>
 
-    
+    	<div class="opennieuwsknoppenonderaan">
 		@if (Auth::user()->rol_id!=4)
 			@if($geopendeNieuwsitem->goedkeuringsstatus == "Goedgekeurd")
 				<span>
@@ -148,5 +156,6 @@
 		<span>
 			<a href="/admin/nieuwsitems/wijzig/{{ $geopendeNieuwsitem->nieuwsitem_id }}" class="btn btn-primary">Wijzig Nieuwsitem</a>
 		</span>
+		</div>
 	</div>
 @endsection

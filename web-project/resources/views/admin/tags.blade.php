@@ -1,14 +1,18 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">Tags</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper">
 
-	<h2>Tags</h2>
-	<button class="btn btn-primary" id="tagToevoegenKnop">Tag toevoegen</button>
+	<button class="btn btn-primary tagknop" id="tagToevoegenKnop">Tag toevoegen</button>
 	<form id="tagForm" action="/admin/tags/toevoegen/" method="post">     	
 		{!! csrf_field() !!}
-		<div class="form-group">
-		    <label for="tag">Tagnaam</label>
+		<div class="form-group zoekgebruikersveld">
 		    <input type="text" name="tag" class="form-control" placeholder="Typ hier de tagnaam"></input>
 		    @if ($errors->has('tag'))
 			    <span class="help-block">
@@ -16,12 +20,14 @@
 			    </span>
 			@endif
 		</div>
-		<button type="button" id="tagAnnulerenKnop" class="btn btn-primary">
+		<div class="tagknoppen">
+		<span>
+			<input type="submit" class="btn btn-primary" value="Tag toevoegen">
+		</span>	
+		<button type="button" id="tagAnnulerenKnop" class="btn btn-danger">
 			Annuleren
 		</button>
-		<span>
-			<input type="submit" class="btn btn-danger" value="Tag toevoegen">
-		</span>	
+		</div>
 	</form>
 	@if( session()->has('foutmelding'))
        	@if(!$errors->all())

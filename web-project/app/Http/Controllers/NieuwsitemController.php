@@ -450,6 +450,8 @@ class NieuwsitemController extends Controller
                 'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
                 'goedgekeurdop' => $goedgekeurdop
             ]); 
+
+            $this->offlineHalenNieuwsitem($nieuwsitemId);
         };        
 
         return Redirect::back()->withErrors($validated)->with('succesBericht', 'Het artikel werd succesvol afgewezen.');

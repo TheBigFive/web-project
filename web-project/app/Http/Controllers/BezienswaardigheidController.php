@@ -194,7 +194,8 @@ class BezienswaardigheidController extends Controller
                 'openingsuren' => $request->input('openingsuren'),
                 'vervoer' => $request->input('vervoer'),
                 'kostprijs' => $request->input('kostprijs'),
-                'adres' => $request->input('adres'),
+                'adres' => $request->input('locatie-text'),
+                'coordinaten' => $request->input('coordinaten'),
                 'contact' => $request->input('contact'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
             ]);
@@ -262,7 +263,9 @@ class BezienswaardigheidController extends Controller
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
                 'goedgekeurdop' => $goedgekeurdop
-            ]); 
+            ]);
+
+            $this->offlineHalenBezienswaardigheid($bezienswaardigheidId);
         };        
 
         return Redirect::back()->withErrors($validator)->with('succesBericht', 'De bezienswaardigheid werd succesvol afgewezen.');
@@ -326,7 +329,7 @@ class BezienswaardigheidController extends Controller
 
         $media = new Media();
 
-        foreach ($afbeeldingen as $afbeelding) {
+        foreach ($afbeeldingen as $key => $afbeelding) {
             $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
             $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
                     
@@ -335,13 +338,29 @@ class BezienswaardigheidController extends Controller
                 $afbeeldingNaam = 'bezienswaardigheid-'.$bezienswaardigheid_id.'-'.str_random(5).$afbeelding->getClientOriginalName();
                 $afbeelding->move('img/bezienswaardigheden/', $afbeeldingNaam);
                 $filePath = 'img/bezienswaardigheden/'.$afbeeldingNaam;
+
+                if(sizeOf($media->bezienswaardigheidMediaOphalenViabezienswaardigheidId($bezienswaardigheid_id))<1){
+                    if($key == 0){
+                        $isHoofdafbeelding = true;
+                        //Afbeelding toevoegen in de database
+                        $media->voegMediaToe([
+                        'link' => $filePath,
+                        'mediaType' => $mediaType,
+                        'bezienswaardigheid_id' => $bezienswaardigheid_id,
+                        'isHoofdafbeelding' => $isHoofdafbeelding
+                        ]);
+                    }
+                } else{
+                    $media->voegMediaToe([
+                        'link' => $filePath,
+                        'mediaType' => $mediaType,
+                        'bezienswaardigheid_id' => $bezienswaardigheid_id
+                        ]);
+
+                }
+
                         
-                //Afbeelding toevoegen in de database
-                $media->voegMediaToe([
-                'link' => $filePath,
-                'mediaType' => $mediaType,
-                'bezienswaardigheid_id' => $bezienswaardigheid_id
-                ]);
+                
 
 
 
@@ -395,7 +414,35 @@ class BezienswaardigheidController extends Controller
         return Redirect::back()->with('succesBericht', 'De afbeelding werd verwijderd.');
     }
     
+    public function stelHoofdafbeeldingIn($id){
+        $media = new Media;
+        $mediaId = $id;
 
+        $inTeStellenMedia =  $media->bezienswaardigheidMediaOphalenViaId($mediaId)->first();
+        $geopendeBezienswaardigheidId = $inTeStellenMedia->bezienswaardigheid_id;
+
+        $alleBezienswaardigheidMedia = $media->bezienswaardigheidMediaOphalenViabezienswaardigheidId($geopendeBezienswaardigheidId);
+
+        //De afbeelding die ervoor hoofdafbeelding was, niet meer instellen als hoofdafbeelding
+        foreach ($alleBezienswaardigheidMedia as $afbeelding) {
+            if($afbeelding->isHoofdafbeelding){
+                $afbeeldingId = $afbeelding->media_id;
+
+                $media->wijzigMedia($afbeeldingId,[
+                    'isHoofdafbeelding' => false
+                    ]);
+            }
+        }
+
+        //Nieuwe afbeelding als hoofdafbeelding instellen
+        $media->wijzigMedia($mediaId,[
+                'isHoofdafbeelding' => true
+            ]);
+
+        return Redirect::back();
+
+
+    }
     
 
 

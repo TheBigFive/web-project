@@ -33,10 +33,13 @@ Route::get('bezienswaardigheden/open360/{id}','BezienswaardigheidController@open
 
 //Administratie routes die iedereen mag uitvoeren
 Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () {
+
 	Route::get('admin', 'AdminController@index');
+
 	//Gebruiker routes
 	Route::get('admin/gebruikers', 'AdminController@gebruikersPaginaOpenen');
 	Route::post('admin/gebruikers/zoeken','AdminController@zoekGebruikerViaNaam');
+
 	//Nieuwsitems routes
 	Route::get('admin/nieuwsitems','NieuwsitemController@index');
 	Route::get('admin/nieuwsitems/toevoegen','NieuwsitemController@openToevoegenNieuwsitem');
@@ -68,6 +71,28 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::get('admin/bezienswaardigheden/open/{id}', 'BezienswaardigheidController@openBezienswaardigheidAdmin');
 	Route::post('admin/bezienswaardigheden/toevoegenMedia/{id}', 'BezienswaardigheidController@toevoegenMediaBezienswaardigheid');
 	Route::get('admin/bezienswaardigheden/verwijderMedia/{id}', 'BezienswaardigheidController@afbeeldingVerwijderen');
+	Route::get('admin/bezienswaardigheden/stelHoofdafbeeldingIn/{id}', 'BezienswaardigheidController@stelHoofdafbeeldingIn');
+
+	//Scholen
+	Route::get('admin/scholen','ScholenController@index');
+	Route::get('admin/scholen/toevoegen','ScholenController@openToevoegenSchool');
+	Route::post('admin/scholen/toevoegen','ScholenController@voegSchoolToe');
+	Route::get('admin/scholen/open/{id}', 'ScholenController@openSchoolAdmin');
+	Route::post('admin/scholen/wijzig/{id}', 'ScholenController@wijzigSchool');
+	Route::get('admin/scholen/wijzig/{id}', 'ScholenController@openWijzigingSchool');
+	Route::post('admin/scholen/toevoegenMedia/{id}', 'ScholenController@toevoegenMediaSchool');
+	Route::get('admin/scholen/verwijderMedia/{id}', 'ScholenController@afbeeldingVerwijderen');
+
+	//Campussen
+	Route::get('admin/scholen/campus/toevoegen/{id}', 'ScholenController@openVoegCampusToe');
+	Route::post('admin/scholen/campus/toevoegen/{id}', 'ScholenController@voegCampusToe');
+	Route::get('admin/scholen/campus/verwijder/{id}', 'ScholenController@verwijderCampus');
+
+	//Interessegebieden
+	Route::get('admin/scholen/interessegebied/toevoegen/{id}', 'ScholenController@openVoegInteressegebiedToe');
+	Route::post('admin/scholen/interessegebied/toevoegen/{id}', 'ScholenController@voegInteressegebiedToe');
+	Route::get('admin/scholen/interessegebied/verwijder/{id}', 'ScholenController@verwijderInteressegebied');
+
 
 	//Tags
 	Route::get('admin/tags','TagsController@index');
@@ -102,6 +127,13 @@ Route::group(['middleware' => 'rol:Administrator,Approver'], function () {
 	Route::post('admin/bezienswaardigheden/afwijzen/{id}', 'BezienswaardigheidController@afwijzenBezienswaardigheid');
 	Route::get('admin/bezienswaardigheden/publiceren/{id}', 'BezienswaardigheidController@publicerenBezienswaardigheid');
 	Route::get('admin/bezienswaardigheden/offlineHalen/{id}', 'BezienswaardigheidController@offlineHalenBezienswaardigheid');
+
+	//Scholen
+	Route::get('admin/scholen/verwijder/{id}', 'ScholenController@verwijderSchool');
+	Route::get('admin/scholen/goedkeuren/{id}', 'ScholenController@goedkeurenSchool');
+	Route::post('admin/scholen/afwijzen/{id}', 'ScholenController@afwijzenSchool');
+	Route::get('admin/scholen/publiceren/{id}', 'ScholenController@publicerenSchool');
+	Route::get('admin/scholen/offlineHalen/{id}', 'ScholenController@offlineHalenSchool');
 	
 });
 

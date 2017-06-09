@@ -1,9 +1,14 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">Wijziging gebruiker</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper">
-    <div class="row">
-        <h2>Wijziging gebruiker</h2>      
+    <div class="row">   
         	
         		<form action="/admin/gebruikers/wijzig/{{ $geopendeGebruiker->id }}" method="post">
         			@if( session()->has('succesBericht'))
@@ -138,12 +143,12 @@
 			                </div>
 		                </div>
 	            	</div>
-	                <div class="row">
-	                	<span>
+	                <div class="row knoponderaan">
+	                	<span class="knop">
 		                	<a href="/admin/gebruikers/verwijder/{{ $geopendeGebruiker->id }}" class="btn btn-danger">Gebruiker verwijderen</a>
 		             	</span>	
 
-	                	<span>
+	                	<span class="knop">
 		                	<input type="submit" name="wijzigen" class="btn btn-primary" value="Gebruiker wijzigen">
 		              	</span>
 		                

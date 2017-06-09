@@ -1,13 +1,18 @@
 @extends('layouts.admin')
 @section('admincontent')
 
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 200%;">Bezienswaardigheid toevoegen</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper bevatNieuweBezienswaardigheidMap">
 
-	<h2>Bezienswaardigheden Toevoegen</h2>
 	<form action="/admin/bezienswaardigheden/toevoegen" enctype="multipart/form-data" method="post">
 		{!! csrf_field() !!}
 		<div class="form-group">
-		    <label for="naam">Naam bezienswaardigheid</label>
+		    <label for="naam" class="nieuwstoevoegen">Naam bezienswaardigheid</label>
 		    <input type="text" name="naam" class="form-control" placeholder="Typ hier de naam van de bezienswaardigheid">
 		    @if ($errors->has('naam'))
 			    <span class="help-block">
@@ -16,7 +21,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="beschrijving">Beschrijving</label>
+		    <label for="beschrijving" class="nieuwstoevoegen">Beschrijving</label>
 		    <textarea rows="5" name="beschrijving" class="form-control summernote" placeholder="Typ hier de beschrijving van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('beschrijving'))
 			    <span class="help-block">
@@ -26,16 +31,16 @@
 		</div>
 
 		<div class="form-group">
-		    <label for="adres">Locatie</label>
+		    <label for="adres" class="nieuwstoevoegen">Locatie</label>
 		    <p>Geef het volledige adres in van de bezienswaardigheid</p>
-		    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control"/><br/>
+		    <input type="text" name="locatie-text" id="locatie-text" placeholder="vb. Grote Markt 1, 2000 Antwerpen" class="form-control zoeklocatieveld"/>
 		    <button id="locatieBezienswaardigheidKnop" class="btn btn-primary">Zoek locatie op</button>
-		    <div id="voegBezienswaardigheidToe-map"></div>
+		    <div id="voegBezienswaardigheidToe-map" style="margin-top: 2%;"></div>
 		    <input id="locatie-input" type="hidden" name="coordinaten">
 		</div>
 
 		<div class="form-group">
-		    <label for="openingsuren">Openingsuren</label>
+		    <label for="openingsuren" class="nieuwstoevoegen">Openingsuren</label>
 		    <textarea rows="5" name="openingsuren" class="form-control summernote" placeholder="Typ hier de openingsuren van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('openingsuren'))
 			    <span class="help-block">
@@ -45,7 +50,7 @@
 		</div>
 
 		<div class="form-group">
-		    <label for="vervoer">Vervoer</label>
+		    <label for="vervoer" class="nieuwstoevoegen">Vervoer</label>
 		    <textarea rows="5" name="vervoer" class="form-control summernote" placeholder="Typ hier de vervoersmogelijkheden van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('vervoer'))
 			    <span class="help-block">
@@ -54,7 +59,7 @@
 			@endif
 		</div>
 		<div class="form-group">
-		    <label for="kostprijs">Kostprijs</label>
+		    <label for="kostprijs" class="nieuwstoevoegen">Kostprijs</label>
 		    <textarea rows="5" name="kostprijs" class="form-control summernote" placeholder="Typ hier de kostprijzen van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('kostprijs'))
 			    <span class="help-block">
@@ -64,7 +69,7 @@
 		</div>
 		
 		<div class="form-group">
-		    <label for="contact">Contact</label>
+		    <label for="contact" class="nieuwstoevoegen">Contact</label>
 		    <textarea rows="5" name="contact" class="form-control summernote" placeholder="Typ hier de contactmogelijkheden van de bezienswaardigheid"></textarea>
 		    @if ($errors->has('contact'))
 			    <span class="help-block">
@@ -75,7 +80,7 @@
 
 		
 
-		<h3>Media</h3>
+		<h3 class="nieuwstoevoegen">Media</h3>
 		
 		<div class="row">
 			<div class="col-md-5">
@@ -106,7 +111,7 @@
 		</div>
 
 		<div class="form-group">
-		    <input type="submit" class="btn btn-primary" value="Maak Bezienswaardigheid">
+		    <input type="submit" class="btn btn-primary nieuwsknoponderaan" value="Maak Bezienswaardigheid">
 		</div>
 	</form>
 

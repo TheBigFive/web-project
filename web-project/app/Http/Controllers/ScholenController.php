@@ -8,7 +8,8 @@ use App\Http\Requests;
 
 use App\Gebruikers;
 use App\Scholen;
-use App\Tags;
+use App\Campussen;
+use App\Interessegebieden;
 use App\Media;
 use Auth;
 use Validator;
@@ -26,8 +27,18 @@ class ScholenController extends Controller
         $school = new Scholen();
         $alleScholen = $school->alleScholenOpvragen();
 
+        $aantalNieuweEnGewijzigdeScholen = 0;
+
+        foreach($alleScholen as $school){
+            if($school->goedkeuringsstatus == "Nieuwe school" || $school->goedkeuringsstatus == "Gewijzigd"){
+                $aantalNieuweEnGewijzigdeScholen++;
+            }
+
+        }
+
         return view('admin/scholen/scholen',
-            ['alleScholen' => $alleScholen
+            ['alleScholen' => $alleScholen,
+            'aantalNieuweEnGewijzigdeScholen' => $aantalNieuweEnGewijzigdeScholen
             ]);
     }
 
@@ -41,7 +52,7 @@ class ScholenController extends Controller
         $geopendeSchool = $school->schoolOpvragenViaId($scholenId)->first();
         */
         return view('user/school'/*, 
-            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
+            ['geopendeschool' => $geopendeschool,
             ]*/);
         
     }
@@ -54,313 +65,265 @@ class ScholenController extends Controller
             ['alleScholen' => $alleScholen
             ]*/);
     }
-/*    
-    public function openToevoegenNieuwsitem()
+    
+    public function openToevoegenschool()
     {
-        $tag = new Tags();
-        $alleTags = $tag->alleTagsOpvragen();
 
-        return view('admin/nieuwsitems/toevoegenNieuwsitem',
-            ['alleTags' => $alleTags,
-            ]);
+        return view('admin/scholen/toevoegenschool');
         
     }
 
-    public function voegNieuwsitemToe(Request $request)
+    public function voegSchoolToe(Request $request)
     {
-        $nieuwsitem = new Nieuwsitems();
+        $school = new Scholen();
         $gebruikersId = Auth::id();
         $publicatieStatus = 'Nog niet gepubliceerd';
-        $goedkeuringsstatus = 'Nieuw artikel';
+        $goedkeuringsstatus = 'Nieuwe school';
         $datumEnTijd = new DateTime();
+
+        $validator = Validator::make($request->all(), [
+          'naam' => 'required',
+          'beschrijving' => 'required',
+          'website' => 'required',
+        ]);
+
+        if($validator->passes()){
+            $school_id = $school->voegschoolToe([
+                'naam' => $request->input('naam'),
+                'beschrijving' => $request->input('beschrijving'),
+                'website' => $request->input('website'),
+                'goedkeuringsstatus' => $goedkeuringsstatus,
+                'publicatieStatus' => $publicatieStatus,
+                'toegevoegddoor_id' => $gebruikersId,
+                'toegevoegdop' => $datumEnTijd
+            ]);
+
+            $logo = Input::file('logo');
+            $afbeelding = Input::file('afbeelding');
+
+            if($logo){
+
+                $validator = $this->logoToevoegen($school_id, $logo);
+            }
+
+            if($afbeeldingen){
+                $validator = $this->afbeeldingToevoegen($school_id, $afbeelding);
+            }
+
+             return redirect('/admin/scholen/')->withErrors($validator);
+
+        } else{
+            return Redirect::back()->withErrors($validator);
+        }
+
+       
+
+    }
+
+   public function logoToevoegen($school_id, $logo){
 
         $media = new Media();
 
-        $validator = Validator::make($request->all(), [
-          'titel' => 'required',
-          'introtekst' => 'required',
-          'artikel' => 'required',
-        ]);
-
-
-        if($validator->passes()){
-            $nieuwsitem_id = $nieuwsitem->voegNieuwsitemToe([
-                'titel' => $request->input('titel'),
-                'introtekst' => $request->input('introtekst'),
-                'artikel' => $request->input('artikel'),
-                'publicatieStatus' => $publicatieStatus,
-                'goedkeuringsstatus' => $goedkeuringsstatus,
-                'toegevoegdop' => $datumEnTijd,
-                'toegevoegddoor_id' => $gebruikersId,
-                'tag_id' => $request->input('tag'),
-            ]);
-
-            //Toevoegen van afbeeldingen 
-            if(Input::file('afbeeldingen')){
-                $afbeeldingen = Input::file('afbeeldingen');
-                foreach ($afbeeldingen as $afbeelding) {
-                    $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
-                    $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
-                    
-                    if($validator->passes()){  
-
-                        $afbeeldingNaam = 'nieuwsitem-'.$nieuwsitem_id.'-'.str_random(5).$afbeelding->getClientOriginalName();
-                        $afbeelding->move('img/nieuwsitems/', $afbeeldingNaam);
-                        $filePath = 'img/nieuwsitems/'.$afbeeldingNaam;
-                        $mediaType = "Afbeelding";
-
-                        //Afbeelding toevoegen in de database
-                        $media->voegMediaToe([
-                        'link' => $filePath,
-                        'mediaType' => $mediaType,
-                        'nieuwsitem_id' => $nieuwsitem_id
-                        ]);
-                    }
-                }
-            }
-
-            $youtubelink = $request->input('video');
-            $mediaType = "Video";
-
-            if($youtubelink != ''){
-                $validator = Validator::make(array('video' => $youtubelink), [
-                    'video' => 'sometimes|required',
-                ]);
-                if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $youtubelink, $id)) {
-                  $videoId = $id[1];
-                } else if (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $youtubelink, $id)) {
-                  $videoId = $id[1];
-                } else if (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $youtubelink, $id)) {
-                  $videoId = $id[1];
-                } else if (preg_match('/youtu\.be\/([^\&\?\/]+)/', $youtubelink, $id)) {
-                  $videoId = $id[1];
-                }
-                else if (preg_match('/youtube\.com\/verify_age\?next_url=\/watch%3Fv%3D([^\&\?\/]+)/', $youtubelink, $id)) {
-                    $videoId = $id[1];
-                } else {   
-                    // not an youtube video
-                    return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youutbelink');
-                }
-
-                //youtubelink toevoegen in de database
-                $media->voegMediaToe([
-                'link' => $videoId,
+        $regels = array('logo' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
+        $validator = Validator::make(array('logo'=> $logo), $regels);
+             
+        if($validator->passes()){  
+            $mediaType = "schoolLogo";
+            $afbeeldingNaam = 'school-'.$school_id.'-'.str_random(5).$logo->getClientOriginalName();
+            $logo->move('img/scholen/', $afbeeldingNaam);
+            $filePath = 'img/scholen/'.$afbeeldingNaam;
+                        
+            //Afbeelding toevoegen in de database
+            $media->voegMediaToe([
+                'link' => $filePath,
                 'mediaType' => $mediaType,
-                'nieuwsitem_id' => $nieuwsitem_id
-                ]);
-            }
+                'school_id' => $school_id
+            ]);
+        
+        }
 
-            return redirect('/admin/nieuwsitems/open/'.$nieuwsitem_id);
-        }else{
-            return Redirect::back()->withErrors($validator); 
-        }       
+        return $validator;
+
     }
 
-    public function verwijderMediaNieuwsitem($id){
+    public function afbeeldingToevoegen($school_id, $afbeelding){
+
+        $media = new Media();
+
+        $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
+        $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
+                    
+        if($validator->passes()){  
+            $mediaType = "Afbeelding";
+            $afbeeldingNaam = 'school-'.$school_id.'-'.str_random(5).$afbeelding->getClientOriginalName();
+            $afbeelding->move('img/scholen/', $afbeeldingNaam);
+            $filePath = 'img/scholen/'.$afbeeldingNaam;
+                        
+            //Afbeelding toevoegen in de database
+            $media->voegMediaToe([
+            'link' => $filePath,
+            'mediaType' => $mediaType,
+            'school_id' => $school_id
+            ]);
+
+        } else{
+            return "het passeert ni";
+        }
+        
+
+        return $validator;
+
+    }
+
+
+    public function toevoegenMediaSchool($id,Request $request){
+        $media = new Media();
+        $school_id = $id;
+
+        $logo = Input::file('logo');
+        $afbeelding = Input::file('afbeelding');
+
+            if($logo){
+                $alleSchoolMedia = $media->schoolMediaOphalenViaSchoolId($school_id);                
+                foreach ($alleSchoolMedia as $key => $media) {
+                    if ($media->mediaType == "schoolLogo"){
+                        $teVerwijderenMediaId = $media->media_id;
+                       
+                    }
+                }
+                $validator = $this->logoToevoegen($school_id, $logo);
+                $this->afbeeldingVerwijderen($teVerwijderenMediaId);
+            }
+
+            if($afbeelding){
+                $alleSchoolMedia = $media->schoolMediaOphalenViaSchoolId($school_id);                
+                foreach ($alleSchoolMedia as $key => $media) {
+                    if ($media->mediaType == "Afbeelding"){
+                        $teVerwijderenMediaId = $media->media_id;
+                       
+                    }
+                }
+                $validator = $this->afbeeldingToevoegen($school_id, $afbeelding);
+                $this->afbeeldingVerwijderen($teVerwijderenMediaId);
+            }
+
+        return redirect('/admin/scholen/wijzig/'.$school_id)->withErrors($validator)->with('succesBericht', 'De afbeelding werd succesvol toegevoegd.');
+    }
+
+    public function afbeeldingVerwijderen($id){
 
         $mediaId = $id;
         $media = new Media();
-        $opgehaaldeMedia = $media->nieuwsitemMediaOphalenViaId($mediaId)->first();
-        if($opgehaaldeMedia->mediaType == "Afbeelding"){
-            $filePath = $media->nieuwsitemMediaOphalenViaId($mediaId)->first()->link;
+        $opgehaaldeMedia = $media->schoolMediaOphalenViaId($mediaId)->first();
+
+        if($opgehaaldeMedia->mediaType == "Afbeelding" || $opgehaaldeMedia->mediaType == "schoolLogo"){
+            $filePath = $media->schoolMediaOphalenViaId($mediaId)->first()->link;
             $media->verwijderMedia($mediaId);
             unlink($filePath);
         }
-        elseif ($opgehaaldeMedia->mediaType == "Video")
-        {
-            $media->verwijderMedia($mediaId);
-        }
 
-        return Redirect::back();
+        return Redirect::back()->with('succesBericht', 'De vorige afbeelding werd verwijderd.');
     }
-
-    public function toevoegenMediaNieuwsitem($id, Request $request){
-
-        $media = new Media();
-        $nieuwsitemId = $id;
-
-
-        if(Input::file('afbeeldingen')){
-            $afbeeldingen = Input::file('afbeeldingen');
-            foreach ($afbeeldingen as $afbeelding) {
-                $regels = array('afbeelding' => 'required');//|mimes:jpeg,bmp,png,gif,jpg,svg'
-                $validator = Validator::make(array('afbeelding'=> $afbeelding), $regels);
-                    
-                if($validator->passes()){  
-                    $mediaType = "Afbeelding";
-                    $afbeeldingNaam = 'nieuwsitem-'.$nieuwsitemId.'-'.str_random(5).$afbeelding->getClientOriginalName();
-                    $afbeelding->move('img/nieuwsitems/', $afbeeldingNaam);
-                    $filePath = 'img/nieuwsitems/'.$afbeeldingNaam;
-                        
-                    //Afbeelding toevoegen in de database
-                    $media->voegMediaToe([
-                    'link' => $filePath,
-                    'mediaType' => $mediaType,
-                    'nieuwsitem_id' => $nieuwsitemId
-                    ]);
-                }
-            }
-        }
-
-        $youtubelink = $request->input('video');
-        $mediaType = "Video";
-
-        if($youtubelink != ''){
-            $validator = Validator::make(array('video' => $youtubelink), [
-                'video' => 'sometimes|required',
-            ]);
-
-            if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $youtubelink, $id)) {
-                $videoId = $id[1];
-            } else if (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $youtubelink, $id)) {
-                $videoId = $id[1];
-            } else if (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $youtubelink, $id)) {
-                $videoId = $id[1];
-            } else if (preg_match('/youtu\.be\/([^\&\?\/]+)/', $youtubelink, $id)) {
-                $videoId = $id[1];
-            }
-            else if (preg_match('/youtube\.com\/verify_age\?next_url=\/watch%3Fv%3D([^\&\?\/]+)/', $youtubelink, $id)) {
-                $videoId = $id[1];
-            } else {   
-                // not an youtube video
-                return Redirect::back()->withErrors($validator)->with('foutmelding', 'De link die u meegaf is geen youtbelink');
-            }
-
-            //youtubelink toevoegen in de database
-            $media->voegMediaToe([
-            'link' => $videoId,
-            'mediaType' => $mediaType,
-            'nieuwsitem_id' => $nieuwsitemId
-            ]);
-        }
-
-        return Redirect::back()->withErrors($validator);
-    }
-
     
+    public function openWijzigingschool($id, Request $request){
 
-    public function openWijzigingNieuwsitem($id, Request $request){
-
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
-        $tag = new Tags();
+        $school = new scholen();
+        $scholenId = $id;
         $media = new Media();
-        $aantalAfbeeldingen = 0;
-        $aantalVideos = 0;
 
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemsId)->first();
-        $alleTags = $tag->alleTagsOpvragen();
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemsId);
-
-        foreach ($alleNieuwsitemMedia as $key => $media) {
-            if($media->mediaType == "Afbeelding"){
-                $aantalAfbeeldingen++;
-            }
-
-            if($media->mediaType == "Video"){
-                $aantalVideos++;
-            }
-        }
+        $geopendeSchool = $school->schoolOpvragenViaId($scholenId)->first();
+        $alleSchoolMedia = $media->schoolMediaOphalenViaSchoolId($scholenId);
         
-        return view('/admin/nieuwsitems/wijzigNieuwsitem', 
-            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            'alleTags' => $alleTags,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos
+        return view('/admin/scholen/wijzigSchool', 
+            ['geopendeSchool' => $geopendeSchool,
+            'alleSchoolMedia' => $alleSchoolMedia,
             ]);
         
     }
 
-    public function wijzigNieuwsitem($id, Request $request){
+    public function wijzigSchool($id, Request $request){
 
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+        $school = new scholen();
+        $scholenId = $id;
         $goedkeuringsstatus = "Werd gewijzigd";
 
-        $validated = Validator::make($request->all(), [
-          'titel' => 'required',
-          'introtekst' => 'required',
-          'artikel' => 'required',
+        $validator = Validator::make($request->all(), [
+          'naam' => 'required',
+          'beschrijving' => 'required',
+          'website' => 'required',
         ]);
 
-        if(!$validated->fails()){
-            $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
-                'titel' => $request->input('titel'),
-                'introtekst' => $request->input('introtekst'),
-                'artikel' => $request->input('artikel'),
+        if($validator->passes()){
+            $school->wijzigSchool($scholenId,[
+                'naam' => $request->input('naam'),
+                'beschrijving' => $request->input('beschrijving'),
+                'website' => $request->input('website'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
-                'tag_id' => $request->input('tag'),
             ]);
         }
 
-        return Redirect::back()->withErrors($validated)->with('succesBericht', 'Het artikel werd gewijzigd');
+        return Redirect::back()->withErrors($validator)->with('succesBericht', 'Het artikel werd gewijzigd');
         
     }
 
-    public function verwijderNieuwsitem($id){
+    public function verwijderSchool($id){
         
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemId = $id;
+        $school = new scholen();
+        $schoolId = $id;
 
         //media dat in de folder wordt geplaatst moet ook verwijderd worden
         $media = new Media();
-        $nieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+        $schoolMedia = $media->schoolMediaOphalenViaschoolId($schoolId);
 
-        if(sizeof($nieuwsitemMedia) >0){
-            foreach ($nieuwsitemMedia as $media) {
-                if($media->mediaType == "Afbeelding"){
+        if(sizeof($schoolMedia) >0){
+            foreach ($schoolMedia as $media) {
+                if($media->mediaType == "Afbeelding" || $media->mediaType == "schoolLogo"){
                     $filePath = $media->link;
                     unlink($filePath);
                 }
             } 
         }
-        $nieuwsitem->verwijderNieuwsitem($nieuwsitemId);
+        $school->verwijderschool($schoolId);
 
-        return redirect('/admin/nieuwsitems');
+        return redirect('/admin/scholen');
         
     }
-*/
-    public function openNieuwsitemAdmin($id, Request $request){
 
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemId = $id;
-        $aantalAfbeeldingen = 0;
-        $aantalVideos = 0;
+    public function openschoolAdmin($id, Request $request){
 
-        $geopendeNieuwsitem = $nieuwsitem->nieuwsitemOpvragenViaId($nieuwsitemId)->first();
+        $school = new scholen();
+        $schoolId = $id;
+
+        $campus = new Campussen();
+        $alleCampussen = $campus->alleCampussenOpvragen($schoolId);
+
+        $interessegebied = new Interessegebieden();
+        $alleInteressegebieden= $interessegebied->alleInteressegebiedenOpvragen($schoolId);
+
+        $geopendeSchool = $school->schoolOpvragenViaId($schoolId)->first();
 
         $media = new Media;
-        $alleNieuwsitemMedia = $media->nieuwsitemMediaOphalenViaNieuwsitemId($nieuwsitemId);
+        $alleSchoolMedia = $media->schoolMediaOphalenViaSchoolId($schoolId);
 
-        foreach ($alleNieuwsitemMedia as $media) {
-            if($media->mediaType == "Afbeelding"){
-                $aantalAfbeeldingen++;
-            }
-
-            if($media->mediaType == "Video"){
-                $aantalVideos++;
-            }
-        }
         
-        return view('/admin/nieuwsitems/openNieuwsitem', 
-            ['geopendeNieuwsitem' => $geopendeNieuwsitem,
-            'alleNieuwsitemMedia' => $alleNieuwsitemMedia,
-            'aantalAfbeeldingen' => $aantalAfbeeldingen,
-            'aantalVideos' => $aantalVideos
+        return view('/admin/scholen/openSchool', 
+            ['geopendeSchool' => $geopendeSchool,
+            'alleCampussen' => $alleCampussen,
+            'alleInteressegebieden' => $alleInteressegebieden,
+            'alleSchoolMedia' => $alleSchoolMedia,
             ]);
         
     }
-/*
-    public function goedkeurenNieuwsitem($id){
 
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+    public function goedkeurenSchool($id){
+
+        $school = new scholen();
+        $scholenId = $id;
         $datumEnTijd = new DateTime();
         $goedkeuringsstatus = 'Goedgekeurd';
         $redenVanAfwijzing = null;
      
-        $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
+        $school->wijzigSchool($scholenId,[
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'goedgekeurdop' => $datumEnTijd,
                 'redenVanAfwijzing' => $redenVanAfwijzing
@@ -371,10 +334,10 @@ class ScholenController extends Controller
         
     }
     
-    public function afwijzenNieuwsitem($id, Request $request){
+    public function afwijzenSchool($id, Request $request){
 
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+        $school = new scholen();
+        $scholenId = $id;
         $goedkeuringsstatus = 'Afgewezen';
         $goedgekeurdop = null;
 
@@ -383,43 +346,45 @@ class ScholenController extends Controller
         ]);
 
         if(!$validated->fails()){
-            $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
+            $school->wijzigSchool($scholenId,[
                 'goedkeuringsstatus' => $goedkeuringsstatus,
                 'redenVanAfwijzing' => $request->input('redenVanAfwijzing'),
                 'goedgekeurdop' => $goedgekeurdop
-            ]); 
+            ]);
+
+            $this->offlineHalenSchool($scholenId);
         };        
 
         return Redirect::back()->withErrors($validated)->with('succesBericht', 'Het artikel werd succesvol afgewezen.');
         
     }
 
-    public function publicerenNieuwsitem($id){
+    public function publicerenschool($id){
 
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+        $school = new scholen();
+        $scholenId = $id;
         $datumEnTijd = new DateTime();
         $publicatieStatus = 'Gepubliceerd';
      
-        $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
+        $school->wijzigSchool($scholenId,[
                 'gepubliceerdop' => $datumEnTijd,
                 'publicatieStatus' => $publicatieStatus
             ]);
 
-        $this->goedkeurenNieuwsitem($nieuwsitemsId);
+        $this->goedkeurenschool($scholenId);
 
         return Redirect::back()->with('succesBericht', 'Het artikel werd succsvol gepubliceerd.');
         
     }
 
-    public function offlineHalenNieuwsitem($id){
+    public function offlineHalenSchool($id){
 
-        $nieuwsitem = new Nieuwsitems();
-        $nieuwsitemsId = $id;
+        $school = new scholen();
+        $scholenId = $id;
         $datumEnTijd = null;
         $publicatieStatus = 'Nog niet gepubliceerd';
      
-        $nieuwsitem->wijzigNieuwsitem($nieuwsitemsId,[
+        $school->wijzigSchool($scholenId,[
                 'gepubliceerdop' => $datumEnTijd,
                 'publicatieStatus' => $publicatieStatus
             ]);
@@ -427,5 +392,138 @@ class ScholenController extends Controller
         return Redirect::back()->with('succesBericht', 'Het artikel werd succsvol offline gehaald.');
         
     }
-*/
+
+    public function openVoegCampusToe($id){
+        $school = new scholen();
+        $schoolId = $id;
+
+        $geopendeSchool = $school->schoolOpvragenViaId($schoolId)->first();
+
+        return view('admin/scholen/toevoegenCampus',[
+            'geopendeSchool' => $geopendeSchool
+            ]);
+    }
+
+     public function voegCampusToe($id, Request $request)
+    {
+        $campus = new Campussen();
+        $school_id = $id;
+    
+        $validator = Validator::make($request->all(), [
+            'campus' => 'required',
+            'locatie-text' => 'required',
+            'coordinaten' => 'required',
+        ]);
+
+        if($validator->passes()){
+            $campus->voegCampusToe([
+                'naam' => $request->input('campus'),
+                'adres' => $request->input('locatie-text'),
+                'coordinaten' => $request->input('coordinaten'),
+                'school_id' => $school_id
+            ]);
+
+            return redirect('/admin/scholen/open/'.$school_id);
+        } else {
+
+            return Redirect::back()->withErrors($validator);
+        }
+         
+        
+    }
+
+    public function verwijderCampus($id){
+        
+        $campus = new Campussen();
+        $campusId = $id;    
+
+        $campus->verwijderCampus($campusId);
+
+        return redirect::back();
+        
+    }
+
+    
+    public function openVoegInteressegebiedToe($id){
+        $school = new scholen();
+        $schoolId = $id;
+
+        $geopendeSchool = $school->schoolOpvragenViaId($schoolId)->first();
+
+        return view('admin/scholen/toevoegenInteressegebied',[
+            'geopendeSchool' => $geopendeSchool
+            ]);
+    }
+
+    public function voegInteressegebiedToe($id, Request $request)
+    {
+        $interessegebied = new Interessegebieden();
+        $school_id = $id;
+
+        $media = new Media();
+    
+        $validator = Validator::make($request->all(), [
+            'naam' => 'required',
+            'link' => 'required',
+            'afbeelding' => 'required',
+        ]);
+
+        if($validator->passes()){
+            $interessegebiedId = $interessegebied->voegInteressegebiedToe([
+                'naam' => $request->input('naam'),
+                'link' => $request->input('link'),
+                'school_id' => $school_id
+            ]);
+
+             
+            $afbeelding = Input::file('afbeelding');
+            if($afbeelding){
+
+            $mediaType = "Afbeelding";
+            $afbeeldingNaam = 'interessegebied-'.$interessegebiedId.'-'.str_random(5).$afbeelding->getClientOriginalName();
+            $afbeelding->move('img/interessegebieden/', $afbeeldingNaam);
+            $filePath = 'img/interessegebieden/'.$afbeeldingNaam;
+                        
+            //Afbeelding toevoegen in de database
+            $media->voegMediaToe([
+            'link' => $filePath,
+            'mediaType' => $mediaType,
+            'interessegebied_id' => $interessegebiedId
+            ]);
+            }
+
+            return redirect('/admin/scholen/open/'.$school_id);
+        } else {
+
+            return Redirect::back()->withErrors($validator);
+            
+        }
+         
+        
+    }
+
+    public function verwijderInteressegebied($id){
+        
+        $interessegebied = new Interessegebieden();
+        $interessegebiedId = $id;  
+
+        $media = new Media();
+        $interessegebiedMedia = $media->interesseMediaOphalenViaInteresseId($interessegebiedId);
+
+        if(sizeof($interessegebiedMedia) >0){
+            foreach ($interessegebiedMedia as $media) {
+                if($media->mediaType == "Afbeelding"){
+                    $filePath = $media->link;
+                    unlink($filePath);
+                }
+            }   
+
+            
+        }
+        
+        $interessegebied->verwijderInteressegebied($interessegebiedId);
+
+        return redirect::back();
+    }
+
 }

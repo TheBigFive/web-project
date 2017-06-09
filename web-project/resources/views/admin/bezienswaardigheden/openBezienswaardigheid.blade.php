@@ -1,6 +1,12 @@
 @extends('layouts.admin')
-
 @section('admincontent')
+
+<div class="row heading-bg  bg-blue">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="txt-light" style="margin-top: 3%; margin-left: 29%; width: 100%;">Bezienswaardigheid</h2>
+    </div>
+</div>
+
 <div class="gebruikerswrapper bevatOpenBezienswaardigheidMap">
 
 	<h2>Bezienswaardigheid: {{ $geopendeBezienswaardigheid->naam }}</h2>
@@ -14,11 +20,11 @@
     @endif
     <div class="row">
     		<div class="col-md-6">
-			    <h4>Bezienswaardigheid</h4>    
+			    <h4 class="bezienswaardigheidtoevoegen">Bezienswaardigheid</h4>    
 				<p>{{ $geopendeBezienswaardigheid->naam }}</p>
-				<h4>Beschrijving</h4>
+				<h4 class="bezienswaardigheidtoevoegen">Beschrijving</h4>
 				<p>{!! $geopendeBezienswaardigheid->beschrijving !!}</p>
-				<h4>Adres</h4>
+				<h4 class="bezienswaardigheidtoevoegen">Adres</h4>
 				<p id="adres">{!! $geopendeBezienswaardigheid->adres !!}</p>
 				<div id="openBezienswaardigheid-map"></div>
 				<input id="coordinaten" type="hidden" name="coordinaten" value="{{ $geopendeBezienswaardigheid->coordinaten }}">
@@ -38,9 +44,9 @@
 					<h4>Contact</h4>
 					<p>{!! $geopendeBezienswaardigheid->contact !!}</p>
 				@endif
-				<h4>Toegevoegd door</h4>
+				<h4 class="bezienswaardigheidtoevoegen">Toegevoegd door</h4>
 				<p>{{ $geopendeBezienswaardigheid->toegevoegddoor_voornaam }} {{ $geopendeBezienswaardigheid->toegevoegddoor_achternaam }}</p>
-				<h4>Goedkeuringsstatus:</h4>
+				<h4 class="bezienswaardigheidtoevoegen">Goedkeuringsstatus:</h4>
 				<p>{{ $geopendeBezienswaardigheid->goedkeuringsstatus }}</p>
 				<h4>Publicatiestatus:</h4>
 				<p>{{ $geopendeBezienswaardigheid->publicatieStatus }}</p>
@@ -51,22 +57,28 @@
 			</div>
 
 		    <div class="col-md-6">
-		    	<h3>Media</h3>
+		    	<h3 class="bezienswaardigheidtoevoegen">Media</h3>
 		     	<h4>Afbeeldingen</h4>
 		     	@if($aantalAfbeeldingen > 0 )
 			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
 			     		@if($media->mediaType == "Afbeelding")
-							<img height="60px" src="{{ asset($media->link)  }}">
+			     			<div class="compleet">
+							<img class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}">
+							@if($media->isHoofdafbeelding)
+								<i class="fa fa-home text middle thuisicoon"></i>
+							@endif
+							</div>
 						@endif
 					@endforeach
 				@else
 					<p>Deze bezienswaardigheid heeft geen afbeeldingen.</p>
 				@endif
-				<h4>360 Foto's</h4>
+				<h4 class="videotitel">360 Foto's</h4>
 				@if($erIsEen360Afbeelding)
 			     	@foreach($alleBezienswaardigheidMedia as $key => $media)
 			     		@if($media->mediaType == "360")
-							<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img height="60px" src="{{ asset($media->link)  }}"></a>
+			     			<div class="compleet">
+							<a href="/bezienswaardigheden/open360/{{ $media->media_id  }}"><img class="nieuwsafbeelding" height="60px" src="{{ asset($media->link)  }}"></a>
 						@endif
 					@endforeach
 				@else
@@ -75,6 +87,8 @@
 
 			</div>
 	</div>
+
+	<div class="knoponderaan">
 	@if (Auth::user()->rol_id!=4)
 			@if($geopendeBezienswaardigheid->goedkeuringsstatus == "Goedgekeurd")
 				<span>
@@ -155,6 +169,9 @@
 	<span>
 		<a href="/admin/bezienswaardigheden/wijzig/{{ $geopendeBezienswaardigheid->bezienswaardigheid_id }}" class="btn btn-primary">Wijzig Bezienswaardigheid</a>
 	</span>
+
+	</div>
+
 </div>
 	
 
