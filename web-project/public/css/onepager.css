@@ -1,11 +1,6 @@
 .parallax {
-    /* The image used */
     background-image: url("{{ asset('img/hero1.jpg') }}");
-
-    /* Set a specific height */
     height: 100vh;
-
-    /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,7 +25,7 @@
 }
 
 .tekst .icon{
-	font-size: 10em;
+	font-size: 6em;
 	color: white;
 	margin-left: auto;
 	margin-right: auto;
@@ -49,11 +44,11 @@
 .fototekst{
 	text-align: center;
 	font-family: Antwerpen;
-	font-size: 6em;
+	font-size: 4em;
 	color: white;
 	position: relative;
 	overflow: hidden;
-	top: 20vh;
+	top: 50vh;
 }
 
 .footer{
@@ -90,4 +85,10 @@
 	.parallax{
 		height: 50vh;
 	}
+
+	.fototekst{
+	font-size: 6em;
+	top: 18vh;
+	}
+
 }
