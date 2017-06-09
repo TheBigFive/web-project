@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('css/nieuwsartikel.css') }}" >
 	<div class="container">
 	<div class="heroImage">
-		<img src="{{ asset('img/nieuwsitems/nieuwsitem-4-ZVEO76KtcdUU.jpg') }}">
+		<img alt='afbeelding heroimage is zoek?' src="{{ asset('img/nieuwsitems/nieuwsitem-4-ZVEO76KtcdUU.jpg') }}">
 	</div>
 	<div class="nieuwsitems">
 		<div class="introPagina">
