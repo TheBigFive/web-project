@@ -29,13 +29,26 @@
 		</div>
 		<div class="testimonialInhoud col-xs-12 col-sm-8 col-md-8 col-lg-8">
 			<h1>{!! $geopendeTestimonial->titel !!}</h1>
-			<div class="datum">
+			<div class="datum">Toegevoegd op: 
 				{{ date('d-m-Y', strtotime($geopendeTestimonial->toegevoegdop)) }}
 			</div>
+			@foreach($alleTestimonialMedia as $media)
+				@if($media->mediaType == "Video")
+					<div class="testimonialVideo">
+						<iframe src="https://www.youtube.com/embed/{{ asset($media->link)  }}"D2SlPFTCHDM" frameborder="0" allowfullscreen></iframe>
+					</div>
+				@elseif($media->mediaType == "Afbeelding")
+					@if($media->isHoofdafbeelding == 1)
+					<div class="heroImage">
+						<img src="{{ asset($media->link)  }}">
+					</div>
+					@endif
+				@endif
+			@endforeach
 			<p>{!! $geopendeTestimonial->tekstvorm_testimonial !!}</p>
 			@foreach($alleTestimonialMedia as $media)
 				@if($media->mediaType == "Afbeelding")
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 miniatuurAfbeelding">
+				<div class="miniatuurAfbeelding col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
 					<img src="{{ asset($media->link)  }}" >
 				</div>
 				@endif
