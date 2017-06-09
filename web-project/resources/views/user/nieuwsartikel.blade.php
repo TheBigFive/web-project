@@ -33,28 +33,6 @@
 				@endif
 			@endforeach
 
-			<div class="extraNieuws col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<h2>Nieuwe artikels</h2>
-			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
-				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
-			</div>
-			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
-				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
-			</div>
-			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
-				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
-			</div>
-			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
-				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
-			</div>
-			<div class="item col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a><h4>{!! $geopendeNieuwsitem->titel !!}</h4></a>
-				<p class="datum">Datum: {{ date('d-m-Y', strtotime($geopendeNieuwsitem->toegevoegdop)) }}</p>
-			</div>
 		</div>
 	</div>
 	</div>
