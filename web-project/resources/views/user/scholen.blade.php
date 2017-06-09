@@ -1,11 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="schoolheroimage container-fluid">
-	<img src="img/schoolhero2.jpg">
+<div class="container">
+	<div class="schoolheroimage">
+	<img alt="hero image ontbreekt" src="img/schoolhero2.jpg">
 </div>
-
-	<div class="container">
 	<div class="nieuwsitems">
 	
 		<div class="container inhoud">
