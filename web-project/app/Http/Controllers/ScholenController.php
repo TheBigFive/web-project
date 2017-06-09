@@ -30,7 +30,7 @@ class ScholenController extends Controller
         $aantalNieuweEnGewijzigdeScholen = 0;
 
         foreach($alleScholen as $school){
-            if($school->goedkeuringsstatus == "Nieuwe school" || $school->goedkeuringsstatus == "Gewijzigd"){
+            if($school->goedkeuringsstatus == "Nieuwe school" || $school->goedkeuringsstatus == "Werd gewijzigd"){
                 $aantalNieuweEnGewijzigdeScholen++;
             }
 
@@ -532,5 +532,12 @@ class ScholenController extends Controller
 
         return redirect::back();
     }
+
+    public function allCampusJson($id){
+    $campus = new Campussen();
+    $schoolId = $id;
+
+    return response()->json($campus->alleCampussenOpvragen($id));
+  }
 
 }

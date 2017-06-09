@@ -90,6 +90,8 @@ Route::group(['middleware' => 'rol:Administrator,Approver,Editor'], function () 
 	Route::post('admin/scholen/campus/toevoegen/{id}', 'ScholenController@voegCampusToe');
 	Route::get('admin/scholen/campus/verwijder/{id}', 'ScholenController@verwijderCampus');
 
+	Route::get('/json/campussen/all/{id}', 'ScholenController@allCampusJson');
+
 	//Interessegebieden
 	Route::get('admin/scholen/interessegebied/toevoegen/{id}', 'ScholenController@openVoegInteressegebiedToe');
 	Route::post('admin/scholen/interessegebied/toevoegen/{id}', 'ScholenController@voegInteressegebiedToe');

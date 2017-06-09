@@ -80,40 +80,16 @@
             <a href="{{ url('/admin/gebruikers') }}" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-fw fa-users"></i> Gebruikers</a>
           </li>
           <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><i class="fa fa-fw fa-file-text-o"></i> Nieuwsitems <span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
-            <ul id="app_dr" class="collapse collapse-level-1">
-              <li>
-                <a href="{{ url('admin/nieuwsitems') }}">Alle nieuwsitems</a>
-              </li>
-              <li>
-                <a href="{{ url('admin/nieuwsitems/toevoegen') }}">Nieuwsitem toevoegen</a>
-              </li>
-            </ul>
+            <a href="{{ url('admin/nieuwsitems') }}" data-toggle="collapse" 
+            ><i class="fa fa-fw fa-file-text-o"></i> Nieuwsitems <span class="pull-right"></span></a>
           </li>
           <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#ui_dr"><i class="fa fa-fw fa-comment"></i></i> Testimonials<span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
-            <ul id="ui_dr" class="collapse collapse-level-1">
-              <li>
-                <a href="{{ url('admin/testimonials') }}">Alle testimonials</a>
-              </li>
-              <li>
-                <a href="{{ url('admin/testimonials/toevoegen') }}">Testimonial toevoegen</a>
-              </li>
-            </ul>
+            <a href="{{ url('admin/testimonials') }}" data-toggle="collapse" ><i class="fa fa-fw fa-comment"></i></i> Testimonials<span class="pull-right"></span></a>
           </li>
           <li>
-            <a href="javascript:void(0);" data-toggle="collapse" data-target="#form_dr"><i class="fa fa-fw fa-camera"></i> Bezienswaardigheden<span class="pull-right"><i class="fa fa-fw fa-angle-down"></i></span></a>
-            <ul id="form_dr" class="collapse collapse-level-1">
-              <li>
-                <a href="{{ url('admin/bezienswaardigheden') }}">Alle Bezienswaardigheden</a>
-              </li>
-              <li>
-                <a href="{{ url('admin/bezienswaardigheden/toevoegen') }}">Bezienswaardigheid toevoegen</a>
-              </li>
-            </ul>
+            <a href="{{ url('admin/bezienswaardigheden') }}" data-toggle="collapse" ><i class="fa fa-fw fa-camera"></i> Bezienswaardigheden<span class="pull-right"></span></a>
           </li>
           <li>
-
             <a href="{{ url('admin/scholen') }}" data-toggle="collapse" data-target="#chart_dr"><i class="fa fa-fw fa-mortar-board"></i> Scholen </a>
           </li>
           <li>
