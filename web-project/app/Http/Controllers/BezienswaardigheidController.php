@@ -222,7 +222,8 @@ class BezienswaardigheidController extends Controller
                 'openingsuren' => $request->input('openingsuren'),
                 'vervoer' => $request->input('vervoer'),
                 'kostprijs' => $request->input('kostprijs'),
-                'adres' => $request->input('adres'),
+                'adres' => $request->input('locatie-text'),
+                'coordinaten' => $request->input('coordinaten'),
                 'contact' => $request->input('contact'),
                 'goedkeuringsstatus' => $goedkeuringsstatus,
             ]);

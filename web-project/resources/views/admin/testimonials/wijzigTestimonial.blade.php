@@ -23,7 +23,7 @@
 			        			@endif        	
 				 	{!! csrf_field() !!}
 					<div class="form-group">
-					    <label for="titel">Titel testimonial</label>
+					    <label for="titel" class="nieuwstoevoegen">Titel testimonial</label>
 					    <input type="text" name="titel" class="form-control" value="{{ $geopendeTestimonial->titel }}" placeholder="Typ hier de titel van de testimonial">
 					    @if ($errors->has('titel'))
 						    <span class="help-block">
@@ -32,7 +32,7 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="naam_persoon">Naam persoon</label>
+					    <label for="naam_persoon" class="nieuwstoevoegen">Naam persoon</label>
 					    <input type="text" name="naam_persoon" class="form-control" value="{{ $geopendeTestimonial->naam_persoon }}" placeholder="Typ hier de naam van de persoon">
 					    @if ($errors->has('naam_persoon'))
 						    <span class="help-block">
@@ -41,7 +41,7 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="leeftijd_persoon">Leeftijd persoon</label>
+					    <label for="leeftijd_persoon" class="nieuwstoevoegen">Leeftijd persoon</label>
 					    <input type="number" name="leeftijd_persoon" class="form-control" placeholder="Typ hier de leeftijd van de persoon die het verhaal vertelt" value="{{ $geopendeTestimonial->leeftijd_persoon }}">
 					    @if ($errors->has('leeftijd_persoon'))
 						    <span class="help-block">
@@ -50,7 +50,7 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="functie_persoon">Functie persoon</label>
+					    <label for="functie_persoon" class="nieuwstoevoegen">Functie persoon</label>
 					    <input type="text" name="functie_persoon" class="form-control" placeholder="Typ hier de functie van de persoon die het verhaal vertelt: vb. Student Marketing" value="{{ $geopendeTestimonial->functie_persoon }}">
 					    @if ($errors->has('functie_persoon'))
 						    <span class="help-block">
@@ -59,7 +59,7 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="beschrijving_persoon">Beschrijving persoon</label>
+					    <label for="beschrijving_persoon" class="nieuwstoevoegen">Beschrijving persoon</label>
 					    <textarea rows="5" name="beschrijving_persoon" class="form-control summernote" placeholder="Typ hier de beschrijving van de persoon">{{ $geopendeTestimonial->beschrijving_persoon }}</textarea>
 					    @if ($errors->has('beschrijving_persoon'))
 						    <span class="help-block">
@@ -68,7 +68,7 @@
 						@endif
 					</div>
 					<div class="form-group">
-					    <label for="tekstvorm_testimonial">Artikel</label>
+					    <label for="tekstvorm_testimonial" class="nieuwstoevoegen">Artikel</label>
 					    <textarea rows="5" name="tekstvorm_testimonial" class="form-control summernote" placeholder="Typ hier je artikel">{{ $geopendeTestimonial->tekstvorm_testimonial }}</textarea>
 					    @if ($errors->has('teskstvorm_testimonial'))
 						    <span class="help-block">
@@ -78,7 +78,7 @@
 					</div>
 
 					<div class="form-group{{ $errors->has('tag') ? ' has-error' : '' }}">
-						<label for="tag">Tag</label>
+						<label for="tag" class="nieuwstoevoegen">Tag</label>
 						<select class="form-control" name="tag">
 						@foreach ($alleTags as $tag)
 						   	@if ($geopendeTestimonial->tag_naam == $tag->naam)
@@ -94,7 +94,7 @@
 						    </span>
 						@endif
 					</div>
-					<div class="form-group">
+					<div class="form-group knoponderaan">
 						@if (Auth::user()->rol_id!=4)
 						  	<span>
 						        <a href="/admin/testimonials/verwijder/{{ $geopendeTestimonial->testimonial_id }}" class="btn btn-danger">Testimonial verwijderen</a>
@@ -117,27 +117,22 @@
 					@foreach($alleTestimonialMedia as $media)
 						@if($media->mediaType == "Afbeelding")
 							<div class="geheel">
-							@if($media->isHoofdafbeelding == true)
-								<div class="omlijnd">
-								<i class="fa fa-home"></i>
-							@endif
 							<img height="60px" class="pic" src="{{ asset($media->link)  }}">
 							<div class="middle">
-							<a class="text" href="/admin/testimonials/verwijderMedia/{{ $media->media_id }}"><i class="fa fa-trash" title="Verwijderen" data-toggle="tooltip"></i></a>
-							@if($media->isHoofdafbeelding == false)
+							@if($media->isHoofdafbeelding == true)
+								<p style="margin-bottom: -3%;">Momenteel ingesteld als hoofdafbeelding</p>
+							@else
 								<a class="text" href="/admin/testimonials/stelHoofdafbeeldingIn/{{ $media->media_id }}" title="Zet als hoofdafbeelding" data-toggle="tooltip"><i class="fa fa-home"></i></a>
 							@endif
+							<a class="text" href="/admin/testimonials/verwijderMedia/{{ $media->media_id }}"><i class="fa fa-trash" title="Verwijderen" data-toggle="tooltip"></i></a>
 							</div>
-							@if($media->isHoofdafbeelding == true)
-							</div>
-							@endif
 							</div>
 						@endif
 					@endforeach
 				@else
 					<p>Dit nieuwsitem heeft geen afbeeldingen.</p>
 				@endif
-				<h4>Video</h4>
+				<h4 class="videotitel">Video</h4>
 				@if($aantalVideos > 0 )
 			     	@foreach($alleTestimonialMedia as $key => $media)
 			     		@if($media->mediaType == "Video")

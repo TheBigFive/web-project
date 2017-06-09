@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Gebruikers;
 use App\Scholen;
+use App\Campussen;
+use App\Interessegebieden;
 use App\Media;
 use Auth;
 use Validator;
@@ -292,6 +294,12 @@ class ScholenController extends Controller
         $school = new scholen();
         $schoolId = $id;
 
+        $campus = new Campussen();
+        $alleCampussen = $campus->alleCampussenOpvragen($schoolId);
+
+        $interessegebied = new Interessegebieden();
+        $alleInteressegebieden= $interessegebied->alleInteressegebiedenOpvragen($schoolId);
+
         $geopendeSchool = $school->schoolOpvragenViaId($schoolId)->first();
 
         $media = new Media;
@@ -300,6 +308,8 @@ class ScholenController extends Controller
         
         return view('/admin/scholen/openSchool', 
             ['geopendeSchool' => $geopendeSchool,
+            'alleCampussen' => $alleCampussen,
+            'alleInteressegebieden' => $alleInteressegebieden,
             'alleSchoolMedia' => $alleSchoolMedia,
             ]);
         
@@ -381,6 +391,139 @@ class ScholenController extends Controller
 
         return Redirect::back()->with('succesBericht', 'Het artikel werd succsvol offline gehaald.');
         
+    }
+
+    public function openVoegCampusToe($id){
+        $school = new scholen();
+        $schoolId = $id;
+
+        $geopendeSchool = $school->schoolOpvragenViaId($schoolId)->first();
+
+        return view('admin/scholen/toevoegenCampus',[
+            'geopendeSchool' => $geopendeSchool
+            ]);
+    }
+
+     public function voegCampusToe($id, Request $request)
+    {
+        $campus = new Campussen();
+        $school_id = $id;
+    
+        $validator = Validator::make($request->all(), [
+            'campus' => 'required',
+            'locatie-text' => 'required',
+            'coordinaten' => 'required',
+        ]);
+
+        if($validator->passes()){
+            $campus->voegCampusToe([
+                'naam' => $request->input('campus'),
+                'adres' => $request->input('locatie-text'),
+                'coordinaten' => $request->input('coordinaten'),
+                'school_id' => $school_id
+            ]);
+
+            return redirect('/admin/scholen/open/'.$school_id);
+        } else {
+
+            return Redirect::back()->withErrors($validator);
+        }
+         
+        
+    }
+
+    public function verwijderCampus($id){
+        
+        $campus = new Campussen();
+        $campusId = $id;    
+
+        $campus->verwijderCampus($campusId);
+
+        return redirect::back();
+        
+    }
+
+    
+    public function openVoegInteressegebiedToe($id){
+        $school = new scholen();
+        $schoolId = $id;
+
+        $geopendeSchool = $school->schoolOpvragenViaId($schoolId)->first();
+
+        return view('admin/scholen/toevoegenInteressegebied',[
+            'geopendeSchool' => $geopendeSchool
+            ]);
+    }
+
+    public function voegInteressegebiedToe($id, Request $request)
+    {
+        $interessegebied = new Interessegebieden();
+        $school_id = $id;
+
+        $media = new Media();
+    
+        $validator = Validator::make($request->all(), [
+            'naam' => 'required',
+            'link' => 'required',
+            'afbeelding' => 'required',
+        ]);
+
+        if($validator->passes()){
+            $interessegebiedId = $interessegebied->voegInteressegebiedToe([
+                'naam' => $request->input('naam'),
+                'link' => $request->input('link'),
+                'school_id' => $school_id
+            ]);
+
+             
+            $afbeelding = Input::file('afbeelding');
+            if($afbeelding){
+
+            $mediaType = "Afbeelding";
+            $afbeeldingNaam = 'interessegebied-'.$interessegebiedId.'-'.str_random(5).$afbeelding->getClientOriginalName();
+            $afbeelding->move('img/interessegebieden/', $afbeeldingNaam);
+            $filePath = 'img/interessegebieden/'.$afbeeldingNaam;
+                        
+            //Afbeelding toevoegen in de database
+            $media->voegMediaToe([
+            'link' => $filePath,
+            'mediaType' => $mediaType,
+            'interessegebied_id' => $interessegebiedId
+            ]);
+            }
+
+            return redirect('/admin/scholen/open/'.$school_id);
+        } else {
+
+            return Redirect::back()->withErrors($validator);
+            
+        }
+         
+        
+    }
+
+    public function verwijderInteressegebied($id){
+        
+        $interessegebied = new Interessegebieden();
+        $interessegebiedId = $id;  
+
+        $media = new Media();
+        $interessegebiedMedia = $media->interesseMediaOphalenViaInteresseId($interessegebiedId);
+
+        if(sizeof($interessegebiedMedia) >0){
+            foreach ($interessegebiedMedia as $media) {
+                if($media->mediaType == "Afbeelding"){
+                    $filePath = $media->link;
+                    unlink($filePath);
+                }
+            }   
+
+            
+        }
+        
+        $interessegebied->verwijderInteressegebied($interessegebiedId);
+
+        return redirect::back();
     }
 
 }

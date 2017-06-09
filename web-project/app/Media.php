@@ -74,6 +74,12 @@ class Media extends Model
       ->where('media_id', $id)
       ->get();
     }
+
+    public function interesseMediaOphalenViaInteresseId($id){
+      return DB::table('media')
+      ->where('interessegebied_id', $id)
+      ->get();
+    }
     
 
     public function voegMediaToe($media)
