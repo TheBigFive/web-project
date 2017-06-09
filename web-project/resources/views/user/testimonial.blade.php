@@ -40,7 +40,7 @@
 				@elseif($media->mediaType == "Afbeelding")
 					@if($media->isHoofdafbeelding == 1)
 					<div class="heroImage">
-						<img src="{{ asset($media->link)  }}">
+						<img alt="heroimage ontbreekt" src="{{ asset($media->link)  }}">
 					</div>
 					@endif
 				@endif
@@ -49,7 +49,7 @@
 			@foreach($alleTestimonialMedia as $media)
 				@if($media->mediaType == "Afbeelding")
 				<div class="miniatuurAfbeelding col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-					<img src="{{ asset($media->link)  }}" >
+					<img alt="kleine afbeelding testimonial ontbreekt" src="{{ asset($media->link)  }}" >
 				</div>
 				@endif
 			@endforeach

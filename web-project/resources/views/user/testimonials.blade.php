@@ -3,7 +3,7 @@
 	<link rel="stylesheet" href="{{ asset('css/testimonials.css') }}">
 <div class="container">
 	<div class="heroImage">
-		<img src="{{ asset('img/testimonials/testimonial-14-127Ffantwerpen.jpg') }}">
+		<img alt="afbeelding hero ontbreekt" src="{{ asset('img/testimonials/testimonial-14-127Ffantwerpen.jpg') }}">
 	</div>
 	<div class="introPagina">
 		<h1>

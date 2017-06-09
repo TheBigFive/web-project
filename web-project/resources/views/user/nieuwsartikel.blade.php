@@ -12,7 +12,7 @@
 				@if($media->mediaType == "Afbeelding")
 					@if($media->isHoofdafbeelding == 1)
 						<div class="heroafbeelding col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<img src="{{ asset($media->link)  }}"></img>
+							<img alt='afbeelding heroafbeelding is zoek?' src="{{ asset($media->link)  }}"></img>
 						</div>
 					@endif
 				@endif
@@ -27,7 +27,7 @@
 				@if($media->mediaType == "Afbeelding")
 					@if($media->isHoofdafbeelding == 0)
 						<div class="enkeleAfbeelding">
-							<img src="{{ asset($media->link)  }}"></img>
+							<img alt='extra image artikel is zoek' src="{{ asset($media->link)  }}"></img>
 						</div>
 					@endif
 				@endif
